@@ -1,6 +1,6 @@
 # 缠根泥土
 
-![Rooted Dirt](https://minecraft.wiki/images/Rooted_Dirt_JE1_BE1.png?format=original)
+![Rooted Dirt](../page/images/blocks/rooted-dirt/7f59fa83.png)
 
 > **稀有度**：不常见 | **可再生**：是 | **可堆叠**：64 | **工具**：任何（锹最快）
 > **硬度**：0.5 | **爆炸抗性**：0.5 | **发光**：否 | **透明**：否 | **可燃**：否

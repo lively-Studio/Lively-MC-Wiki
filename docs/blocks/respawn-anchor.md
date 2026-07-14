@@ -1,6 +1,6 @@
 # 重生锚
 
-![Respawn Anchor](https://minecraft.wiki/images/Respawn_Anchor_JE2_BE2.png?format=original)
+![Respawn Anchor](../page/images/blocks/respawn-anchor/ef0c5f13.png)
 
 > **稀有度**：不常见 | **可再生**：是 | **可堆叠**：64 | **工具**：钻石镐或更好
 > **硬度**：50 | **爆炸抗性**：1200 | **发光**：是（0~15 动态） | **透明**：否 | **可燃**：否
@@ -79,8 +79,8 @@
 
 ## 图库
 
-![Respawn Anchor Charge](https://minecraft.wiki/images/Respawn_Anchor_Charge.png?format=original)
+![Respawn Anchor Charge](../page/images/blocks/respawn-anchor/1e90e32c.png)
 *不同充能等级的重生锚*
 
-![Respawn Anchor Explosion](https://minecraft.wiki/images/Respawn_Anchor_Exploding.gif?format=original)
+![Respawn Anchor Explosion](../page/images/blocks/respawn-anchor/98563ec6.gif)
 *重生锚在主世界爆炸*
