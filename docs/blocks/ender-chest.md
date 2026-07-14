@@ -1,6 +1,6 @@
 # 末影箱
 
-![Ender Chest](https://minecraft.wiki/images/Ender_Chest_JE3_BE3.png?format=original)
+![Ender Chest](../page/images/blocks/ender-chest/360e911c.png)
 
 > **稀有度**：稀有 | **可再生**：否 | **可堆叠**：64 | **工具**：木镐或更好
 > **硬度**：22.5 | **爆炸抗性**：600 | **发光**：是（7） | **透明**：否 | **可燃**：否
@@ -107,8 +107,8 @@
 
 ## 图库
 
-![Ender Chest GUI](https://minecraft.wiki/images/Ender_Chest_GUI.png?format=original)
+![Ender Chest GUI](../page/images/blocks/ender-chest/1cfbb461.png)
 *末影箱 GUI*
 
-![Ender Chest Particle](https://minecraft.wiki/images/Ender_Chest_Particles.png?format=original)
+![Ender Chest Particle](../page/images/blocks/ender-chest/51984617.png)
 *末影箱的粒子效果*
