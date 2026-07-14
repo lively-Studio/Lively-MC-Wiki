@@ -75,6 +75,28 @@
     </div>
   </section>
 
+  <!-- Stats Bar -->
+  <section class="stats-bar" id="statsBar">
+    <div class="stats-bar__inner">
+      <div class="stats-bar__item">
+        <span class="stats-bar__number" id="statsTotalArticles">152</span>
+        <span class="stats-bar__label">篇文章</span>
+      </div>
+      <div class="stats-bar__item">
+        <span class="stats-bar__number" id="statsCategories">6</span>
+        <span class="stats-bar__label">个分类</span>
+      </div>
+      <div class="stats-bar__item" id="statsVersionItem">
+        <span class="stats-bar__number" id="statsLatestVersion">Java 26.1</span>
+        <span class="stats-bar__label">最新版本</span>
+      </div>
+      <div class="stats-bar__item">
+        <span class="stats-bar__number" id="statsLang">简体中文</span>
+        <span class="stats-bar__label">语言</span>
+      </div>
+    </div>
+  </section>
+
   <!-- Category Portal - MC Wiki Style -->
   <section class="category-portal" id="categoryPortal">
     <div class="category-portal__inner">
@@ -242,6 +264,37 @@
         tags: ['Java版', '基岩版', '更新日志', '版本对比']
       }
     ];
+
+    // ===== Version Data - Loaded from api/latest.json =====
+    var LATEST_VERSIONS = null;
+    function loadLatestVersion() {
+      return fetch('api/latest.json')
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          LATEST_VERSIONS = data;
+          // Update stats bar
+          var statsEl = document.getElementById('statsLatestVersion');
+          if (statsEl && data.java) {
+            statsEl.textContent = 'Java ' + data.java.version;
+          }
+        })
+        .catch(function(err) {
+          console.warn('加载 api/latest.json 失败:', err.message);
+        });
+    }
+
+    function replaceVersionPlaceholders(md) {
+      if (!LATEST_VERSIONS) return md;
+      return md
+        .replace(/\{\{JE_VERSION\}\}/g, LATEST_VERSIONS.java ? LATEST_VERSIONS.java.version : '1.21.5')
+        .replace(/\{\{BE_VERSION\}\}/g, LATEST_VERSIONS.bedrock ? LATEST_VERSIONS.bedrock.version : '1.21.70')
+        .replace(/\{\{JE_NAME\}\}/g, LATEST_VERSIONS.java ? LATEST_VERSIONS.java.name : 'Spring to Life')
+        .replace(/\{\{BE_NAME\}\}/g, LATEST_VERSIONS.bedrock ? LATEST_VERSIONS.bedrock.name : 'Spring to Life')
+        .replace(/\{\{JE_NAME_ZH\}\}/g, LATEST_VERSIONS.java ? LATEST_VERSIONS.java.name_zh : '春日生机')
+        .replace(/\{\{BE_NAME_ZH\}\}/g, LATEST_VERSIONS.bedrock ? LATEST_VERSIONS.bedrock.name_zh : '春日生机')
+        .replace(/\{\{JE_DATE\}\}/g, LATEST_VERSIONS.java ? LATEST_VERSIONS.java.date : '')
+        .replace(/\{\{BE_DATE\}\}/g, LATEST_VERSIONS.bedrock ? LATEST_VERSIONS.bedrock.date : '');
+    }
 
     // ===== Search System =====
     var SEARCH_INDEX = null;
@@ -420,6 +473,19 @@
       var grid = document.getElementById('categoryGrid');
       if (!grid) return;
       grid.innerHTML = '';
+
+      // Calculate total articles
+      var totalArticles = 0;
+      CATEGORIES.forEach(function(cat) {
+        totalArticles += parseInt(cat.count) || 0;
+      });
+
+      // Update stats bar
+      var totalEl = document.getElementById('statsTotalArticles');
+      var catEl = document.getElementById('statsCategories');
+      if (totalEl) totalEl.textContent = totalArticles;
+      if (catEl) catEl.textContent = CATEGORIES.length;
+
       CATEGORIES.forEach(function(cat, i) {
         var card = document.createElement('a');
         card.className = 'cat-card';
@@ -833,6 +899,7 @@
           if (!r.ok) throw new Error('HTTP ' + r.status);
           return r.text();
         })
+        .then(function(md) { return replaceVersionPlaceholders(md); })
         .then(function(md) { return parseWidgetsMD(md); })
         .then(function(layoutData) { renderWidgets(layoutData); })
         .catch(function(err) {
@@ -842,16 +909,18 @@
     }
 
     // ===== Load =====
-    fetch('page/config.json')
-      .then(function(r) { return r.json(); })
-      .then(function(cfg) {
-        applyConfig(cfg);
-        loadWidgets((cfg.home || {}).widgets || null);
-      })
-      .catch(function() {
-        console.warn('加载 config.json 失败，使用默认配置');
-        applyConfig(DEFAULT_CONFIG);
-      });
+    loadLatestVersion().then(function() {
+      fetch('page/config.json')
+        .then(function(r) { return r.json(); })
+        .then(function(cfg) {
+          applyConfig(cfg);
+          loadWidgets((cfg.home || {}).widgets || null);
+        })
+        .catch(function() {
+          console.warn('加载 config.json 失败，使用默认配置');
+          applyConfig(DEFAULT_CONFIG);
+        });
+    });
 
     // ===== Scroll behavior =====
     var topBar = document.getElementById('topBar');

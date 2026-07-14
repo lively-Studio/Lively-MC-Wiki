@@ -60,7 +60,6 @@
             const blocksNavItem = NAV.find(item => item.route === '/blocks');
             if (blocksNavItem) {
               blocksNavItem.children = blocksList;
-              // Also register all block routes
               blocksList.forEach(block => {
                 nr[block.route] = { file: block.file, title: block.title, icon: 'computer' };
                 nf[block.file] = block.route;
@@ -69,63 +68,93 @@
           }
         } catch (e) { console.warn('blocks-nav.json load failed:', e.message); }
 
+        // Load articles.json to get children for items, mobs, crafting, mechanics categories
+        try {
+          const articlesResp = await fetch('../api/articles.json');
+          if (articlesResp.ok) {
+            const articlesData = await articlesResp.json();
+            articlesData.categories.forEach(function(cat) {
+              if (cat.id === 'blocks') return; // blocks already loaded from blocks-nav.json
+              var navItem = NAV.find(function(item) { return item.route === cat.route; });
+              if (navItem && cat.articles && cat.articles.length > 1) {
+                // Filter out the category overview article (index)
+                var children = cat.articles.filter(function(a) {
+                  return a.route !== cat.route;
+                });
+                if (children.length > 0) {
+                  navItem.children = children.map(function(a) {
+                    return { title: a.title, route: a.route, file: a.file, icon: cat.icon };
+                  });
+                  children.forEach(function(a) {
+                    nr[a.route] = { file: a.file, title: a.title, icon: cat.icon };
+                    nf[a.file] = a.route;
+                  });
+                }
+              }
+            });
+          }
+        } catch (e) { console.warn('articles.json load failed:', e.message); }
+
         Object.assign(ROUTES, nr); Object.assign(FILE_TO_ROUTE, nf);
       }
       SIDEBAR_LINKS = cfg.sidebarLinks || [];
     } catch (e) { console.warn('config.json load failed:', e.message); }
   }
 
+  /* ============================================
+     Sidebar - MC Wiki Style (section-based, no collapsing)
+     ============================================ */
   function renderSidebar() {
     if (!NAV.length) return;
-    function buildHTML(items, depth) {
-      return items.map(item => {
-        const hasKids = item.children && item.children.length;
-        const route = item.route || (hasKids ? null : (item.title || '').toLowerCase().replace(/[^\w\u4e00-\u9fff]+/g, '-').replace(/^-+|-+$/g, ''));
-        const pad = depth * 16;
-        if (hasKids) {
-          const catRoute = route || '#' + (item.title || '').toLowerCase().replace(/[^\w\u4e00-\u9fff]+/g, '-');
-          const catId = 'nav-cat-' + depth + '-' + item.title.replace(/[^\w\u4e00-\u9fff]/g, '');
-          const isBlocksCat = route === '/blocks';
-          return `<li class="nav-category-wrapper">
-            <div class="nav-category-header" data-cat="${catId}" style="padding-left:${pad}px;" role="button" tabindex="0" aria-expanded="${isBlocksCat ? 'false' : 'true'}">
-              <svg class="nav-category-chevron" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-              <a href="#${route}" class="nav-category-title" data-action="nav">${item.title}</a>
-            </div>
-            <ul class="nav-category-children${isBlocksCat ? '' : ' nav-category-children--open'}" data-cat="${catId}">${buildHTML(item.children, depth + 1)}</ul>
-          </li>`;
-        }
-        return `<li class="nav-item${route === DEFAULT_ROUTE ? ' active' : ''}" data-route="#${route}" style="padding-left:${pad}px;">
-          <a href="#${route}" class="nav-link">
-            <svg viewBox="0 0 24 24" width="20" height="20" class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${iconSVG(item.icon || 'info')}</svg>
-            <span class="nav-label">${item.title}</span>
-          </a>
-        </li>`;
-      }).join('');
-    }
-    navList.innerHTML = buildHTML(NAV, 0);
-    // Category expand/collapse handlers
-    navList.querySelectorAll('.nav-category-header').forEach(header => {
-      header.addEventListener('click', function(e) {
-        // Don't toggle if clicking the link directly
-        if (e.target.closest('[data-action="nav"]')) return;
-        const catId = this.dataset.cat;
-        const children = navList.querySelector(`.nav-category-children[data-cat="${catId}"]`);
-        if (children) {
-          const isOpen = children.classList.toggle('nav-category-children--open');
-          this.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-        }
+    var html = '';
+
+    NAV.forEach(function(item) {
+      // Skip items without children (standalone pages handled separately)
+      var hasKids = item.children && item.children.length;
+      if (!hasKids) {
+        // Standalone page like 首页 or 关于
+        var route = item.route || '/' + (item.title || '').toLowerCase();
+        html += '<a href="#' + route + '" class="nav-item-link' + (route === DEFAULT_ROUTE ? ' nav-item-link--active' : '') + '" data-route="' + route + '">';
+        html += '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + iconSVG(item.icon || 'info') + '</svg>';
+        html += item.title;
+        html += '</a>';
+        return;
+      }
+
+      // Category with children
+      var catRoute = item.route || '/' + item.title.toLowerCase();
+      var catIcon = iconSVG(item.icon || 'computer');
+
+      html += '<div class="nav-section">';
+      // Section header
+      html += '<div class="nav-section__header">';
+      html += '<svg viewBox="0 0 24 24" width="14" height="14" class="nav-section__icon" fill="none" stroke="currentColor" stroke-width="2">' + catIcon + '</svg>';
+      html += '<span class="nav-section__title">' + item.title + '</span>';
+      html += '</div>';
+
+      // Category overview link
+      html += '<a href="#' + catRoute + '" class="nav-cat-link" data-route="' + catRoute + '">' + item.title + '总览</a>';
+
+      // Child links
+      item.children.forEach(function(child) {
+        var childRoute = child.route || '';
+        html += '<a href="#' + childRoute + '" class="nav-child-link" data-route="' + childRoute + '">' + child.title + '</a>';
       });
+      html += '</div>';
     });
+
+    navList.innerHTML = html;
   }
 
   function renderSidebarLinks() {
-    const container = $('#sidebarLinks');
+    var container = $('#sidebarLinks');
     if (!container) return;
-    container.innerHTML = `<div class="sidebar__section-label">链接</div>` + SIDEBAR_LINKS.map(link => `
-      <a href="${link.url}" class="sidebar-footer-link" style="margin-top:4px"${link.external ? ' target="_blank"' : ''}>
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${iconSVG(link.external ? 'external' : 'home')}</svg>
-        ${link.title}
-      </a>`).join('');
+    container.innerHTML = '<div class="sidebar__footer-label">外部链接</div>' + SIDEBAR_LINKS.map(function(link) {
+      return '<a href="' + link.url + '" class="sidebar-footer-link"' + (link.external ? ' target="_blank"' : '') + '>' +
+        '<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + iconSVG(link.external ? 'external' : 'home') + '</svg>' +
+        link.title +
+      '</a>';
+    }).join('');
   }
 
   const $ = (sel) => document.querySelector(sel);
@@ -133,6 +162,7 @@
   const navList = $('#navList'), sidebar = $('#sidebar'), drawerOverlay = $('#drawerOverlay');
   const menuToggle = $('#menuToggle'), themeToggle = $('#themeToggle'), themeIcon = $('#themeIcon');
   const scrollTopBtn = $('#scrollTop'), tocList = $('#tocList');
+  const sidebarSearchInput = $('#sidebarSearchInput');
 
   /* ============================================
      Version Data - Loaded from versions.json
@@ -145,15 +175,15 @@
     } catch (e) { console.warn('versions.json load failed:', e.message); }
   }
   function getLatestVersion(edition) {
-    if (!VERSIONS || !VERSIONS.latest) return edition === 'bedrock' ? '1.21.70' : '1.21.5';
+    if (!VERSIONS || !VERSIONS.latest) return edition === 'bedrock' ? '1.21.70' : '26.1';
     return edition === 'bedrock' ? VERSIONS.latest.bedrock : VERSIONS.latest.java;
   }
   function getLatestVersionName(edition) {
-    if (!VERSIONS || !VERSIONS.latest) return edition === 'bedrock' ? 'Spring to Life' : 'Spring to Life';
+    if (!VERSIONS || !VERSIONS.latest) return 'Spring to Life';
     return edition === 'bedrock' ? VERSIONS.latest.bedrock_name : VERSIONS.latest.java_name;
   }
   function getLatestVersionNameZh(edition) {
-    if (!VERSIONS || !VERSIONS.latest) return '春日生机';
+    if (!VERSIONS || !VERSIONS.latest) return '混沌立方';
     return edition === 'bedrock' ? VERSIONS.latest.bedrock_name_zh : VERSIONS.latest.java_name_zh;
   }
   function getVersionDate(edition) {
@@ -195,27 +225,31 @@
   scrollTopBtn.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
 
   function updateActiveNav(route) {
-    // Deactivate all nav items
-    navList.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-    // Activate the matching nav item
-    const matchItem = navList.querySelector(`.nav-item[data-route="#${route}"]`);
-    if (matchItem) matchItem.classList.add('active');
-    // Auto-expand parent category when viewing a child page (e.g., /blocks/stone)
-    if (route.includes('/')) {
-      const parts = route.replace(/^\//, '').split('/');
-      const parentRoute = '/' + parts.slice(0, -1).join('/');
-      const parentLink = navList.querySelector(`.nav-category-title[href="#${parentRoute}"]`);
-      if (parentLink) {
-        const wrapper = parentLink.closest('.nav-category-wrapper');
-        if (wrapper) {
-          const children = wrapper.querySelector('.nav-category-children');
-          const header = wrapper.querySelector('.nav-category-header');
-          if (children && !children.classList.contains('nav-category-children--open')) {
-            children.classList.add('nav-category-children--open');
-            if (header) header.setAttribute('aria-expanded', 'true');
-          }
-        }
-      }
+    // Remove all active states
+    navList.querySelectorAll('.nav-item-link--active, .nav-cat-link--active, .nav-child-link--active').forEach(function(el) {
+      el.classList.remove('nav-item-link--active', 'nav-cat-link--active', 'nav-child-link--active');
+    });
+
+    // Find and activate matching item for the current route
+    // Try child link first (most specific)
+    var childMatch = navList.querySelector('.nav-child-link[data-route="' + route + '"]');
+    if (childMatch) {
+      childMatch.classList.add('nav-child-link--active');
+      return;
+    }
+
+    // Try category link
+    var catMatch = navList.querySelector('.nav-cat-link[data-route="' + route + '"]');
+    if (catMatch) {
+      catMatch.classList.add('nav-cat-link--active');
+      return;
+    }
+
+    // Try standalone nav item
+    var itemMatch = navList.querySelector('.nav-item-link[data-route="' + route + '"]');
+    if (itemMatch) {
+      itemMatch.classList.add('nav-item-link--active');
+      return;
     }
   }
 
@@ -658,6 +692,46 @@
       }
     });
   }
+  // ===== Sidebar Search Filter =====
+  if (sidebarSearchInput) {
+    var sidebarFilterTimeout = null;
+    sidebarSearchInput.addEventListener('input', function() {
+      clearTimeout(sidebarFilterTimeout);
+      var filter = this.value.toLowerCase().trim();
+      var self = this;
+      sidebarFilterTimeout = setTimeout(function() {
+        if (!filter) {
+          // Show all
+          navList.querySelectorAll('.nav-child-link, .nav-cat-link, .nav-item-link, .nav-section').forEach(function(el) {
+            el.style.display = '';
+          });
+          return;
+        }
+        // Filter: hide non-matching items
+        navList.querySelectorAll('.nav-child-link').forEach(function(el) {
+          var text = el.textContent.toLowerCase();
+          el.style.display = text.indexOf(filter) !== -1 ? '' : 'none';
+        });
+        // Hide category links without visible children
+        navList.querySelectorAll('.nav-section').forEach(function(section) {
+          var visibleChildren = section.querySelectorAll('.nav-child-link[style*="display:"]');
+          var allChildren = section.querySelectorAll('.nav-child-link');
+          var hasVisible = Array.from(allChildren).some(function(c) { return c.style.display !== 'none'; });
+          section.style.display = hasVisible ? '' : 'none';
+        });
+        // Hide standalone links that don't match
+        navList.querySelectorAll('.nav-item-link').forEach(function(el) {
+          var text = el.textContent.toLowerCase();
+          el.style.display = text.indexOf(filter) !== -1 ? '' : 'none';
+        });
+        navList.querySelectorAll('.nav-cat-link').forEach(function(el) {
+          var text = el.textContent.toLowerCase();
+          el.style.display = text.indexOf(filter) !== -1 ? '' : 'none';
+        });
+      }, 100);
+    });
+  }
+
   function waitForDeps() { if (typeof marked!=='undefined' && typeof hljs!=='undefined') init(); else setTimeout(waitForDeps, 100); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', waitForDeps);
   else waitForDeps();

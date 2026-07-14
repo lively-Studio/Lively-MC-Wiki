@@ -5,13 +5,13 @@
 
 /* ===== Hero (OreUI 中灰背景) ===== */
 .hero {
-  min-height: 100vh;
+  min-height: 70vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 48px 24px;
+  padding: 80px 24px 64px;
   position: relative;
   overflow: hidden;
   background-color: var(--oreui-bg-base);
@@ -30,7 +30,7 @@
 .hero__content {
   position: relative;
   z-index: 1;
-  max-width: 680px;
+  max-width: 780px;
   animation: heroFadeIn 0.4s ease-out;
 }
 
@@ -73,7 +73,7 @@
 
 .hero__title {
   font-family: var(--oreui-font-family);
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: 800;
   line-height: 1.15;
   margin-bottom: 12px;
@@ -176,7 +176,7 @@
 /* ===== Search Box (in Top Bar) ===== */
 .home-topbar__search {
   flex: 1;
-  max-width: 420px;
+  max-width: 560px;
   margin: 0 24px;
   position: relative;
 }
@@ -348,10 +348,74 @@
   flex-shrink: 0;
 }
 
+/* ===== Stats Bar ===== */
+.stats-bar {
+  padding: 0 24px;
+  position: relative;
+  z-index: 2;
+  margin-top: -32px;
+}
+
+.stats-bar__inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  background: var(--oreui-bg-elevated);
+  border: 2px solid var(--oreui-border-dark);
+  box-shadow: inset 0 0 0 1px var(--oreui-border-light), var(--oreui-shadow-md);
+  overflow: hidden;
+}
+
+.stats-bar__item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 18px 24px;
+  position: relative;
+}
+
+.stats-bar__item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 12px;
+  bottom: 12px;
+  width: 2px;
+  background: var(--oreui-border-dark);
+  box-shadow: 1px 0 0 0 var(--oreui-border-light);
+}
+
+.stats-bar__number {
+  font-family: var(--oreui-font-family);
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--oreui-green);
+  letter-spacing: 0.02em;
+  margin-bottom: 2px;
+}
+
+.stats-bar__label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--oreui-text-tertiary);
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 768px) {
+  .stats-bar { margin-top: -20px; padding: 0 12px; }
+  .stats-bar__inner { flex-wrap: wrap; }
+  .stats-bar__item { flex: 1 1 50%; padding: 14px 16px; }
+  .stats-bar__item:nth-child(2)::after { display: none; }
+  .stats-bar__number { font-size: 1.1rem; }
+}
+
 /* ===== Category Portal (MC Wiki Style) ===== */
 .category-portal {
   padding: 64px 24px;
-  max-width: 1100px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
@@ -384,8 +448,20 @@
 
 .category-portal__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 14px;
+}
+
+@media (max-width: 1100px) {
+  .category-portal__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .category-portal__grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Category Card */
@@ -505,7 +581,7 @@
 .cat-card__arrow svg { width: 18px; height: 18px; }
 
 /* ===== Links Section ===== */
-.links-section { padding: 64px 24px; max-width: 1100px; margin: 0 auto; }
+.links-section { padding: 64px 24px; max-width: 1400px; margin: 0 auto; }
 
 .links-section__title {
   text-align: center;
@@ -555,7 +631,7 @@
 }
 
 .site-footer__inner {
-  max-width: 1100px;
+  max-width: 1400px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -627,7 +703,7 @@
   border-bottom: 2px solid var(--oreui-border-dark);
 }
 
-.widgets__inner { max-width: 1100px; margin: 0 auto; }
+.widgets__inner { max-width: 1400px; margin: 0 auto; }
 .widgets__header { text-align: center; margin-bottom: 36px; }
 
 .widgets__label {
@@ -792,10 +868,9 @@
   .hero__subtitle { font-size: 0.95rem; }
   .hero__logo { width: 64px; height: 64px; }
   .category-portal__title, .widgets__title, .links-section__title { font-size: 1.25rem; }
-  .category-portal__grid { grid-template-columns: 1fr; }
   .hero__actions { flex-direction: column; align-items: center; }
   .btn { width: 100%; justify-content: center; max-width: 260px; }
-  .hero { padding: 64px 18px 44px; }
+  .hero { padding: 72px 18px 48px; }
   .category-portal, .widgets, .links-section { padding: 44px 18px; }
   .widgets__grid { grid-template-columns: 1fr !important; grid-template-areas: none !important; gap: 12px; }
   .widget-panel { grid-area: auto !important; }

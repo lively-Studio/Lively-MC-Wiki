@@ -41,14 +41,14 @@ def load_versions():
 
     latest = data.get("latest", {})
     return {
-        "JE_VERSION": latest.get("java", "1.21.5"),
-        "BE_VERSION": latest.get("bedrock", "1.21.70"),
+        "JE_VERSION": latest.get("java", "26.1"),
+        "BE_VERSION": latest.get("bedrock", "26.1"),
         "JE_NAME": latest.get("java_name", "Spring to Life"),
         "BE_NAME": latest.get("bedrock_name", "Spring to Life"),
-        "JE_NAME_ZH": latest.get("java_name_zh", "春日生机"),
-        "BE_NAME_ZH": latest.get("bedrock_name_zh", "春日生机"),
-        "JE_DATE": latest.get("java_date", ""),
-        "BE_DATE": latest.get("bedrock_date", ""),
+        "JE_NAME_ZH": latest.get("java_name_zh", "混沌立方"),
+        "BE_NAME_ZH": latest.get("bedrock_name_zh", "混沌立方"),
+        "JE_DATE": latest.get("java_date", "2026-06-16"),
+        "BE_DATE": latest.get("bedrock_date", "2026-06-16"),
     }
 
 

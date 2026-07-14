@@ -9,11 +9,11 @@
   "nav": [
     { "title": "首页", "icon": "home" },
     { "title": "方块", "icon": "computer", "route": "/blocks", "file": "blocks/index.md" },
-    { "title": "物品", "icon": "customize", "route": "/items" },
-    { "title": "生物", "icon": "info", "route": "/mobs" },
-    { "title": "合成", "icon": "schedule", "route": "/crafting" },
-    { "title": "游戏机制", "icon": "devices", "route": "/mechanics" },
-    { "title": "版本历史", "icon": "schedule", "route": "/versions" },
+    { "title": "物品", "icon": "customize", "route": "/items", "file": "items/index.md" },
+    { "title": "生物", "icon": "info", "route": "/mobs", "file": "mobs/index.md" },
+    { "title": "合成", "icon": "schedule", "route": "/crafting", "file": "crafting/index.md" },
+    { "title": "游戏机制", "icon": "devices", "route": "/mechanics", "file": "mechanics/index.md" },
+    { "title": "版本历史", "icon": "schedule", "route": "/versions", "file": "versions/index.md" },
     { "title": "关于", "icon": "info", "route": "/about" }
   ],
   "sidebarLinks": [

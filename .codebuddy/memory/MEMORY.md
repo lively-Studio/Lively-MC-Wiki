@@ -67,6 +67,15 @@
 ## API 版本控制
 - api/latest.json: 最新版本信息（Java 1.21.5 春日生机, 基岩 1.21.70）
 - api/versions.json: 完整版本历史列表（Java 20 个版本 + 基岩 13 个版本）
+- api/articles.json: **完整文章列表 API**（156 篇文章，按 6 大分类组织，含 title/route/file）
+- docs/api.md: API 开发文档（所有端点说明、使用示例、版本号占位符、更新指南）
+
+## 侧边栏 - MC Wiki 分区导航（2026-07-14 重做）
+- **结构**：`.nav-sections` → `.nav-section`（有子文章的类别）或 `.nav-item-link`（独立页面）
+- **每分区**：section header（图标 + 标题）→ `.nav-cat-link`（分类总览）→ `.nav-child-link`（子文章列表）
+- **搜索**：侧边栏顶部有 `.sidebar-search` 输入框，实时过滤导航项
+- **活跃状态**：绿色左边框 + 背景高亮，三级链接各有独立 --active 类
+- **数据源**：blocks 子文章来自 `blocks-nav.json`，其他类别子文章来自 `api/articles.json`
 
 ## 文档内容覆盖
 - README.md: 首页介绍
