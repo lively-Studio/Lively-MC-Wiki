@@ -175,11 +175,11 @@
     } catch (e) { console.warn('versions.json load failed:', e.message); }
   }
   function getLatestVersion(edition) {
-    if (!VERSIONS || !VERSIONS.latest) return edition === 'bedrock' ? '1.21.70' : '26.1';
+    if (!VERSIONS || !VERSIONS.latest) return edition === 'bedrock' ? '26.30' : '26.2';
     return edition === 'bedrock' ? VERSIONS.latest.bedrock : VERSIONS.latest.java;
   }
   function getLatestVersionName(edition) {
-    if (!VERSIONS || !VERSIONS.latest) return 'Spring to Life';
+    if (!VERSIONS || !VERSIONS.latest) return 'Chaos Cubed';
     return edition === 'bedrock' ? VERSIONS.latest.bedrock_name : VERSIONS.latest.java_name;
   }
   function getLatestVersionNameZh(edition) {

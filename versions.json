@@ -1,26 +1,38 @@
 {
   "latest": {
-    "java": "26.1",
-    "java_name": "Spring to Life",
+    "java": "26.2",
+    "java_name": "Chaos Cubed",
     "java_name_zh": "混沌立方",
     "java_date": "2026-06-16",
-    "bedrock": "26.1",
-    "bedrock_name": "Spring to Life",
+    "bedrock": "26.30",
+    "bedrock_name": "Chaos Cubed",
     "bedrock_name_zh": "混沌立方",
     "bedrock_date": "2026-06-16"
   },
   "recent": {
+    "java_26_1": {
+      "version": "26.1",
+      "name": "Tiny Takeover",
+      "name_zh": "小鬼当家",
+      "date": "2026-03-24"
+    },
+    "java_1_21_11": {
+      "version": "1.21.11",
+      "name": "Mounts of Mayhem",
+      "name_zh": "灾厄坐骑",
+      "date": "2025-12-09"
+    },
+    "java_1_21_6": {
+      "version": "1.21.6",
+      "name": "Chase the Skies",
+      "name_zh": "追逐天空",
+      "date": "2025-06-17"
+    },
     "java_1_21_5": {
       "version": "1.21.5",
       "name": "Spring to Life",
       "name_zh": "春日生机",
       "date": "2025-03-25"
-    },
-    "java_1_21_4": {
-      "version": "1.21.4",
-      "name": "The Garden Awakens",
-      "name_zh": "花园觉醒",
-      "date": "2024-12-03"
     },
     "java_1_21": {
       "version": "1.21",
@@ -28,22 +40,29 @@
       "name_zh": "棘巧试炼",
       "date": "2024-06-13"
     },
+    "bedrock_26_30": {
+      "version": "26.30",
+      "name": "Chaos Cubed",
+      "name_zh": "混沌立方",
+      "date": "2026-06-16"
+    },
     "bedrock_1_21_70": {
       "version": "1.21.70",
       "name": "Spring to Life",
       "name_zh": "春日生机",
       "date": "2025-03-25"
-    },
-    "bedrock_1_21": {
-      "version": "1.21",
-      "name": "Tricky Trials",
-      "name_zh": "棘巧试炼",
-      "date": "2024-06-13"
     }
   },
   "all_versions": [
-    { "version": "26.1", "name": "Spring to Life", "name_zh": "混沌立方", "date": "2026-06-16", "edition": "java" },
-    { "version": "26.1", "name": "Spring to Life", "name_zh": "混沌立方", "date": "2026-06-16", "edition": "bedrock" },
+    { "version": "26.2", "name": "Chaos Cubed", "name_zh": "混沌立方", "date": "2026-06-16", "edition": "java" },
+    { "version": "26.30", "name": "Chaos Cubed", "name_zh": "混沌立方", "date": "2026-06-16", "edition": "bedrock" },
+    { "version": "26.1", "name": "Tiny Takeover", "name_zh": "小鬼当家", "date": "2026-03-24", "edition": "java" },
+    { "version": "1.21.11", "name": "Mounts of Mayhem", "name_zh": "灾厄坐骑", "date": "2025-12-09", "edition": "java" },
+    { "version": "1.21.10", "name": "The Copper Age", "name_zh": "铜器时代", "date": "2025-10-07", "edition": "java" },
+    { "version": "1.21.9", "name": "The Copper Age", "name_zh": "铜器时代", "date": "2025-09-30", "edition": "java" },
+    { "version": "1.21.8", "name": "Chase the Skies", "name_zh": "追逐天空", "date": "2025-07-17", "edition": "java" },
+    { "version": "1.21.7", "name": "Chase the Skies", "name_zh": "追逐天空", "date": "2025-06-30", "edition": "java" },
+    { "version": "1.21.6", "name": "Chase the Skies", "name_zh": "追逐天空", "date": "2025-06-17", "edition": "java" },
     { "version": "1.21.5", "name": "Spring to Life", "name_zh": "春日生机", "date": "2025-03-25", "edition": "java" },
     { "version": "1.21.70", "name": "Spring to Life", "name_zh": "春日生机", "date": "2025-03-25", "edition": "bedrock" },
     { "version": "1.21.4", "name": "The Garden Awakens", "name_zh": "花园觉醒", "date": "2024-12-03", "edition": "java" },

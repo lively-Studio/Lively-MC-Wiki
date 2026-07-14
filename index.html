@@ -87,7 +87,7 @@
         <span class="stats-bar__label">个分类</span>
       </div>
       <div class="stats-bar__item" id="statsVersionItem">
-        <span class="stats-bar__number" id="statsLatestVersion">Java 26.1</span>
+        <span class="stats-bar__number" id="statsLatestVersion">Java 26.2</span>
         <span class="stats-bar__label">最新版本</span>
       </div>
       <div class="stats-bar__item">
@@ -286,14 +286,14 @@
     function replaceVersionPlaceholders(md) {
       if (!LATEST_VERSIONS) return md;
       return md
-        .replace(/\{\{JE_VERSION\}\}/g, LATEST_VERSIONS.java ? LATEST_VERSIONS.java.version : '1.21.5')
-        .replace(/\{\{BE_VERSION\}\}/g, LATEST_VERSIONS.bedrock ? LATEST_VERSIONS.bedrock.version : '1.21.70')
-        .replace(/\{\{JE_NAME\}\}/g, LATEST_VERSIONS.java ? LATEST_VERSIONS.java.name : 'Spring to Life')
-        .replace(/\{\{BE_NAME\}\}/g, LATEST_VERSIONS.bedrock ? LATEST_VERSIONS.bedrock.name : 'Spring to Life')
-        .replace(/\{\{JE_NAME_ZH\}\}/g, LATEST_VERSIONS.java ? LATEST_VERSIONS.java.name_zh : '春日生机')
-        .replace(/\{\{BE_NAME_ZH\}\}/g, LATEST_VERSIONS.bedrock ? LATEST_VERSIONS.bedrock.name_zh : '春日生机')
-        .replace(/\{\{JE_DATE\}\}/g, LATEST_VERSIONS.java ? LATEST_VERSIONS.java.date : '')
-        .replace(/\{\{BE_DATE\}\}/g, LATEST_VERSIONS.bedrock ? LATEST_VERSIONS.bedrock.date : '');
+        .replace(/\{\{JE_VERSION\}\}/g, LATEST_VERSIONS.java ? LATEST_VERSIONS.java.version : '26.2')
+        .replace(/\{\{BE_VERSION\}\}/g, LATEST_VERSIONS.bedrock ? LATEST_VERSIONS.bedrock.version : '26.30')
+        .replace(/\{\{JE_NAME\}\}/g, LATEST_VERSIONS.java ? LATEST_VERSIONS.java.name : 'Chaos Cubed')
+        .replace(/\{\{BE_NAME\}\}/g, LATEST_VERSIONS.bedrock ? LATEST_VERSIONS.bedrock.name : 'Chaos Cubed')
+        .replace(/\{\{JE_NAME_ZH\}\}/g, LATEST_VERSIONS.java ? LATEST_VERSIONS.java.name_zh : '混沌立方')
+        .replace(/\{\{BE_NAME_ZH\}\}/g, LATEST_VERSIONS.bedrock ? LATEST_VERSIONS.bedrock.name_zh : '混沌立方')
+        .replace(/\{\{JE_DATE\}\}/g, LATEST_VERSIONS.java ? LATEST_VERSIONS.java.date : '2026-06-16')
+        .replace(/\{\{BE_DATE\}\}/g, LATEST_VERSIONS.bedrock ? LATEST_VERSIONS.bedrock.date : '2026-06-16');
     }
 
     // ===== Search System =====

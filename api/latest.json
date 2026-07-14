@@ -1,14 +1,14 @@
 {
   "java": {
-    "version": "26.1",
-    "name": "Spring to Life",
+    "version": "26.2",
+    "name": "Chaos Cubed",
     "name_zh": "混沌立方",
     "date": "2026-06-16",
     "type": "release"
   },
   "bedrock": {
-    "version": "26.1",
-    "name": "Spring to Life",
+    "version": "26.30",
+    "name": "Chaos Cubed",
     "name_zh": "混沌立方",
     "date": "2026-06-16",
     "type": "release"
