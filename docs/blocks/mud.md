@@ -1,6 +1,6 @@
 # 泥巴
 
-![Mud](https://minecraft.wiki/images/Mud_JE1_BE1.png?format=original)
+![Mud](../page/images/blocks/mud/d701bb31.png)
 
 > **稀有度**：常见 | **可再生**：是 | **可堆叠**：64 | **工具**：任何（锹最快）
 > **硬度**：0.5 | **爆炸抗性**：0.5 | **发光**：否 | **透明**：否 | **可燃**：否

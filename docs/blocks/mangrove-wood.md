@@ -1,6 +1,6 @@
 # 红树木
 
-![Mangrove Wood](https://minecraft.wiki/images/Mangrove_Wood_JE1_BE1.png?format=original)
+![Mangrove Wood](../page/images/blocks/mangrove-wood/2f66cfcd.png)
 
 > **稀有度**：常见 | **可再生**：是 | **可堆叠**：64 | **工具**：任何（斧最快）
 > **硬度**：2 | **爆炸抗性**：2 | **可燃**：是

@@ -1,6 +1,6 @@
 # 避雷针
 
-![Lightning Rod](https://minecraft.wiki/images/Lightning_Rod_JE2_BE1.png?format=original)
+![Lightning Rod](../page/images/blocks/lightning-rod/ff405dd5.png)
 
 > **稀有度**：常见 | **可再生**：是 | **可堆叠**：64 | **工具**：石镐或更好
 > **硬度**：3 | **爆炸抗性**：6 | **发光**：否 | **透明**：是 | **可燃**：否

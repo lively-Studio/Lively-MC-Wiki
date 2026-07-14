@@ -1,6 +1,6 @@
 # 沙砾
 
-![Gravel](https://minecraft.wiki/images/Gravel_JE4_BE3.png?format=original)
+![Gravel](../page/images/blocks/gravel/d01f8c20.png)
 
 > **稀有度**：常见 | **可再生**：是（猪灵交易） | **可堆叠**：64 | **工具**：任何（锹最快）
 > **硬度**：0.6 | **爆炸抗性**：0.6 | **发光**：否 | **透明**：否 | **可燃**：否

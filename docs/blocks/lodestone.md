@@ -1,6 +1,6 @@
 # 磁石
 
-![Lodestone](https://minecraft.wiki/images/Lodestone_JE2_BE2.png?format=original)
+![Lodestone](../page/images/blocks/lodestone/75ee34ad.png)
 
 > **稀有度**：不常见 | **可再生**：否 | **可堆叠**：64 | **工具**：木镐或更好
 > **硬度**：3.5 | **爆炸抗性**：3.5 | **发光**：否 | **透明**：否 | **可燃**：否
@@ -75,5 +75,5 @@
 
 ## 图库
 
-![Lodestone Compass](https://minecraft.wiki/images/Lodestone_Compass_JE2_BE2.png?format=original)
+![Lodestone Compass](../page/images/blocks/lodestone/c95db6ed.png)
 *磁石指针——永远指向磁石*

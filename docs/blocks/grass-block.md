@@ -1,6 +1,6 @@
 # 草方块
 
-![Grass Block](https://minecraft.wiki/images/Grass_Block_JE7_BE6.png?format=original)
+![Grass Block](../page/images/blocks/grass-block/4264a954.png)
 
 > **稀有度**：常见 | **可再生**：否 | **可堆叠**：64 | **工具**：任何（锹最快）
 > **硬度**：0.6 | **爆炸抗性**：0.6 | **发光**：否 | **透明**：否 | **可燃**：否
@@ -76,8 +76,8 @@
 
 ## 图库
 
-![Grass Spreading](https://minecraft.wiki/images/Grass_Spreading.png?format=original)
+![Grass Spreading](../page/images/blocks/grass-block/4b5af37b.png)
 *草方块向泥土蔓延的过程*
 
-![Biome Grass Colors](https://minecraft.wiki/images/Grass_Block_Biome_Colors.png?format=original)
+![Biome Grass Colors](../page/images/blocks/grass-block/705153c0.png)
 *不同生物群系中的草方块颜色对比*

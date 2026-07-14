@@ -1,6 +1,6 @@
 # 砂轮
 
-![Grindstone](https://minecraft.wiki/images/Grindstone_JE2_BE2.png?format=original)
+![Grindstone](../page/images/blocks/grindstone/7bf91268.png)
 
 > **稀有度**：常见 | **可再生**：是 | **可堆叠**：64 | **工具**：木镐或更好
 > **硬度**：2 | **爆炸抗性**：2 | **发光**：否 | **透明**：否 | **可燃**：否
@@ -104,5 +104,5 @@
 
 ## 图库
 
-![Grindstone GUI](https://minecraft.wiki/images/Grindstone_GUI.png?format=original)
+![Grindstone GUI](../page/images/blocks/grindstone/b87a656a.png)
 *砂轮的 GUI 界面*

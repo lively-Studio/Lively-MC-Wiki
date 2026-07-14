@@ -1,6 +1,6 @@
 # 南瓜灯
 
-![Jack o'Lantern](https://minecraft.wiki/images/Jack_o%27Lantern_JE4_BE3.png?format=original)
+![Jack o'Lantern](../page/images/blocks/jack-o-lantern/7a434168.png)
 
 > **稀有度**：常见 | **可再生**：是 | **可堆叠**：64 | **工具**：任何（斧最快）
 > **硬度**：1 | **爆炸抗性**：1 | **发光**：是（15） | **透明**：否 | **可燃**：否

@@ -1,6 +1,6 @@
 # 菌丝体
 
-![Mycelium](https://minecraft.wiki/images/Mycelium_JE2_BE2.png?format=original)
+![Mycelium](../page/images/blocks/mycelium/c3e9d6fe.png)
 
 > **稀有度**：稀有（仅蘑菇岛） | **可再生**：是 | **可堆叠**：64 | **工具**：任何（锹最快）
 > **硬度**：0.6 | **爆炸抗性**：0.6 | **发光**：否 | **透明**：否 | **可燃**：否

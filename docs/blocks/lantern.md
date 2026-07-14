@@ -1,6 +1,6 @@
 # 灯笼
 
-![Lantern](https://minecraft.wiki/images/Lantern_JE3_BE3.png?format=original)
+![Lantern](../page/images/blocks/lantern/73e414d5.png)
 
 > **稀有度**：常见 | **可再生**：是 | **可堆叠**：64 | **工具**：任何（镐最快）
 > **硬度**：3.5 | **爆炸抗性**：3.5 | **发光**：是（15） | **透明**：否 | **可燃**：否

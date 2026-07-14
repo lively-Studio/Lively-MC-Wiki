@@ -1,6 +1,6 @@
 # 荧石
 
-![Glowstone](https://minecraft.wiki/images/Glowstone_JE5_BE4.png?format=original)
+![Glowstone](../page/images/blocks/glowstone/fe07d956.png)
 
 > **稀有度**：不常见 | **可再生**：是 | **可堆叠**：64 | **工具**：任何
 > **硬度**：0.3 | **爆炸抗性**：0.3 | **发光**：是（15） | **透明**：否 | **可燃**：否
@@ -68,5 +68,5 @@
 
 ## 图库
 
-![Glowstone Cluster](https://minecraft.wiki/images/Glowstone_Naturally_Generated.png?format=original)
+![Glowstone Cluster](../page/images/blocks/glowstone/5070fcb3.png)
 *下界天花板的天然荧石簇*
