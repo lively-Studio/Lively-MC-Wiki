@@ -1,0 +1,386 @@
+/* ============================================
+   Openwebdocs.kit-MD3 Docs - config.json driven
+   ============================================ */
+(function() {
+  'use strict';
+
+  const ROUTES = {};
+  let FILE_TO_ROUTE = {};
+  let SITE = { name:'Openwebdocs.kit-MD3', titleSuffix:'Openwebdocs.kit-MD3', meta:'Openwebdocs.kit-MD3 · 文档站点框架', docDir:'../docs' };
+  let NAV = [];
+  let SIDEBAR_LINKS = [];
+  const DEFAULT_ROUTE = '/';
+
+  const ICONS = {
+    home: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
+    devices: '<rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>',
+    schedule: '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
+    computer: '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>',
+    customize: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>',
+    info: '<circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>',
+    external: '<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>',
+  };
+  function iconSVG(name) { return ICONS[name] || ICONS.info; }
+
+  async function loadConfig() {
+    try {
+      const resp = await fetch('config.json');
+      if (!resp.ok) return;
+      const cfg = await resp.json();
+      if (cfg.site) Object.assign(SITE, cfg.site);
+      if (cfg.nav && Array.isArray(cfg.nav)) {
+        NAV = cfg.nav;
+        const nr = {}, nf = {};
+        function processNav(items, parentRoute) {
+          items.forEach(item => {
+            const tag = (item.title || item.file || '').toLowerCase();
+            const autoSlug = tag.replace(/[\u4e00-\u9fff]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || tag.replace(/[^\w]+/g, '-').replace(/^-+|-+$/g, '');
+            const route = item.route || (parentRoute ? parentRoute + '/' : '/') + autoSlug;
+            item.route = route;
+            const slug = route.split('/').pop();
+            let file = item.file;
+            if (!file) {
+              if (item.children) file = route.replace(/^\//, '') + '/README.md';
+              else if (parentRoute) file = parentRoute.replace(/^\//, '') + '/docs/' + slug + '.md';
+              else file = route === '/' ? 'README.md' : route.replace(/^\//, '') + '.md';
+            }
+            nr[route] = { file, title: item.title, icon: item.icon || 'info' };
+            nf[file] = route;
+            if (item.children) processNav(item.children, route);
+          });
+        }
+        processNav(cfg.nav);
+        Object.assign(ROUTES, nr); Object.assign(FILE_TO_ROUTE, nf);
+      }
+      SIDEBAR_LINKS = cfg.sidebarLinks || [];
+    } catch (e) { console.warn('config.json load failed:', e.message); }
+  }
+
+  function renderSidebar() {
+    if (!NAV.length) return;
+    function buildHTML(items, depth) {
+      return items.map(item => {
+        const hasKids = item.children && item.children.length;
+        const route = hasKids ? null : (item.route || (item.title || '').toLowerCase().replace(/[^\w\u4e00-\u9fff]+/g, '-').replace(/^-+|-+$/g, ''));
+        const pad = depth * 16;
+        if (hasKids) {
+          return `<li class="nav-category" style="padding-left:${pad}px;font-size:11px;font-weight:600;color:var(--md-sys-color-on-surface-variant);padding-top:12px;padding-bottom:4px;text-transform:uppercase;letter-spacing:0.05em;">${item.title}</li>` + buildHTML(item.children, depth + 1);
+        }
+        return `<li class="nav-item${route === DEFAULT_ROUTE ? ' active' : ''}" data-route="#${route}" style="padding-left:${pad}px;">
+          <a href="#${route}" class="nav-link">
+            <svg viewBox="0 0 24 24" width="20" height="20" class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${iconSVG(item.icon || 'info')}</svg>
+            <span class="nav-label">${item.title}</span>
+          </a>
+        </li>`;
+      }).join('');
+    }
+    navList.innerHTML = buildHTML(NAV, 0);
+  }
+
+  function renderSidebarLinks() {
+    const container = $('#sidebarLinks');
+    if (!container) return;
+    container.innerHTML = `<div class="sidebar__section-label">链接</div>` + SIDEBAR_LINKS.map(link => `
+      <a href="${link.url}" class="sidebar-footer-link" style="margin-top:4px"${link.external ? ' target="_blank"' : ''}>
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${iconSVG(link.external ? 'external' : 'home')}</svg>
+        ${link.title}
+      </a>`).join('');
+  }
+
+  const $ = (sel) => document.querySelector(sel);
+  const docTitle = $('#docTitle'), docBody = $('#docBody'), docMeta = $('#docMeta');
+  const navList = $('#navList'), sidebar = $('#sidebar'), drawerOverlay = $('#drawerOverlay');
+  const menuToggle = $('#menuToggle'), themeToggle = $('#themeToggle'), themeIcon = $('#themeIcon');
+  const scrollTopBtn = $('#scrollTop'), tocList = $('#tocList');
+
+  function getPreferredTheme() { return localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); }
+  function setTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme); localStorage.setItem('theme', theme);
+    const isDark = theme === 'dark';
+    themeIcon.innerHTML = isDark
+      ? '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>'
+      : '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
+  }
+  setTheme(getPreferredTheme());
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => { if (!localStorage.getItem('theme')) setTheme(e.matches ? 'dark' : 'light'); });
+
+  function openDrawer() { sidebar.classList.add('open'); drawerOverlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
+  function closeDrawer() { sidebar.classList.remove('open'); drawerOverlay.classList.remove('active'); document.body.style.overflow = ''; }
+  menuToggle.addEventListener('click', () => { sidebar.classList.contains('open') ? closeDrawer() : openDrawer(); });
+  drawerOverlay.addEventListener('click', closeDrawer);
+  navList.addEventListener('click', (e) => { if (window.innerWidth <= 768) closeDrawer(); });
+  window.addEventListener('scroll', () => { scrollTopBtn.classList.toggle('visible', window.scrollY > 300); }, { passive: true });
+  scrollTopBtn.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+  function updateActiveNav(route) { navList.querySelectorAll('.nav-item').forEach(item => item.classList.toggle('active', item.dataset.route === route)); }
+
+  function generateTOC(el) {
+    tocList.innerHTML = '';
+    const hs = el.querySelectorAll('h2, h3');
+    if (!hs.length) { document.getElementById('tocSidebar').style.display = 'none'; return; }
+    document.getElementById('tocSidebar').style.display = 'block';
+    hs.forEach((h, i) => {
+      if (!h.id) h.id = `${i}`;
+      const li = document.createElement('li'), a = document.createElement('a');
+      a.href = `#${h.id}`; a.textContent = h.textContent; a.className = h.tagName === 'H3' ? 'toc-h3' : 'toc-h2';
+      a.addEventListener('click', (e) => { e.preventDefault(); const t = document.getElementById(h.id); if (t) { t.scrollIntoView({ behavior:'smooth', block:'start' }); history.replaceState(null,'',`#${h.id}`); } });
+      li.appendChild(a); tocList.appendChild(li);
+    });
+  }
+
+  function escapeHtml(text) { const d = document.createElement('div'); d.textContent = text; return d.innerHTML; }
+
+  /* ============================================
+     Post-processing: MC Infobox, Gallery, Animated Images
+     ============================================ */
+
+  function processInfobox(body, title) {
+    // Find the first blockquote (key-value stats)
+    const bq = body.querySelector('blockquote');
+    if (!bq) return;
+
+    // Find the first standalone image (before any heading)
+    let firstImg = null;
+    const children = Array.from(body.children);
+    for (const child of children) {
+      if (child.tagName === 'H1' || child.tagName === 'H2') break;
+      if (child.tagName === 'P') {
+        const img = child.querySelector('img');
+        if (img && !child.querySelector('em') && !firstImg) {
+          firstImg = img;
+          break;
+        }
+      }
+    }
+
+    // Parse blockquote lines into key-value pairs
+    const lines = bq.innerHTML.split('\n').filter(l => l.trim());
+    const rows = [];
+    lines.forEach(line => {
+      // Split by | separator
+      const parts = line.split('|');
+      parts.forEach(part => {
+        const m = part.match(/\*\*(.+?)\*\*\s*[：:]\s*(.+)/);
+        if (m) {
+          rows.push({ label: m[1].trim(), value: m[2].trim() });
+        }
+      });
+    });
+
+    if (rows.length === 0) return;
+
+    // Build infobox HTML
+    let infoboxHTML = `<div class="mc-infobox">`;
+    infoboxHTML += `<div class="mc-infobox__header">${escapeHtml(title)}</div>`;
+
+    // Image
+    if (firstImg) {
+      const imgSrc = firstImg.getAttribute('src');
+      const imgAlt = firstImg.getAttribute('alt') || title;
+      infoboxHTML += `<div class="mc-infobox__image"><a href="${imgSrc}" target="_blank"><img src="${imgSrc}" alt="${escapeHtml(imgAlt)}" loading="lazy"></a></div>`;
+      // Remove the original image paragraph
+      const imgP = firstImg.closest('p');
+      if (imgP) imgP.remove();
+    }
+
+    // Rows
+    infoboxHTML += `<div class="mc-infobox__rows">`;
+    rows.forEach(row => {
+      infoboxHTML += `<div class="mc-infobox__row"><div class="mc-infobox__label">${row.label}</div><div class="mc-infobox__value">${row.value}</div></div>`;
+    });
+    infoboxHTML += `</div></div>`;
+
+    // Replace blockquote with infobox
+    const temp = document.createElement('div');
+    temp.innerHTML = infoboxHTML;
+    bq.parentNode.replaceChild(temp.firstElementChild, bq);
+  }
+
+  function processGallery(body) {
+    // Find gallery section: images with captions under headings containing "图库" or "gallery"
+    const galleryHeadings = [];
+    body.querySelectorAll('h2, h3').forEach(h => {
+      if (/图库|画廊|gallery/i.test(h.textContent)) {
+        galleryHeadings.push(h);
+      }
+    });
+
+    galleryHeadings.forEach(heading => {
+      const items = [];
+      let el = heading.nextElementSibling;
+      // Collect consecutive image+caption pairs until next heading
+      while (el && !/^H[1-6]$/.test(el.tagName)) {
+        const img = el.querySelector('img');
+        if (img) {
+          const imgSrc = img.getAttribute('src');
+          const imgAlt = img.getAttribute('alt') || '';
+          // Look for caption in next sibling
+          let caption = '';
+          let next = el.nextElementSibling;
+          if (next && next.tagName === 'P') {
+            const em = next.querySelector('em');
+            if (em) {
+              caption = em.textContent.trim();
+              // Check if next p is purely italic (caption)
+              const textContent = next.textContent.trim();
+              if (next.innerHTML.replace(/<[^>]+>/g, '').trim() === textContent && next.querySelector('em')) {
+                items.push({ src: imgSrc, alt: imgAlt, caption, removeEl: el, removeNext: next });
+                el = next.nextElementSibling;
+                continue;
+              }
+            }
+            // Also handle plain text caption in italic wrapper
+            const italicOnly = next.querySelector('em');
+            if (italicOnly && next.childNodes.length === 1) {
+              caption = italicOnly.textContent.trim();
+              items.push({ src: imgSrc, alt: imgAlt, caption, removeEl: el, removeNext: next });
+              el = next.nextElementSibling;
+              continue;
+            }
+          }
+          // Also match the pattern: <p><em>caption</em></p> where the img is in a separate p before
+          // Actually, marked renders ![alt](url) as <p><img></p> and *text* as <p><em>text</em></p>
+          // So if there's an image p followed by an em-only p, that's a caption
+          if (next && next.tagName === 'P' && next.querySelector('em') && !next.querySelector('img')) {
+            caption = next.querySelector('em').textContent.trim();
+            items.push({ src: imgSrc, alt: imgAlt, caption, removeEl: el, removeNext: next });
+            el = next.nextElementSibling;
+            continue;
+          }
+          // Image without caption
+          items.push({ src: imgSrc, alt: imgAlt, caption: '', removeEl: el, removeNext: null });
+        }
+        const nextEl = el ? el.nextElementSibling : null;
+        el = nextEl;
+        // Break if we hit a non-caption element that's not an image
+        if (el && !el.querySelector('img') && el.tagName !== 'P') break;
+      }
+
+      if (items.length === 0) return;
+
+      // Remove collected elements
+      items.forEach(item => {
+        if (item.removeEl) item.removeEl.remove();
+        if (item.removeNext) item.removeNext.remove();
+      });
+
+      // Build gallery
+      let galleryHTML = `<div class="mc-gallery">`;
+      items.forEach(item => {
+        galleryHTML += `<div class="mc-gallery__item">`;
+        galleryHTML += `<a href="${item.src}" target="_blank"><img src="${item.src}" alt="${escapeHtml(item.alt)}" loading="lazy"></a>`;
+        if (item.caption) {
+          galleryHTML += `<div class="mc-gallery__caption">${item.caption}</div>`;
+        }
+        galleryHTML += `</div>`;
+      });
+      galleryHTML += `</div>`;
+
+      // Insert gallery after the heading
+      const temp = document.createElement('div');
+      temp.innerHTML = galleryHTML;
+      heading.after(temp.firstElementChild);
+    });
+  }
+
+  function processAnimatedImages(body) {
+    // Add GIF badge to animated images
+    body.querySelectorAll('img').forEach(img => {
+      const src = img.getAttribute('src') || '';
+      if (src.toLowerCase().endsWith('.gif') || src.includes('.gif?')) {
+        const parent = img.parentElement;
+        if (parent && parent.tagName === 'P') {
+          const badge = document.createElement('span');
+          badge.className = 'mc-gif-badge';
+          badge.textContent = 'GIF';
+          parent.appendChild(badge);
+        }
+      }
+    });
+  }
+
+  async function loadDocument(route) {
+    let config = ROUTES[route];
+    if (!config && (route.endsWith('.md') || route.endsWith('.txt'))) config = { file: route, title: route.replace(/\.(md|txt)$/i, '') };
+    if (!config) { navigate(DEFAULT_ROUTE); return; }
+    docTitle.textContent = config.title;
+    document.title = `${config.title} - ${SITE.titleSuffix}`;
+    docBody.innerHTML = '<div class="loading-state"><div class="loading-spinner"></div><p>加载文档中...</p></div>';
+    tocList.innerHTML = ''; updateActiveNav(route);
+    try {
+      const response = await fetch(`${SITE.docDir}/${config.file}`);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const md = await response.text();
+      pageCache[route] = { title: config.title, content: md, file: config.file };
+      const renderer = new marked.Renderer();
+      renderer.heading = function({ text, depth }) {
+        const slug = text.toLowerCase().replace(/[^\w\u4e00-\u9fff]+/g, '-').replace(/^-+|-+$/g, '');
+        return `<h${depth} id="${slug}"><a class="heading-anchor" href="#${slug}" aria-hidden="true">#</a>${text}</h${depth}>`;
+      };
+      renderer.code = function({ text, lang }) {
+        const language = lang || '', validLang = language && hljs.getLanguage(language) ? language : '';
+        const highlighted = validLang ? hljs.highlight(text, { language: validLang }).value : escapeHtml(text);
+        return `<pre data-language="${language}"><code class="hljs${validLang?' language-'+validLang:''}">${highlighted}</code></pre>`;
+      };
+      renderer.link = function({ href, tokens }) {
+        const isExternal = href && (href.startsWith('http://') || href.startsWith('https://'));
+        return `<a href="${href}"${isExternal?' target="_blank" rel="noopener noreferrer"':''}>${this.parser.parseInline(tokens)}</a>`;
+      };
+      marked.use({ renderer, breaks: true, gfm: true });
+      docBody.innerHTML = marked.parse(md);
+      processInfobox(docBody, config.title);
+      processGallery(docBody);
+      processAnimatedImages(docBody);
+      generateTOC(docBody);
+      const scrollTo = sessionStorage.getItem('scrollTo');
+      if (scrollTo) { sessionStorage.removeItem('scrollTo'); const s = scrollTo.toLowerCase().replace(/[^\w\u4e00-\u9fff]+/g, '-').replace(/^-+|-+$/g, ''); setTimeout(() => { const el = document.getElementById(s); if (el) el.scrollIntoView({ behavior:'smooth', block:'start' }); }, 200); }
+      docMeta.innerHTML = `<span>${SITE.meta}</span>`;
+    } catch (err) {
+      console.error('Failed to load document:', err);
+      docBody.innerHTML = `<div class="loading-state" style="gap:12px"><svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="var(--md-sys-color-error)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg><p>文档加载失败</p><p style="font-size:14px;color:var(--md-sys-color-on-surface-variant)">${err.message}</p><button onclick="location.reload()" style="margin-top:12px;padding:8px 24px;border-radius:9999px;border:none;background:var(--md-sys-color-primary);color:var(--md-sys-color-on-primary);cursor:pointer;font-size:14px">重新加载</button></div>`;
+    }
+  }
+
+  function navigate(route) { window.location.hash = (route.startsWith('#') ? route.slice(1) : route) || DEFAULT_ROUTE; }
+  function handleRoute() {
+    const hash = window.location.hash.slice(1);
+    if (!hash || hash.startsWith('/') || hash.endsWith('.md') || hash.endsWith('.txt')) {
+      loadDocument(hash || DEFAULT_ROUTE);
+    }
+  }
+  window.addEventListener('hashchange', handleRoute);
+
+  docBody.addEventListener('click', (e) => {
+    const link = e.target.closest('a'); if (!link) return;
+    const href = link.getAttribute('href'); if (!href) return;
+    const lastPart = href.split('/').pop();
+    const [filename, anchor] = lastPart.split('#');
+    const decoded = decodeURIComponent(filename.split('?')[0]);
+    if (!decoded.endsWith('.md') && !decoded.endsWith('.txt')) return;
+    e.preventDefault();
+    const route = FILE_TO_ROUTE[decoded] || decoded;
+    if (anchor) sessionStorage.setItem('scrollTo', anchor);
+    navigate(`#${route}`);
+  });
+
+  themeToggle.addEventListener('click', () => { setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && sidebar.classList.contains('open')) closeDrawer(); });
+
+  const pageCache = {};
+  async function init() {
+    await loadConfig();
+    renderSidebar();
+    renderSidebarLinks();
+    if (!window.location.hash) window.location.hash = DEFAULT_ROUTE;
+    else handleRoute();
+    window.OWD = { config:SITE, routes:ROUTES, nav:NAV, cache:pageCache,
+      navigate(r) { if (r) navigate('#' + r.replace(/^#/, '')); },
+      async getPage(route) { const r=ROUTES[route]; if(!r)return null; if(pageCache[route])return pageCache[route]; try{const resp=await fetch(`${SITE.docDir}/${r.file}`);if(!resp.ok)return null;const t=await resp.text();pageCache[route]={title:r.title,content:t,file:r.file};return pageCache[route];}catch(e){return null;} },
+      search(q) { const w=q.toLowerCase(),res=[]; for(const[k,p]of Object.entries(pageCache)){if(p.content.toLowerCase().includes(w)){const i=p.content.toLowerCase().indexOf(w);const s=p.content.substring(Math.max(0,i-30),i+w.length+80).replace(/\n/g,' ');res.push({route:k,title:p.title,snippet:'...'+s+'...',file:p.file});}} return res; },
+      async searchAll(q) { await Promise.all(Object.keys(ROUTES).map(r=>this.getPage(r))); return this.search(q); }
+    };
+  }
+  function waitForDeps() { if (typeof marked!=='undefined' && typeof hljs!=='undefined') init(); else setTimeout(waitForDeps, 100); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', waitForDeps);
+  else waitForDeps();
+})();

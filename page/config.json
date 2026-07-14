@@ -1,0 +1,53 @@
+{
+  "site": {
+    "name": "Lively Minecraft Wiki",
+    "titleSuffix": "Lively Minecraft Wiki",
+    "meta": "Lively Minecraft Wiki · 灵动--我的世界中文百科",
+    "docDir": "../docs",
+    "logo": "logo.jpg"
+  },
+  "nav": [
+    { "title": "首页", "icon": "home" },
+    { "title": "方块", "icon": "computer", "route": "/blocks" },
+    { "title": "物品", "icon": "customize", "route": "/items" },
+    { "title": "生物", "icon": "info", "route": "/mobs" },
+    { "title": "合成", "icon": "schedule", "route": "/crafting" },
+    { "title": "游戏机制", "icon": "devices", "route": "/mechanics" },
+    { "title": "版本历史", "icon": "schedule", "route": "/versions" },
+    { "title": "关于", "icon": "info", "route": "/about" }
+  ],
+  "sidebarLinks": [
+    { "title": "Minecraft 官网", "url": "https://www.minecraft.net/", "external": true },
+    { "title": "Mojang Studios", "url": "https://www.mojang.com/", "external": true },
+    { "title": "GitHub", "url": "https://github.com", "external": true }
+  ],
+  "home": {
+    "badge": "Minecraft Wiki",
+    "heroTitle": "Minecraft 中文维基",
+    "heroSubtitle": "探索、建造与生存的终极指南",
+    "heroDescription": "从基础的草方块到复杂的红石机械，从下界的烈焰人到末地的末影龙 — 这里收录了关于 Minecraft 的一切知识。",
+    "primaryAction": { "text": "开始探索", "link": "page/" },
+    "secondaryAction": { "text": "Minecraft 官网", "link": "https://www.minecraft.net/" },
+    "featuresTitle": "Minecraft 世界",
+    "featuresDescription": "探索这个无限可能的方块世界",
+    "features": [
+      { "title": "超过 150 种方块", "icon": "computer", "description": "从常见的石头、木头到稀有的远古残骸、信标，每一种方块都有其独特的获取方式与用途" },
+      { "title": "丰富的物品系统", "icon": "customize", "description": "工具、武器、盔甲、食物、药水 — 数百种物品助你在世界中生存与建造" },
+      { "title": "多样的生物群落", "icon": "palette", "description": "平原、沙漠、丛林、雪原、下界、末地 — 每个维度都有独特的生态环境与挑战" },
+      { "title": "强大的红石系统", "icon": "bolt", "description": "红石电路让自动化成为可能，从简单的自动门到复杂的计算器都能实现" },
+      { "title": "无限创造模式", "icon": "edit", "description": "创造模式下无限资源与飞行能力，让你专注于建造宏伟的建筑与奇迹" },
+      { "title": "活跃的社区", "icon": "devices", "description": "全球数以亿计的玩家社区，丰富的模组、材质包、服务器与地图等你探索" }
+    ],
+    "navCardsTitle": "文档导航",
+    "linksTitle": "外部链接",
+    "widgets": {
+      "enabled": true,
+      "file": "docs/_widgets.md",
+      "header": {
+        "label": "游戏数据",
+        "title": "Minecraft 数据库",
+        "description": "快速查阅常用游戏数据与核心信息"
+      }
+    }
+  }
+}

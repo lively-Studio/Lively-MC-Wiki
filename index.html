@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Docs</title>
+  <meta name="description" content="基于 OWD.K-MD3 框架的文档站">
+
+  <link rel="preconnect" href="https://fonts.loli.net">
+  <link rel="preconnect" href="https://gstatic.loli.net" crossorigin>
+  <link href="https://fonts.loli.net/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="page/css/theme.css">
+  <link rel="stylesheet" href="page/css/home.css">
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <header class="home-topbar" id="topBar">
+    <a href="./" class="home-topbar__brand" id="topBrand">
+      <img class="home-topbar__logo" id="topLogo" src="page/logo.jpg" alt="Logo">
+      <span class="home-topbar__name" id="topName">My Docs</span>
+    </a>
+    <div class="home-topbar__actions">
+      <button class="icon-button" id="themeToggle" aria-label="切换主题">
+        <svg viewBox="0 0 24 24" width="24" height="24" id="themeIcon" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero__content">
+      <img class="hero__logo" id="heroLogo" src="page/logo.jpg" alt="Logo">
+      <div class="hero__badge" id="heroBadge">
+        <span class="hero__badge-dot"></span>
+        <span id="heroBadgeText">OWD.K-MD3</span>
+      </div>
+      <h1 class="hero__title" id="heroTitle">构建更好的文档</h1>
+      <p class="hero__subtitle" id="heroSubtitle">基于 Material Design 3 的轻量级文档站点框架</p>
+      <p class="hero__description" id="heroDescription">只需编写 Markdown 文件，即可拥有一个现代化的文档网站</p>
+      <div class="hero__actions" id="heroActions">
+        <a class="btn btn--primary" href="page/" id="heroPrimary">
+          <span>开始阅读</span>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a class="btn btn--outline" href="https://github.com" target="_blank" rel="noopener" id="heroSecondary">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          <span>GitHub</span>
+        </a>
+      </div>
+    </div>
+    <div class="scroll-indicator" id="scrollIndicator" title="向下滚动">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="featuresSection">
+    <div class="features__header">
+      <span class="features__label" id="featuresLabel">核心特性</span>
+      <h2 class="features__title" id="featuresTitle">开箱即用的文档框架</h2>
+      <p class="features__description" id="featuresDescription">为你提供现代文档站点的所有必需功能</p>
+    </div>
+    <div class="features__grid" id="featuresGrid">
+      <!-- Dynamic feature cards inserted by JS -->
+    </div>
+  </section>
+
+  <!-- Widgets Section -->
+  <section class="widgets" id="widgetsSection">
+    <div class="widgets__inner">
+      <div class="widgets__header">
+        <span class="widgets__label" id="widgetsLabel">Widgets</span>
+        <h2 class="widgets__title" id="widgetsTitle">功能面板</h2>
+        <p class="widgets__description" id="widgetsDescription">快速了解项目动态与核心信息</p>
+      </div>
+      <div class="widgets__grid" id="widgetsGrid">
+        <!-- Dynamic widgets inserted by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Nav Cards Section -->
+  <section class="nav-cards" id="navCardsSection">
+    <div class="nav-cards__inner">
+      <div class="nav-cards__header">
+        <span class="nav-cards__label">文档</span>
+        <h2 class="nav-cards__title" id="navCardsTitle">文档导航</h2>
+      </div>
+      <div class="nav-cards__grid" id="navCardsGrid">
+        <!-- Dynamic nav cards inserted by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- External Links Section -->
+  <section class="links-section" id="linksSection">
+    <h2 class="links-section__title" id="linksTitle">外部链接</h2>
+    <div class="links-grid" id="linksGrid">
+      <!-- Dynamic links inserted by JS -->
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div class="site-footer__brand">
+        <img class="site-footer__logo" id="footerLogo" src="page/logo.jpg" alt="Logo">
+        <span class="site-footer__name" id="footerName">My Docs</span>
+      </div>
+      <p class="site-footer__copyright">
+        Built with <a class="site-footer__link" href="#" id="footerLink">OWD.K-MD3</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+  (function() {
+    'use strict';
+
+    // ===== SVG Icons =====
+    var ICONS = {
+      edit: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>',
+      palette: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 0 20"/><path d="M12 2a10 10 0 0 0 0 20"/></svg>',
+      darkmode: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>',
+      devices: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>',
+      bolt: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
+      tune: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>',
+      home: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',
+      schedule: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
+      info: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>',
+      external: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>',
+      chevronRight: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>',
+      sun: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>',
+      moon: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>'
+    };
+
+    // ===== Theme =====
+    var html = document.documentElement;
+    var themeIcon = document.getElementById('themeIcon');
+
+    function getPreferredTheme() {
+      var stored = localStorage.getItem('owd-home-theme');
+      if (stored === 'light' || stored === 'dark') return stored;
+      return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    }
+
+    function applyTheme(theme) {
+      html.setAttribute('data-theme', theme);
+      var isDark = theme === 'dark';
+      themeIcon.innerHTML = isDark ? ICONS.moon : ICONS.sun;
+      localStorage.setItem('owd-home-theme', theme);
+    }
+
+    function toggleTheme() {
+      html.classList.add('theme-transition');
+      var newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      applyTheme(newTheme);
+      setTimeout(function() { html.classList.remove('theme-transition'); }, 300);
+    }
+
+    // Initialize theme
+    applyTheme(getPreferredTheme());
+    document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+
+    // ===== Config Loader =====
+    var DEFAULT_CONFIG = {
+      site: { name: 'My Docs', logo: 'page/logo.jpg', meta: '文档站' },
+      nav: [
+        { title: '首页', icon: 'home' },
+        { title: '指南', icon: 'schedule' },
+        { title: '关于', icon: 'info' }
+      ],
+      sidebarLinks: [
+        { title: 'GitHub', url: 'https://github.com', external: true }
+      ],
+      home: {}
+    };
+
+    function navToPage(item) {
+      if (item.route) return 'page/#' + item.route;
+      var slug = item.title.toLowerCase().replace(/\s+/g, '-');
+      return 'page/#/' + (item.title === '首页' ? '' : slug);
+    }
+
+    function applyConfig(cfg) {
+      var site = cfg.site || {};
+      var home = cfg.home || {};
+
+      // Site info
+      document.title = site.name || 'My Docs';
+      document.querySelector('meta[name="description"]').content = site.meta || '';
+      var logoUrl = site.logo || 'page/logo.jpg';
+      var siteName = site.name || 'My Docs';
+
+      // Set logo across all locations
+      var logoEls = document.querySelectorAll('#heroLogo, #topLogo, #footerLogo');
+      for (var i = 0; i < logoEls.length; i++) logoEls[i].src = logoUrl;
+
+      // Set site name
+      document.getElementById('topName').textContent = siteName;
+      document.getElementById('footerName').textContent = siteName;
+
+      // Hero section
+      document.getElementById('heroBadgeText').textContent = home.badge || ('基于 ' + siteName);
+      document.getElementById('heroTitle').textContent = home.heroTitle || siteName;
+      document.getElementById('heroSubtitle').textContent = home.heroSubtitle || '';
+      document.getElementById('heroDescription').textContent = home.heroDescription || '';
+
+      // Hero actions
+      var primary = home.primaryAction || { text: '开始阅读', link: 'page/' };
+      var secondary = home.secondaryAction || { text: 'GitHub', link: 'https://github.com' };
+      var heroPrimary = document.getElementById('heroPrimary');
+      heroPrimary.href = primary.link;
+      heroPrimary.firstElementChild.textContent = primary.text;
+      var heroSecondary = document.getElementById('heroSecondary');
+      heroSecondary.href = secondary.link;
+      heroSecondary.lastElementChild.textContent = secondary.text;
+
+      // Features
+      var features = home.features || [];
+      if (features.length > 0) {
+        document.getElementById('featuresLabel').textContent = home.featuresTitle || '核心特性';
+        document.getElementById('featuresTitle').textContent = home.featuresTitle || '核心特性';
+        document.getElementById('featuresDescription').textContent = home.featuresDescription || '';
+        var grid = document.getElementById('featuresGrid');
+        grid.innerHTML = '';
+        features.forEach(function(f) {
+          var card = document.createElement('div');
+          card.className = 'feature-card';
+          card.innerHTML =
+            '<div class="feature-card__icon">' + (ICONS[f.icon] || ICONS.edit) + '</div>' +
+            '<h3 class="feature-card__title">' + f.title + '</h3>' +
+            '<p class="feature-card__description">' + f.description + '</p>';
+          grid.appendChild(card);
+        });
+        document.getElementById('featuresSection').style.display = '';
+      } else {
+        document.getElementById('featuresSection').style.display = 'none';
+      }
+
+      // Nav cards
+      var nav = cfg.nav || [];
+      if (nav.length > 0) {
+        document.getElementById('navCardsTitle').textContent = home.navCardsTitle || '文档导航';
+        var navGrid = document.getElementById('navCardsGrid');
+        navGrid.innerHTML = '';
+        nav.forEach(function(item) {
+          var card = document.createElement('a');
+          card.className = 'nav-card';
+          card.href = navToPage(item);
+          card.innerHTML =
+            '<div class="nav-card__icon">' + (ICONS[item.icon] || ICONS.home) + '</div>' +
+            '<div class="nav-card__body">' +
+              '<div class="nav-card__title">' + item.title + '</div>' +
+              '<div class="nav-card__description">阅读 ' + item.title + ' 文档</div>' +
+            '</div>' +
+            '<div class="nav-card__arrow">' + ICONS.chevronRight + '</div>';
+          navGrid.appendChild(card);
+        });
+        document.getElementById('navCardsSection').style.display = '';
+      } else {
+        document.getElementById('navCardsSection').style.display = 'none';
+      }
+
+      // Links
+      var links = cfg.sidebarLinks || [];
+      if (links.length > 0) {
+        document.getElementById('linksTitle').textContent = home.linksTitle || '外部链接';
+        var linksGrid = document.getElementById('linksGrid');
+        linksGrid.innerHTML = '';
+        links.forEach(function(link) {
+          var a = document.createElement('a');
+          a.className = 'link-item';
+          a.href = link.url;
+          if (link.external) {
+            a.target = '_blank';
+            a.rel = 'noopener';
+          }
+          a.innerHTML = (ICONS[link.icon] || ICONS.external) + '<span>' + link.title + '</span>';
+          linksGrid.appendChild(a);
+        });
+        document.getElementById('linksSection').style.display = '';
+      } else {
+        document.getElementById('linksSection').style.display = 'none';
+      }
+
+      // Footer
+      document.getElementById('footerLink').href = secondary.link;
+    }
+
+    // ===== Widget System =====
+    var WIDGET_BREAKPOINTS = {
+      mobile:  '(max-width: 768px)',
+      tablet:  '(min-width: 769px) and (max-width: 1024px)',
+      desktop: '(min-width: 1025px)'
+    };
+
+    var WIDGET_COLORS = {
+      primary:   { bg: 'var(--md-sys-color-primary-container)',     fg: 'var(--md-sys-color-on-primary-container)',     border: 'var(--md-sys-color-primary)' },
+      secondary: { bg: 'var(--md-sys-color-secondary-container)',   fg: 'var(--md-sys-color-on-secondary-container)',   border: 'var(--md-sys-color-secondary)' },
+      tertiary:  { bg: 'var(--md-sys-color-tertiary-container)',    fg: 'var(--md-sys-color-on-tertiary-container)',    border: 'var(--md-sys-color-tertiary)' },
+      error:     { bg: 'var(--md-sys-color-error-container)',       fg: 'var(--md-sys-color-on-error-container)',       border: 'var(--md-sys-color-error)' },
+      neutral:   { bg: 'var(--md-sys-color-surface-container-high)',fg: 'var(--md-sys-color-on-surface)',               border: 'var(--md-sys-color-outline)' }
+    };
+
+    function parseAreas(md) {
+      var templateMap = {};
+      var regex = /<!--\s*areas:(\w+)=\"([^\"]+)\"\s*-->/g;
+      var match;
+      while ((match = regex.exec(md)) !== null) {
+        var platform = match[1].toLowerCase();
+        var rowsStr = match[2].trim();
+        var rows = [];
+        var rowRegex = /\"([^\"]+)\"/g;
+        var rowMatch;
+        while ((rowMatch = rowRegex.exec('\"' + rowsStr + '\"')) !== null) {
+          rows.push(rowMatch[1].trim());
+        }
+        if (rows.length === 0) rows = rowsStr.split(/\s*\"\s*\"/).filter(Boolean);
+        templateMap[platform] = rows.join('\" \"');
+      }
+      return templateMap;
+    }
+
+    function applyAreaTemplate(templateStr) {
+      var grid = document.getElementById('widgetsGrid');
+      if (!templateStr) { grid.style.gridTemplateAreas = ''; return; }
+      var rows = templateStr.split('\" \"');
+      var formatted = rows.map(function(r) { return \"'\" + r.trim() + \"'\"; }).join(' ');
+      grid.style.gridTemplateAreas = formatted;
+      if (rows.length > 0) {
+        var cols = rows[0].trim().split(/\s+/).length;
+        grid.style.gridTemplateColumns = 'repeat(' + cols + ', 1fr)';
+      }
+    }
+
+    function parseWidgetsMD(md) {
+      var templates = parseAreas(md);
+      var widgets = [];
+
+      var regex = /<!--\s*widget:([^>]+)\s*-->([\s\S]*?)<!--\s*\/widget\s*-->/g;
+      var match;
+      while ((match = regex.exec(md)) !== null) {
+        var paramsStr = match[1].trim();
+        var block = match[2].trim();
+
+        var params = {};
+        paramsStr.split(',').forEach(function(p) {
+          var kv = p.trim().split('=');
+          if (kv.length === 2) params[kv[0].trim()] = kv[1].trim();
+        });
+
+        var widget = {
+          area:  params.area  || 'default',
+          type:  params.type  || 'card',
+          color: params.color || 'primary'
+        };
+
+        // Parse heading (## Emoji Title)
+        var hMatch = block.match(/^##\s+(.+)$/m);
+        if (hMatch) {
+          var raw = hMatch[1].trim();
+          var emojiMatch = raw.match(/^([\p{Emoji_Presentation}\p{Emoji}\u{200D}\u{FE0F}]+)\s*/u);
+          if (emojiMatch) {
+            widget.emoji = emojiMatch[0].trim();
+            widget.title = raw.slice(emojiMatch[0].length).trim();
+          } else {
+            widget.emoji = '';
+            widget.title = raw;
+          }
+        }
+
+        // Parse body content — split into sections by ### markers
+        var sections = [];
+        var lines = block.split('\n');
+        var currentSection = null;
+        var skipHeading = false;
+
+        for (var i = 0; i < lines.length; i++) {
+          var line = lines[i];
+          var trimmed = line.trim();
+
+          if (trimmed.startsWith('## ')) { skipHeading = true; continue; }
+          if (!skipHeading) continue;
+          skipHeading = false;
+
+          if (trimmed.startsWith('### ')) {
+            // New sub-section
+            if (currentSection) sections.push(currentSection);
+            currentSection = { heading: trimmed.slice(4).trim(), items: [] };
+          } else if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
+            var itemText = trimmed.slice(2).trim();
+            // Check for markdown link: [text](url)
+            var linkMatch = itemText.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+            if (currentSection) {
+              currentSection.items.push(linkMatch
+                ? { type: 'link', text: linkMatch[1], url: linkMatch[2] }
+                : { type: 'bullet', text: itemText });
+            } else {
+              // top-level list items
+              currentSection = { heading: '', items: [] };
+              currentSection.items.push(linkMatch
+                ? { type: 'link', text: linkMatch[1], url: linkMatch[2] }
+                : { type: 'bullet', text: itemText });
+            }
+          } else if (trimmed.startsWith('|')) {
+            // Table row
+            if (!currentSection) currentSection = { heading: '', items: [] };
+            currentSection.items.push({ type: 'tableRow', cells: trimmed.split('|').map(function(c) { return c.trim(); }).filter(Boolean) });
+          } else if (trimmed.length > 0 && !trimmed.startsWith('[')) {
+            // Regular paragraph text
+            if (currentSection) {
+              currentSection.items.push({ type: 'text', text: trimmed });
+            } else {
+              currentSection = { heading: '', items: [{ type: 'text', text: trimmed }] };
+            }
+          } else if (trimmed.startsWith('[')) {
+            // Standalone link
+            var lnkMatch = trimmed.match(/\[([^\]]+)\]\(([^)]+)\)/);
+            if (lnkMatch) {
+              if (currentSection) {
+                currentSection.items.push({ type: 'cta', text: lnkMatch[1], url: lnkMatch[2] });
+              } else {
+                currentSection = { heading: '', items: [{ type: 'cta', text: lnkMatch[1], url: lnkMatch[2] }] };
+              }
+            }
+          }
+          // empty lines = section boundary (only if not in news mode)
+        }
+        if (currentSection) sections.push(currentSection);
+
+        widget.sections = sections;
+        // Backward compat: description from first text
+        if (sections.length > 0) {
+          var firstText = sections[0].items.find(function(it) { return it.type === 'text'; });
+          widget.description = firstText ? firstText.text : '';
+        }
+
+        widget.linkUrl = '';
+        widget.linkText = '';
+        if (sections.length > 0) {
+          var lastSection = sections[sections.length - 1];
+          var ctaItem = lastSection.items.find(function(it) { return it.type === 'cta'; });
+          if (ctaItem) {
+            widget.linkUrl = ctaItem.url;
+            widget.linkText = ctaItem.text;
+            // Remove CTA from items so it renders as footer button
+            lastSection.items = lastSection.items.filter(function(it) { return it.type !== 'cta'; });
+            if (lastSection.items.length === 0) sections.pop();
+          }
+        }
+
+        widgets.push(widget);
+      }
+
+      return { templates: templates, widgets: widgets };
+    }
+
+    function renderWidgetBody(sections, type) {
+      var html = '';
+      if (!sections || sections.length === 0) return html;
+
+      switch (type) {
+        case 'news':
+          // News style: each ### is a news entry with date
+          sections.forEach(function(sec) {
+            html += '<div class=\"widget-news__item\">';
+            html += '<span class=\"widget-news__date\">' + sec.heading + '</span>';
+            sec.items.forEach(function(item) {
+              if (item.type === 'text') html += '<p class=\"widget-news__text\">' + item.text + '</p>';
+            });
+            html += '</div>';
+          });
+          break;
+
+        case 'stats':
+          // Stats style: table rows
+          html += '<table class=\"widget-stats__table\">';
+          sections.forEach(function(sec) {
+            if (sec.heading) {
+              html += '<thead><tr><th colspan=\"2\">' + sec.heading + '</th></tr></thead>';
+            }
+            html += '<tbody>';
+            sec.items.forEach(function(item) {
+              if (item.type === 'tableRow' && item.cells.length >= 2) {
+                html += '<tr><td>' + item.cells[0] + '</td><td class=\"widget-stats__value\">' + item.cells[1] + '</td></tr>';
+              }
+            });
+            html += '</tbody>';
+          });
+          html += '</table>';
+          break;
+
+        case 'versions':
+          // Versions style: compact platform grid
+          html += '<div class=\"widget-versions__grid\">';
+          sections.forEach(function(sec) {
+            sec.items.forEach(function(item) {
+              if (item.type === 'tableRow' && item.cells.length >= 2) {
+                html += '<div class=\"widget-versions__item\">';
+                html += '<span class=\"widget-versions__platform\">' + item.cells[0] + '</span>';
+                html += '<span class=\"widget-versions__version\">' + item.cells[1] + '</span>';
+                html += '</div>';
+              }
+            });
+          });
+          html += '</div>';
+          break;
+
+        case 'links':
+          // Quick links: grid of link pills
+          html += '<div class=\"widget-links__list\">';
+          sections.forEach(function(sec) {
+            sec.items.forEach(function(item) {
+              if (item.type === 'link') {
+                html += '<a class=\"widget-links__item\" href=\"' + item.url + '\">' + item.text + '</a>';
+              } else if (item.type === 'text') {
+                html += '<span class=\"widget-links__label\">' + item.text + '</span>';
+              }
+            });
+          });
+          html += '</div>';
+          break;
+
+        case 'featured':
+        default:
+          // Standard text content
+          sections.forEach(function(sec) {
+            if (sec.heading) {
+              html += '<h4 class=\"widget-body__subtitle\">' + sec.heading + '</h4>';
+            }
+            sec.items.forEach(function(item) {
+              if (item.type === 'text') {
+                html += '<p class=\"widget-body__text\">' + item.text + '</p>';
+              } else if (item.type === 'bullet') {
+                html += '<li class=\"widget-body__bullet\">' + item.text + '</li>';
+              } else if (item.type === 'link') {
+                html += '<a class=\"widget-body__link\" href=\"' + item.url + '\">' + item.text + '</a>';
+              }
+            });
+          });
+          break;
+      }
+      return html;
+    }
+
+    function renderWidget(widget, index) {
+      var el = document.createElement('div');
+      el.className = 'widget-panel widget-panel--' + widget.type + ' widget-panel--' + widget.color;
+      el.style.gridArea = widget.area;
+      el.style.animationDelay = (index * 0.08) + 's';
+
+      // Header
+      var headerHtml =
+        '<div class=\"widget-panel__header\">' +
+          '<span class=\"widget-panel__icon\">' + (widget.emoji || '') + '</span>' +
+          '<h3 class=\"widget-panel__title\">' + widget.title + '</h3>' +
+        '</div>';
+
+      // Body
+      var bodyHtml = '<div class=\"widget-panel__body\">' +
+        renderWidgetBody(widget.sections, widget.type) +
+        '</div>';
+
+      // Footer (CTA link)
+      var footerHtml = '';
+      if (widget.linkUrl && widget.linkText) {
+        footerHtml =
+          '<a class=\"widget-panel__footer\" href=\"' + widget.linkUrl + '\">' +
+            widget.linkText +
+            ' <svg viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><polyline points=\"9 18 15 12 9 6\"/></svg>' +
+          '</a>';
+      }
+
+      el.innerHTML = headerHtml + bodyHtml + footerHtml;
+      return el;
+    }
+
+    function renderWidgets(layoutData) {
+      var section = document.getElementById('widgetsSection');
+      var grid = document.getElementById('widgetsGrid');
+      grid.innerHTML = '';
+
+      if (!layoutData || !layoutData.widgets || layoutData.widgets.length === 0) {
+        section.style.display = 'none';
+        return;
+      }
+
+      // Render widgets
+      layoutData.widgets.forEach(function(w, i) {
+        grid.appendChild(renderWidget(w, i));
+      });
+
+      // Apply responsive templates
+      var templates = layoutData.templates || {};
+      var platforms = Object.keys(templates);
+      var applied = false;
+
+      platforms.forEach(function(platform) {
+        var template = templates[platform];
+        var query = WIDGET_BREAKPOINTS[platform];
+        if (query && template) {
+          if (window.matchMedia(query).matches) {
+            applyAreaTemplate(template);
+            applied = true;
+          }
+          window.matchMedia(query).addEventListener('change', function(e) {
+            if (e.matches) applyAreaTemplate(template);
+          });
+        }
+      });
+
+      if (!applied && platforms.length > 0) {
+        applyAreaTemplate(templates[platforms[0]]);
+      }
+
+      section.style.display = '';
+    }
+
+    function loadWidgets(widgetsCfg) {
+      var section = document.getElementById('widgetsSection');
+      if (!widgetsCfg || !widgetsCfg.enabled || !widgetsCfg.file) {
+        section.style.display = 'none';
+        return;
+      }
+
+      var header = widgetsCfg.header || {};
+      document.getElementById('widgetsLabel').textContent = header.label || 'Widgets';
+      document.getElementById('widgetsTitle').textContent = header.title || '功能面板';
+      document.getElementById('widgetsDescription').textContent = header.description || '';
+
+      fetch(widgetsCfg.file)
+        .then(function(r) {
+          if (!r.ok) throw new Error('HTTP ' + r.status);
+          return r.text();
+        })
+        .then(function(md) { return parseWidgetsMD(md); })
+        .then(function(layoutData) { renderWidgets(layoutData); })
+        .catch(function(err) {
+          console.warn('加载小组件文件失败:', err.message);
+          section.style.display = 'none';
+        });
+    }
+
+    // ===== Load =====
+    fetch('page/config.json')
+      .then(function(r) { return r.json(); })
+      .then(function(cfg) {
+        applyConfig(cfg);
+        loadWidgets((cfg.home || {}).widgets || null);
+      })
+      .catch(function() {
+        console.warn('加载 config.json 失败，使用默认配置');
+        applyConfig(DEFAULT_CONFIG);
+      });
+
+    // ===== Scroll behavior =====
+    var topBar = document.getElementById('topBar');
+    var scrollIndicator = document.getElementById('scrollIndicator');
+    var featuresSection = document.getElementById('featuresSection');
+
+    scrollIndicator.addEventListener('click', function() {
+      featuresSection.scrollIntoView({ behavior: 'smooth' });
+    });
+
+    var ticking = false;
+    window.addEventListener('scroll', function() {
+      if (!ticking) {
+        requestAnimationFrame(function() {
+          var scrolled = window.scrollY > 80;
+          if (scrolled) {
+            topBar.style.boxShadow = 'var(--md-sys-elevation-1)';
+            scrollIndicator.style.opacity = '0';
+          } else {
+            topBar.style.boxShadow = 'none';
+            scrollIndicator.style.opacity = '0.5';
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    // ===== System theme change listener =====
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+      if (!localStorage.getItem('owd-home-theme')) {
+        applyTheme(e.matches ? 'dark' : 'light');
+      }
+    });
+
+  })();
+  </script>
+</body>
+</html>

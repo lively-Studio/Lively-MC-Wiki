@@ -1,0 +1,177 @@
+/* ============================================
+   Material Design 3 Theme - OCS Open-code-Studio Docs
+   ============================================ */
+
+/* === Light Theme (default) === */
+:root,
+[data-theme="light"] {
+  /* Primary - Green #4AA26F */
+  --md-sys-color-primary: #3A8E5E;
+  --md-sys-color-on-primary: #FFFFFF;
+  --md-sys-color-primary-container: #C7EDD4;
+  --md-sys-color-on-primary-container: #002112;
+
+  /* Secondary */
+  --md-sys-color-secondary: #4B6356;
+  --md-sys-color-on-secondary: #FFFFFF;
+  --md-sys-color-secondary-container: #CDE8D8;
+  --md-sys-color-on-secondary-container: #082015;
+
+  /* Tertiary */
+  --md-sys-color-tertiary: #426277;
+  --md-sys-color-on-tertiary: #FFFFFF;
+  --md-sys-color-tertiary-container: #C6E6FF;
+  --md-sys-color-on-tertiary-container: #001E2F;
+
+  /* Error */
+  --md-sys-color-error: #BA1A1A;
+  --md-sys-color-on-error: #FFFFFF;
+  --md-sys-color-error-container: #FFDAD6;
+  --md-sys-color-on-error-container: #410002;
+
+  /* Surface - warm off-white */
+  --md-sys-color-surface: #FDFBFA;
+  --md-sys-color-on-surface: #1C1B1A;
+  --md-sys-color-surface-dim: #DDDBD9;
+  --md-sys-color-surface-bright: #FDFBFA;
+
+  --md-sys-color-surface-container-lowest: #FFFFFF;
+  --md-sys-color-surface-container-low: #F7F5F2;
+  --md-sys-color-surface-container: #F0EEEC;
+  --md-sys-color-surface-container-high: #EAE8E5;
+  --md-sys-color-surface-container-highest: #D4D2CF;
+
+  --md-sys-color-on-surface-variant: #494846;
+  --md-sys-color-outline: #7A7875;
+  --md-sys-color-outline-variant: #CAC8C5;
+
+  /* Inverse */
+  --md-sys-color-inverse-surface: #31302E;
+  --md-sys-color-inverse-on-surface: #F4F0ED;
+  --md-sys-color-inverse-primary: #81DAAB;
+
+  /* Shadows */
+  --md-sys-color-shadow: #000000;
+  --md-sys-color-scrim: #000000;
+
+  /* Surface Tint */
+  --md-sys-color-surface-tint: #3A8E5E;
+
+  /* Elevation levels */
+  --md-sys-elevation-0: none;
+  --md-sys-elevation-1: 0 1px 3px 1px rgba(0,0,0,0.08), 0 1px 2px 0 rgba(0,0,0,0.04);
+  --md-sys-elevation-2: 0 2px 6px 2px rgba(0,0,0,0.10), 0 1px 2px 0 rgba(0,0,0,0.06);
+  --md-sys-elevation-3: 0 4px 8px 3px rgba(0,0,0,0.10), 0 2px 3px 0 rgba(0,0,0,0.06);
+  --md-sys-elevation-4: 0 6px 12px 4px rgba(0,0,0,0.10), 0 2px 3px 0 rgba(0,0,0,0.06);
+  --md-sys-elevation-5: 0 8px 16px 6px rgba(0,0,0,0.10), 0 4px 4px 0 rgba(0,0,0,0.06);
+
+  /* Shape */
+  --md-sys-shape-extra-small: 4px;
+  --md-sys-shape-small: 8px;
+  --md-sys-shape-medium: 12px;
+  --md-sys-shape-large: 16px;
+  --md-sys-shape-extra-large: 28px;
+  --md-sys-shape-full: 9999px;
+}
+
+/* === Dark Theme === */
+[data-theme="dark"] {
+  --md-sys-color-primary: #81DAAB;
+  --md-sys-color-on-primary: #003920;
+  --md-sys-color-primary-container: #2E6B48;
+  --md-sys-color-on-primary-container: #C7EDD4;
+
+  --md-sys-color-secondary: #B7C4CC;
+  --md-sys-color-on-secondary: #222F35;
+  --md-sys-color-secondary-container: #39474E;
+  --md-sys-color-on-secondary-container: #D3DFE6;
+
+  --md-sys-color-tertiary: #D5BEDD;
+  --md-sys-color-on-tertiary: #3B2944;
+  --md-sys-color-tertiary-container: #533F5C;
+  --md-sys-color-on-tertiary-container: #F6DAFF;
+
+  --md-sys-color-error: #FFB4AB;
+  --md-sys-color-on-error: #690005;
+  --md-sys-color-error-container: #93000A;
+  --md-sys-color-on-error-container: #FFDAD6;
+
+  --md-sys-color-surface: #121212;
+  --md-sys-color-on-surface: #E4E2DF;
+  --md-sys-color-surface-dim: #121212;
+  --md-sys-color-surface-bright: #3A3836;
+
+  --md-sys-color-surface-container-lowest: #0D0D0D;
+  --md-sys-color-surface-container-low: #1D1B1A;
+  --md-sys-color-surface-container: #252322;
+  --md-sys-color-surface-container-high: #302D2B;
+  --md-sys-color-surface-container-highest: #3B3836;
+
+  --md-sys-color-on-surface-variant: #C8C5C2;
+  --md-sys-color-outline: #928F8C;
+  --md-sys-color-outline-variant: #494846;
+
+  --md-sys-color-inverse-surface: #E4E2DF;
+  --md-sys-color-inverse-on-surface: #31302E;
+  --md-sys-color-inverse-primary: #3A8E5E;
+
+  --md-sys-color-shadow: #000000;
+  --md-sys-color-scrim: #000000;
+  --md-sys-color-surface-tint: #81DAAB;
+}
+
+/* === Global Styles === */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: var(--md-sys-color-surface);
+  color: var(--md-sys-color-on-surface);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+a {
+  color: var(--md-sys-color-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--md-sys-color-primary);
+  text-decoration: underline;
+}
+
+::selection {
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--md-sys-color-outline-variant);
+  border-radius: var(--md-sys-shape-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--md-sys-color-outline);
+}

@@ -1,0 +1,359 @@
+/* ============================================
+   Components - MD3 Styled UI Elements
+   ============================================ */
+
+/* === Icon Button === */
+.icon-button {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--md-sys-shape-full);
+  border: none;
+  background: transparent;
+  color: var(--md-sys-color-on-surface-variant);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.icon-button svg {
+  width: 24px;
+  height: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.icon-button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: currentColor;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.icon-button:hover::after {
+  opacity: 0.08;
+}
+
+.icon-button:active::after {
+  opacity: 0.12;
+}
+
+.icon-button:hover {
+  color: var(--md-sys-color-on-surface);
+}
+
+/* === Doc Header === */
+.doc-header {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.doc-title {
+  font-family: 'Noto Sans SC', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--md-sys-color-on-surface);
+  margin-bottom: 8px;
+}
+
+.doc-meta {
+  font-size: 14px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.doc-meta a {
+  color: var(--md-sys-color-primary);
+}
+
+/* === Details / Accordion === */
+details {
+  margin: 16px 0;
+  border-radius: var(--md-sys-shape-medium);
+  overflow: hidden;
+  background-color: var(--md-sys-color-surface-container-low);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  transition: border-color 0.2s ease;
+}
+
+details[open] {
+  border-color: var(--md-sys-color-primary);
+}
+
+summary {
+  padding: 12px 16px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--md-sys-color-primary);
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+summary::marker {
+  color: var(--md-sys-color-primary);
+}
+
+details > :not(summary) {
+  padding: 0 16px 16px;
+}
+
+/* === Blockquote === */
+blockquote {
+  margin: 16px 0;
+  padding: 16px 20px;
+  border-radius: var(--md-sys-shape-medium);
+  background-color: var(--md-sys-color-surface-container-low);
+  border-left: 4px solid var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+blockquote p {
+  margin: 4px 0;
+}
+
+blockquote > :first-child {
+  margin-top: 0;
+}
+
+blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+/* === Horizontal Rule === */
+hr {
+  border: none;
+  height: 1px;
+  background-color: var(--md-sys-color-outline-variant);
+  margin: 24px 0;
+}
+
+/* === Brand Icon SVG === */
+.brand-icon svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+/* === Theme Transition === */
+html.transitioning * {
+  transition: background-color 0.3s ease,
+              color 0.3s ease,
+              border-color 0.3s ease,
+              box-shadow 0.3s ease !important;
+}
+
+/* ============================================
+   MC Wiki Infobox - Right-floating info panel
+   ============================================ */
+
+.mc-infobox {
+  float: right;
+  width: 280px;
+  margin: 0 0 20px 24px;
+  background: var(--md-sys-color-surface-container);
+  border: 2px solid var(--md-sys-color-outline);
+  border-radius: var(--md-sys-shape-medium);
+  overflow: hidden;
+  font-size: 13px;
+  line-height: 1.5;
+  box-shadow: var(--md-sys-elevation-2);
+  clear: right;
+  position: relative;
+  z-index: 2;
+}
+
+.mc-infobox__header {
+  background: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+  font-family: 'Noto Sans SC', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  text-align: center;
+  padding: 12px 14px;
+  letter-spacing: 0.02em;
+}
+
+.mc-infobox__image {
+  text-align: center;
+  padding: 12px 14px 8px;
+  background: var(--md-sys-color-surface);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.mc-infobox__image img {
+  max-width: 100%;
+  height: auto;
+  image-rendering: auto;
+  margin: 0;
+  border-radius: 2px;
+}
+
+.mc-infobox__rows {
+  padding: 4px 0;
+}
+
+.mc-infobox__row {
+  display: flex;
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.mc-infobox__row:last-child {
+  border-bottom: none;
+}
+
+.mc-infobox__label {
+  width: 90px;
+  min-width: 90px;
+  padding: 8px 10px;
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--md-sys-color-on-surface);
+  background: var(--md-sys-color-surface-container-low);
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.mc-infobox__value {
+  flex: 1;
+  padding: 8px 10px;
+  color: var(--md-sys-color-on-surface-variant);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.mc-infobox__value code {
+  font-size: 12px;
+  padding: 1px 5px;
+  background: var(--md-sys-color-surface-container-high);
+  border-radius: 3px;
+  color: var(--md-sys-color-tertiary);
+}
+
+.mc-infobox__value a {
+  color: var(--md-sys-color-primary);
+  text-decoration: none;
+  border-bottom: none;
+}
+
+/* Infobox on mobile: no float, full width */
+@media (max-width: 768px) {
+  .mc-infobox {
+    float: none;
+    width: 100%;
+    margin: 0 0 24px 0;
+  }
+}
+
+/* ============================================
+   MC Gallery - Image grid with captions
+   ============================================ */
+
+.mc-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.mc-gallery__item {
+  background: var(--md-sys-color-surface-container-low);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--md-sys-shape-medium);
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.mc-gallery__item:hover {
+  border-color: var(--md-sys-color-primary);
+  box-shadow: var(--md-sys-elevation-2);
+  transform: translateY(-2px);
+}
+
+.mc-gallery__item a {
+  display: block;
+  text-decoration: none;
+  border-bottom: none !important;
+}
+
+.mc-gallery__item img {
+  width: 100%;
+  height: 160px;
+  object-fit: contain;
+  display: block;
+  margin: 0;
+  border-radius: 0;
+  padding: 12px;
+  box-sizing: border-box;
+  background: var(--md-sys-color-surface);
+}
+
+.mc-gallery__caption {
+  padding: 8px 12px;
+  font-size: 12px;
+  color: var(--md-sys-color-on-surface-variant);
+  text-align: center;
+  line-height: 1.4;
+  background: var(--md-sys-color-surface-container);
+  border-top: 1px solid var(--md-sys-color-outline-variant);
+  font-style: italic;
+}
+
+/* Video embed container */
+.mc-video {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  margin: 24px 0;
+  border-radius: var(--md-sys-shape-medium);
+  background: #000;
+}
+
+.mc-video iframe,
+.mc-video video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: var(--md-sys-shape-medium);
+}
+
+/* Animated GIF badge */
+.mc-gif-badge {
+  display: inline-block;
+  padding: 1px 6px;
+  font-size: 10px;
+  font-weight: 700;
+  background: var(--md-sys-color-tertiary-container);
+  color: var(--md-sys-color-on-tertiary-container);
+  border-radius: 3px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+/* === Keyboard shortcuts === */
+kbd {
+  display: inline-block;
+  padding: 2px 6px;
+  font-family: 'JetBrains Mono', "SF Mono", "Fira Code", "Fira Mono", "Roboto Mono", Menlo, Courier, monospace;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--md-sys-color-on-surface);
+  background-color: var(--md-sys-color-surface-container-high);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--md-sys-shape-extra-small);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
