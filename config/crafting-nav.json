@@ -1,0 +1,10 @@
+[
+  { "title": "盔甲配方", "route": "/crafting/armor-recipes", "file": "crafting/armor-recipes.md" },
+  { "title": "方块配方", "route": "/crafting/block-recipes", "file": "crafting/block-recipes.md" },
+  { "title": "酿造设备", "route": "/crafting/brewing-setup", "file": "crafting/brewing-setup.md" },
+  { "title": "食物配方", "route": "/crafting/food-recipes", "file": "crafting/food-recipes.md" },
+  { "title": "红石组件", "route": "/crafting/redstone-components", "file": "crafting/redstone-components.md" },
+  { "title": "烧炼", "route": "/crafting/smelting", "file": "crafting/smelting.md" },
+  { "title": "工具配方", "route": "/crafting/tools", "file": "crafting/tools.md" },
+  { "title": "武器配方", "route": "/crafting/weapons", "file": "crafting/weapons.md" }
+]

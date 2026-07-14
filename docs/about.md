@@ -2,7 +2,7 @@
 
 ## Lively MC Wiki
 
-这是一个基于 **OWD.K-MD3** 框架构建的 Minecraft 中文维基百科。
+这是一个基于 **OWD.K-MD3** 框架构建的 Minecraft 中文百科网站。
 
 ## 项目信息
 

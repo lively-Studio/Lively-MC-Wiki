@@ -1,0 +1,22 @@
+[
+  { "title": "烈焰人", "route": "/mobs/blaze", "file": "mobs/blaze.md" },
+  { "title": "苦力怕", "route": "/mobs/creeper", "file": "mobs/creeper.md" },
+  { "title": "溺尸", "route": "/mobs/drowned", "file": "mobs/drowned.md" },
+  { "title": "末影龙", "route": "/mobs/ender-dragon", "file": "mobs/ender-dragon.md" },
+  { "title": "末影人", "route": "/mobs/enderman", "file": "mobs/enderman.md" },
+  { "title": "恶魂", "route": "/mobs/ghast", "file": "mobs/ghast.md" },
+  { "title": "守卫者", "route": "/mobs/guardian", "file": "mobs/guardian.md" },
+  { "title": "铁傀儡", "route": "/mobs/iron-golem", "file": "mobs/iron-golem.md" },
+  { "title": "幻翼", "route": "/mobs/phantom", "file": "mobs/phantom.md" },
+  { "title": "猪灵", "route": "/mobs/piglin", "file": "mobs/piglin.md" },
+  { "title": "骷髅", "route": "/mobs/skeleton", "file": "mobs/skeleton.md" },
+  { "title": "史莱姆", "route": "/mobs/slime", "file": "mobs/slime.md" },
+  { "title": "蜘蛛", "route": "/mobs/spider", "file": "mobs/spider.md" },
+  { "title": "村民", "route": "/mobs/villager", "file": "mobs/villager.md" },
+  { "title": "循声守卫", "route": "/mobs/warden", "file": "mobs/warden.md" },
+  { "title": "女巫", "route": "/mobs/witch", "file": "mobs/witch.md" },
+  { "title": "凋灵骷髅", "route": "/mobs/wither-skeleton", "file": "mobs/wither-skeleton.md" },
+  { "title": "凋灵", "route": "/mobs/wither", "file": "mobs/wither.md" },
+  { "title": "狼", "route": "/mobs/wolf", "file": "mobs/wolf.md" },
+  { "title": "僵尸", "route": "/mobs/zombie", "file": "mobs/zombie.md" }
+]

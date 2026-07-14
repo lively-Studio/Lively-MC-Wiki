@@ -25,10 +25,22 @@
 
   async function loadConfig() {
     try {
-      const resp = await fetch('config.json');
+      const resp = await fetch('../config/config.json');
       if (!resp.ok) return;
       const cfg = await resp.json();
-      if (cfg.site) Object.assign(SITE, cfg.site);
+      if (cfg.site) {
+        Object.assign(SITE, cfg.site);
+        // Update logos from config (prepend ../ if needed for page/ context)
+        if (SITE.logo) {
+          var logoPath = SITE.logo;
+          if (logoPath.indexOf('http') !== 0 && logoPath.indexOf('../') !== 0) {
+            logoPath = '../' + logoPath;
+          }
+          document.querySelectorAll('#appLogo, .brand-icon img').forEach(function(img) {
+            img.src = logoPath;
+          });
+        }
+      }
       if (cfg.nav && Array.isArray(cfg.nav)) {
         NAV = cfg.nav;
         const nr = {}, nf = {};
@@ -52,9 +64,9 @@
         }
         processNav(cfg.nav);
 
-        // Load blocks-nav.json and inject as children of "方块" item
+        // Load blocks-nav.json from config/ and inject as children of "方块" item
         try {
-          const blocksResp = await fetch('blocks-nav.json');
+          const blocksResp = await fetch('../config/blocks-nav.json');
           if (blocksResp.ok) {
             const blocksList = await blocksResp.json();
             const blocksNavItem = NAV.find(item => item.route === '/blocks');
@@ -68,32 +80,32 @@
           }
         } catch (e) { console.warn('blocks-nav.json load failed:', e.message); }
 
-        // Load articles.json to get children for items, mobs, crafting, mechanics categories
-        try {
-          const articlesResp = await fetch('../api/articles.json');
-          if (articlesResp.ok) {
-            const articlesData = await articlesResp.json();
-            articlesData.categories.forEach(function(cat) {
-              if (cat.id === 'blocks') return; // blocks already loaded from blocks-nav.json
-              var navItem = NAV.find(function(item) { return item.route === cat.route; });
-              if (navItem && cat.articles && cat.articles.length > 1) {
-                // Filter out the category overview article (index)
-                var children = cat.articles.filter(function(a) {
-                  return a.route !== cat.route;
+        // Load individual category nav files for items, mobs, crafting, mechanics, versions
+        var catNavFiles = {
+          '/items':     '../config/items-nav.json',
+          '/mobs':      '../config/mobs-nav.json',
+          '/crafting':  '../config/crafting-nav.json',
+          '/mechanics': '../config/mechanics-nav.json',
+          '/versions':  '../config/versions-nav.json'
+        };
+
+        for (var route in catNavFiles) {
+          try {
+            var resp = await fetch(catNavFiles[route]);
+            if (resp.ok) {
+              var children = await resp.json();
+              var navItem = NAV.find(function(item) { return item.route === route; });
+              if (navItem && children.length > 0) {
+                navItem.children = children;
+                var icon = navItem.icon || 'info';
+                children.forEach(function(a) {
+                  nr[a.route] = { file: a.file, title: a.title, icon: icon };
+                  nf[a.file] = a.route;
                 });
-                if (children.length > 0) {
-                  navItem.children = children.map(function(a) {
-                    return { title: a.title, route: a.route, file: a.file, icon: cat.icon };
-                  });
-                  children.forEach(function(a) {
-                    nr[a.route] = { file: a.file, title: a.title, icon: cat.icon };
-                    nf[a.file] = a.route;
-                  });
-                }
               }
-            });
-          }
-        } catch (e) { console.warn('articles.json load failed:', e.message); }
+            }
+          } catch (e) { console.warn(catNavFiles[route] + ' load failed:', e.message); }
+        }
 
         Object.assign(ROUTES, nr); Object.assign(FILE_TO_ROUTE, nf);
       }
@@ -438,7 +450,8 @@
     });
   }
 
-  async function loadDocument(route) {
+  async function loadDocument(route, outputFormat) {
+    var asJson = outputFormat === 'json';
     let config = ROUTES[route];
     // If route contains a sub-path like "/blocks/stone", auto-resolve to file path
     if (!config && route.includes('/')) {
@@ -471,6 +484,24 @@
       let md = await response.text();
       md = replaceVersionPlaceholders(md);
       pageCache[route] = { title: config.title, content: md, file: config.file };
+
+      // JSON API mode: render raw JSON instead of HTML
+      if (asJson) {
+        var jsonOutput = {
+          api_version: '1.0',
+          route: route,
+          title: config.title,
+          file: config.file,
+          content_raw: md,
+          site: SITE,
+          rendered_at: new Date().toISOString()
+        };
+        docBody.innerHTML = '<pre style="padding:24px;font-family:monospace;font-size:13px;white-space:pre-wrap;word-break:break-all">' + escapeHtml(JSON.stringify(jsonOutput, null, 2)) + '</pre>';
+        docTitle.textContent = '[JSON] ' + config.title;
+        document.title = '[API] ' + config.title;
+        docMeta.innerHTML = '<span>JSON API Response</span>';
+        return;
+      }
       const renderer = new marked.Renderer();
       renderer.heading = function({ text, depth }) {
         const slug = text.toLowerCase().replace(/[^\w\u4e00-\u9fff]+/g, '-').replace(/^-+|-+$/g, '');
@@ -503,9 +534,16 @@
   function navigate(route) { window.location.hash = (route.startsWith('#') ? route.slice(1) : route) || DEFAULT_ROUTE; }
   function handleRoute() {
     const hash = window.location.hash.slice(1);
+    var format = 'html';
+    var route = hash;
+    // JSON API: #/api/json/blocks/stone → JSON output
+    if (hash.startsWith('/api/json/')) {
+      format = 'json';
+      route = hash.replace('/api/json', '');
+    }
     // Load doc if: empty, starts with /, is a .md/.txt file, or contains / (sub-document like blocks/stone)
-    if (!hash || hash.startsWith('/') || hash.endsWith('.md') || hash.endsWith('.txt') || (hash.includes('/') && !hash.startsWith('http'))) {
-      loadDocument(hash || DEFAULT_ROUTE);
+    if (!route || route.startsWith('/') || route.endsWith('.md') || route.endsWith('.txt') || (route.includes('/') && !route.startsWith('http'))) {
+      loadDocument(route || DEFAULT_ROUTE, format);
     }
   }
   window.addEventListener('hashchange', handleRoute);

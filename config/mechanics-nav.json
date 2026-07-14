@@ -1,0 +1,16 @@
+[
+  { "title": "进度", "route": "/mechanics/advancements", "file": "mechanics/advancements.md" },
+  { "title": "铁砧机制", "route": "/mechanics/anvil", "file": "mechanics/anvil.md" },
+  { "title": "以物易物", "route": "/mechanics/bartering", "file": "mechanics/bartering.md" },
+  { "title": "信标", "route": "/mechanics/beacon", "file": "mechanics/beacon.md" },
+  { "title": "养殖", "route": "/mechanics/breeding", "file": "mechanics/breeding.md" },
+  { "title": "酿造", "route": "/mechanics/brewing", "file": "mechanics/brewing.md" },
+  { "title": "战斗", "route": "/mechanics/combat", "file": "mechanics/combat.md" },
+  { "title": "附魔", "route": "/mechanics/enchanting", "file": "mechanics/enchanting.md" },
+  { "title": "农业", "route": "/mechanics/farming", "file": "mechanics/farming.md" },
+  { "title": "袭击", "route": "/mechanics/raids", "file": "mechanics/raids.md" },
+  { "title": "红石", "route": "/mechanics/redstone", "file": "mechanics/redstone.md" },
+  { "title": "锻造与纹饰", "route": "/mechanics/smithing", "file": "mechanics/smithing.md" },
+  { "title": "交易", "route": "/mechanics/trading", "file": "mechanics/trading.md" },
+  { "title": "天气", "route": "/mechanics/weather", "file": "mechanics/weather.md" }
+]

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lively Minecraft Wiki</title>
-  <meta name="description" content="Lively Minecraft Wiki · 灵动--我的世界中文百科，从基础的草方块到复杂的红石机械，收录关于 Minecraft 的一切知识">
+  <meta name="description" content="Lively Minecraft Wiki · Lively 中文百科，从基础的草方块到复杂的红石机械，收录关于 Minecraft 的一切知识">
 
   <link rel="preconnect" href="https://fonts.loli.net">
   <link rel="preconnect" href="https://gstatic.loli.net" crossorigin>
@@ -18,7 +18,7 @@
   <!-- Top Bar -->
   <header class="home-topbar" id="topBar">
     <a href="./" class="home-topbar__brand" id="topBrand">
-      <img class="home-topbar__logo" id="topLogo" src="page/logo.jpg" alt="Logo">
+      <img class="home-topbar__logo" id="topLogo" src="assets/logo.jpg" alt="Logo">
       <span class="home-topbar__name" id="topName">Lively Minecraft Wiki</span>
     </a>
     <div class="home-topbar__search" id="homeSearch">
@@ -49,12 +49,12 @@
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero__content">
-      <img class="hero__logo" id="heroLogo" src="page/logo.jpg" alt="Logo">
+      <img class="hero__logo" id="heroLogo" src="assets/logo.jpg" alt="Logo">
       <div class="hero__badge" id="heroBadge">
         <span class="hero__badge-dot"></span>
         <span id="heroBadgeText">Lively Minecraft Wiki</span>
       </div>
-      <h1 class="hero__title" id="heroTitle">Minecraft 中文维基</h1>
+      <h1 class="hero__title" id="heroTitle">Lively Minecraft 中文百科</h1>
       <p class="hero__subtitle" id="heroSubtitle">探索、建造与生存的终极指南</p>
       <p class="hero__description" id="heroDescription">从基础的草方块到复杂的红石机械，从下界的烈焰人到末地的末影龙 — 这里收录了关于 Minecraft 的一切知识。</p>
       <div class="hero__actions" id="heroActions">
@@ -144,11 +144,11 @@
   <footer class="site-footer">
     <div class="site-footer__inner">
       <div class="site-footer__brand">
-        <img class="site-footer__logo" id="footerLogo" src="page/logo.jpg" alt="Logo">
+        <img class="site-footer__logo" id="footerLogo" src="assets/logo.jpg" alt="Logo">
         <span class="site-footer__name" id="footerName">Lively Minecraft Wiki</span>
       </div>
       <p class="site-footer__copyright">
-        Built with <a class="site-footer__link" href="https://www.minecraft.net/" id="footerLink">Minecraft Wiki</a>
+        Built with <a class="site-footer__link" href="https://www.minecraft.net/" id="footerLink">Lively Minecraft Wiki</a>
       </p>
     </div>
   </footer>
@@ -414,7 +414,7 @@
             SEARCH_INDEX.push({
               type: 'page',
               title: item.title,
-              description: 'Minecraft Wiki 文档',
+              description: 'Lively Minecraft Wiki 文档',
               link: 'page/#' + (item.route || '/' + item.title.toLowerCase()),
               icon: item.icon || 'info',
               keywords: item.title
@@ -544,7 +544,7 @@
 
     // ===== Config Loader =====
     var DEFAULT_CONFIG = {
-      site: { name: 'Lively Minecraft Wiki', logo: 'page/logo.jpg', meta: 'Lively Minecraft Wiki · 我的世界中文百科' },
+      site: { name: 'Lively Minecraft Wiki', logo: 'assets/logo.jpg', meta: 'Lively Minecraft Wiki · 我的世界中文百科' },
       nav: [
         { title: '首页', icon: 'home' },
         { title: '指南', icon: 'schedule' },
@@ -555,7 +555,7 @@
       ],
       home: {
         badge: 'Lively Minecraft Wiki',
-        heroTitle: 'Minecraft 中文维基',
+        heroTitle: 'Lively Minecraft 中文百科',
         heroSubtitle: '探索、建造与生存的终极指南',
         heroDescription: '从基础的草方块到复杂的红石机械，从下界的烈焰人到末地的末影龙 — 这里收录了关于 Minecraft 的一切知识。',
         primaryAction: { text: '开始探索', link: '#categoryPortal' },
@@ -601,10 +601,11 @@
       if (cfg.nav) window._siteNav = cfg.nav;
 
       // Site info
-      document.title = site.name || 'Minecraft Wiki';
+      document.title = site.name || 'Lively Minecraft Wiki';
       document.querySelector('meta[name="description"]').content = site.meta || '';
-      var logoUrl = site.logo || 'page/logo.jpg';
-      var siteName = site.name || 'Minecraft Wiki';
+      var logoUrl = site.logo || 'assets/logo.jpg';
+      // Config stores path relative to root (e.g. assets/logo.jpg), use as-is
+      var siteName = site.name || 'Lively Minecraft Wiki';
 
       // Set logo across all locations
       var logoEls = document.querySelectorAll('#heroLogo, #topLogo, #footerLogo');
@@ -640,7 +641,7 @@
 
     // ===== Load =====
     loadLatestVersion().then(function() {
-      fetch('page/config.json')
+      fetch('config/config.json')
         .then(function(r) { return r.json(); })
         .then(function(cfg) {
           applyConfig(cfg);

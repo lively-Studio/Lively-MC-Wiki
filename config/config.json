@@ -2,9 +2,9 @@
   "site": {
     "name": "Lively Minecraft Wiki",
     "titleSuffix": "Lively Minecraft Wiki",
-    "meta": "Lively Minecraft Wiki · 灵动--我的世界中文百科",
+    "meta": "Lively Minecraft Wiki · Lively 中文百科",
     "docDir": "../docs",
-    "logo": "/page/logo.jpg"
+    "logo": "assets/logo.jpg"
   },
   "nav": [
     { "title": "首页", "icon": "home" },

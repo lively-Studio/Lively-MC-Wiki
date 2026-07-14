@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>图片画廊 - Lively Minecraft Wiki</title>
+  <link rel="preconnect" href="https://fonts.loli.net">
+  <link href="https://fonts.loli.net/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <style>
+    body { margin: 0; background: var(--oreui-bg-base); color: var(--oreui-text-primary); font-family: var(--oreui-font-family); }
+    .gallery-header {
+      background: var(--oreui-bg-elevated);
+      border-bottom: 2px solid var(--oreui-border-dark);
+      box-shadow: inset 0 -1px 0 0 var(--oreui-border-light);
+      padding: 16px 24px;
+      display: flex; align-items: center; gap: 16px;
+      position: sticky; top: 0; z-index: 10;
+    }
+    .gallery-header a { text-decoration: none; color: var(--oreui-blue); font-weight: 800; font-size: 0.85rem; }
+    .gallery-header a:hover { text-decoration: underline; }
+    .gallery-header h1 { margin: 0; font-size: 1.2rem; font-weight: 800; flex: 1; }
+    .gallery-header__count { font-size: 0.75rem; color: var(--oreui-text-tertiary); }
+    .gallery-filters {
+      padding: 12px 24px; display: flex; gap: 6px; flex-wrap: wrap;
+      border-bottom: 2px solid var(--oreui-border-dark);
+      box-shadow: inset 0 -1px 0 0 var(--oreui-border-light);
+      background: var(--oreui-bg-base); position: sticky; top: 53px; z-index: 9;
+    }
+    .gallery-filter {
+      padding: 4px 12px; font-size: 0.72rem; font-weight: 800; cursor: pointer;
+      border: 2px solid var(--oreui-border-dark);
+      box-shadow: inset 0 0 0 1px var(--oreui-border-light);
+      background: var(--oreui-bg-elevated); color: var(--oreui-text-secondary);
+      transition: all 0.1s ease;
+    }
+    .gallery-filter--active { background: var(--oreui-green); color: var(--oreui-green-text); border-color: var(--oreui-green); }
+    .gallery-filter:hover:not(.gallery-filter--active) { border-color: var(--oreui-blue); color: var(--oreui-blue); }
+    .gallery-grid {
+      padding: 20px 24px; display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 2px; background: var(--oreui-border-dark);
+    }
+    .gallery-item {
+      background: var(--oreui-bg-elevated); overflow: hidden;
+      display: flex; flex-direction: column;
+      border: none; cursor: pointer; transition: transform 0.1s;
+    }
+    .gallery-item:hover { transform: scale(1.02); z-index: 1; }
+    .gallery-item__img {
+      width: 100%; aspect-ratio: 1; object-fit: contain;
+      background: var(--oreui-bg-base);
+    }
+    .gallery-item__info {
+      padding: 8px 10px; border-top: 1px solid var(--oreui-border-dark);
+      font-size: 0.65rem; color: var(--oreui-text-tertiary); font-weight: 600;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .gallery-empty {
+      padding: 60px 24px; text-align: center; color: var(--oreui-text-tertiary);
+      font-size: 0.9rem; font-weight: 600;
+    }
+    .gallery-lightbox {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+    }
+    .gallery-lightbox img {
+      max-width: 90vw; max-height: 90vh; object-fit: contain;
+      border: 2px solid var(--oreui-border-dark);
+      box-shadow: 0 0 40px rgba(0,0,0,0.5);
+    }
+    .gallery-lightbox__close {
+      position: absolute; top: 16px; right: 24px;
+      color: white; font-size: 2rem; cursor: pointer; font-weight: 800;
+    }
+  </style>
+</head>
+<body>
+<div class="gallery-header">
+  <a href="../">← 首页</a>
+  <h1>图片画廊</h1>
+  <span class="gallery-header__count" id="galleryCount"></span>
+</div>
+<div class="gallery-filters" id="galleryFilters"></div>
+<div class="gallery-grid" id="galleryGrid"></div>
+<div id="galleryLightbox" class="gallery-lightbox" style="display:none" onclick="this.style.display='none'">
+  <span class="gallery-lightbox__close">&times;</span>
+  <img id="galleryLightboxImg" src="" alt="">
+</div>
+
+<script>
+(function() {
+  'use strict';
+  var html = document.documentElement;
+  var theme = localStorage.getItem('owd-home-theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+  html.setAttribute('data-theme', theme);
+
+  // Image manifest - update this to add images
+  var IMAGES = [];
+  // When adding images, use: IMAGES.push({ src: '../assets/images/...', category: 'blocks', name: 'Stone' });
+
+  // Scan known categories for images
+  var CATEGORIES = ['blocks', 'items', 'mobs', 'crafting', 'mechanics', 'other'];
+
+  function initGallery() {
+    if (IMAGES.length === 0) {
+      document.getElementById('galleryGrid').innerHTML = '<div class="gallery-empty">暂无图片<br><br>将图片放入 assets/images/ 目录后刷新页面</div>';
+      document.getElementById('galleryCount').textContent = '0 张';
+      return;
+    }
+    renderAll();
+  }
+
+  function renderAll() {
+    updateFilters();
+    renderGrid(IMAGES);
+  }
+
+  function updateFilters() {
+    var cats = {};
+    IMAGES.forEach(function(img) { cats[img.category] = (cats[img.category] || 0) + 1; });
+
+    var filterEl = document.getElementById('galleryFilters');
+    filterEl.innerHTML = '<button class="gallery-filter gallery-filter--active" data-cat="all">全部 (' + IMAGES.length + ')</button>';
+
+    Object.keys(cats).sort().forEach(function(cat) {
+      filterEl.innerHTML += '<button class="gallery-filter" data-cat="' + cat + '">' + cat + ' (' + cats[cat] + ')</button>';
+    });
+
+    filterEl.querySelectorAll('.gallery-filter').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        filterEl.querySelectorAll('.gallery-filter').forEach(function(b) { b.classList.remove('gallery-filter--active'); });
+        this.classList.add('gallery-filter--active');
+        var cat = this.getAttribute('data-cat');
+        renderGrid(cat === 'all' ? IMAGES : IMAGES.filter(function(img) { return img.category === cat; }));
+      });
+    });
+  }
+
+  function renderGrid(images) {
+    var grid = document.getElementById('galleryGrid');
+    document.getElementById('galleryCount').textContent = images.length + ' 张';
+
+    if (images.length === 0) {
+      grid.innerHTML = '<div class="gallery-empty">该分类暂无图片</div>';
+      return;
+    }
+
+    grid.innerHTML = images.map(function(img, i) {
+      return '<div class="gallery-item" onclick="openLightbox(\'' + img.src + '\', \'' + (img.name || '') + '\')">' +
+        '<img class="gallery-item__img" src="' + img.src + '" alt="' + (img.name || 'Image ' + i) + '" loading="lazy">' +
+        '<div class="gallery-item__info">' + (img.category ? img.category + ' / ' : '') + (img.name || 'Image ' + i) + '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  window.openLightbox = function(src, name) {
+    var lb = document.getElementById('galleryLightbox');
+    var img = document.getElementById('galleryLightboxImg');
+    img.src = src;
+    img.alt = name;
+    lb.style.display = 'flex';
+  };
+
+  initGallery();
+})();
+</script>
+</body>
+</html>
