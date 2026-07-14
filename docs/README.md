@@ -1,6 +1,6 @@
-# Minecraft Wiki 中文维基
+# Lively Minecraft Wiki
 
-欢迎来到 **Minecraft 中文维基**！这里是一个关于 Minecraft 的综合知识库。
+欢迎来到 **Lively MC WIKI**！这里是一个关于 Minecraft 的综合知识库。
 
 ## 什么是 Minecraft？
 
@@ -43,14 +43,3 @@ Minecraft 是由 Mojang Studios 开发的一款沙盒游戏，由 Markus "Notch"
 - [合成配方](crafting.md) — 常用合成表与烧炼配方
 - [游戏机制](mechanics.md) — 红石、附魔、酿造等核心机制
 - [版本历史](versions.md) — Java 版与基岩版更新记录
-
-## 最新更新
-
-当前最新正式版：**Minecraft Java 版 1.21** — "Tricky Trials" 更新
-
-新增内容：
-- 试炼密室（Trial Chambers）结构
-- 旋风人（Breeze）生物
-- 试炼刷怪笼（Trial Spawner）
-- 铜灯、凝灰岩系列方块
-- 犰狳与狼铠
