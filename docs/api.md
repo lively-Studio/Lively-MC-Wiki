@@ -204,7 +204,7 @@ Lively-MC-Wiki/
   "site": {
     "name": "Lively Minecraft Wiki",
     "titleSuffix": "Lively Minecraft Wiki",
-    "meta": "Lively Minecraft Wiki · 我的世界中文百科",
+    "meta": "灵影 Minecraft Wiki · 灵影中文百科",
     "docDir": "../docs",
     "logo": "assets/logo.jpg"
   },
