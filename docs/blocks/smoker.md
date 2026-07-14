@@ -1,6 +1,6 @@
 # 烟熏炉
 
-![Smoker](https://minecraft.wiki/images/Smoker_JE2_BE2.png?format=original)
+![Smoker](../page/images/blocks/smoker/a761021d.png)
 
 > **稀有度**：常见 | **可再生**：是 | **可堆叠**：64 | **工具**：木镐或更好
 > **硬度**：3.5 | **爆炸抗性**：3.5 | **发光**：是（13，燃烧时） | **透明**：否 | **可燃**：否
@@ -106,8 +106,8 @@
 
 ## 图库
 
-![Smoker GUI](https://minecraft.wiki/images/Smoker_GUI.png?format=original)
+![Smoker GUI](../page/images/blocks/smoker/0fc66243.png)
 *烟熏炉 GUI 界面*
 
-![Smoker Lit](https://minecraft.wiki/images/Lit_Smoker.png?format=original)
+![Smoker Lit](../page/images/blocks/smoker/473636ef.png)
 *燃烧中的烟熏炉*

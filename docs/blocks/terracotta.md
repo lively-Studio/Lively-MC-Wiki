@@ -1,6 +1,6 @@
 # 陶瓦 / 染色陶瓦
 
-![Terracotta](https://minecraft.wiki/images/Terracotta_JE3_BE3.png?format=original)
+![Terracotta](../page/images/blocks/terracotta/58cacf5a.png)
 
 > **稀有度**：常见 | **可再生**：是 | **可堆叠**：64 | **工具**：木镐或更好
 > **硬度**：1.25 | **爆炸抗性**：4.2 | **发光**：否 | **透明**：否 | **可燃**：否

@@ -1,6 +1,6 @@
 # 火把
 
-![Torch](https://minecraft.wiki/images/Torch_JE4_BE3.png?format=original)
+![Torch](../page/images/blocks/torch/88544941.png)
 
 > **稀有度**：常见 | **可再生**：是 | **可堆叠**：64 | **工具**：任何
 > **硬度**：0 | **爆炸抗性**：0 | **发光**：是（14） | **透明**：是 | **可燃**：否
@@ -47,7 +47,7 @@
 
 ## 灵魂火把
 
-![Soul Torch](https://minecraft.wiki/images/Soul_Torch_JE2_BE2.png?format=original)
+![Soul Torch](../page/images/blocks/torch/45ca2bd3.png)
 
 | 特性 | 普通火把 | 灵魂火把 |
 |------|----------|----------|
@@ -77,5 +77,5 @@
 
 ## 图库
 
-![Torch on wall](https://minecraft.wiki/images/Wall_Torch.png?format=original)
+![Torch on wall](../page/images/blocks/torch/19114996.png)
 *墙上的火把*

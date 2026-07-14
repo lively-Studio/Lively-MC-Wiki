@@ -1,6 +1,6 @@
 # 海晶灯
 
-![Sea Lantern](https://minecraft.wiki/images/Sea_Lantern_JE3_BE3.png?format=original)
+![Sea Lantern](../page/images/blocks/sea-lantern/11782bb3.png)
 
 > **稀有度**：不常见 | **可再生**：是 | **可堆叠**：64 | **工具**：任何
 > **硬度**：0.3 | **爆炸抗性**：0.3 | **发光**：是（15） | **透明**：否 | **可燃**：否
@@ -51,5 +51,5 @@
 
 ## 图库
 
-![Sea Lantern in Monument](https://minecraft.wiki/images/Ocean_Monument_Sea_Lanterns.png?format=original)
+![Sea Lantern in Monument](../page/images/blocks/sea-lantern/aabca821.png)
 *海底遗迹中的海晶灯*

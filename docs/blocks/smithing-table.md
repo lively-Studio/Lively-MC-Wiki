@@ -1,6 +1,6 @@
 # 锻造台
 
-![Smithing Table](https://minecraft.wiki/images/Smithing_Table_JE3_BE2.png?format=original)
+![Smithing Table](../page/images/blocks/smithing-table/329df707.png)
 
 > **稀有度**：常见 | **可再生**：是 | **可堆叠**：64 | **工具**：任何（斧最快）
 > **硬度**：2.5 | **爆炸抗性**：2.5 | **发光**：否 | **透明**：否 | **可燃**：是
@@ -74,8 +74,8 @@
 
 ## 图库
 
-![Smithing Table GUI](https://minecraft.wiki/images/Smithing_Table_GUI_1.20.png?format=original)
+![Smithing Table GUI](../page/images/blocks/smithing-table/237afbf0.png)
 *1.20 锻造台 GUI（带模板槽）*
 
-![Netherite Upgrade](https://minecraft.wiki/images/Smithing_Table_Netherite_Upgrade.png?format=original)
+![Netherite Upgrade](../page/images/blocks/smithing-table/d47f1408.png)
 *下界合金升级界面*

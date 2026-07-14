@@ -1,6 +1,6 @@
 # 云杉木
 
-![Spruce Wood](https://minecraft.wiki/images/Spruce_Wood_JE4_BE2.png?format=original)
+![Spruce Wood](../page/images/blocks/spruce-wood/bc9e9337.png)
 
 > **稀有度**：常见 | **可再生**：是 | **可堆叠**：64 | **工具**：任何（斧最快）
 > **硬度**：2 | **爆炸抗性**：2 | **发光**：否 | **透明**：否 | **可燃**：是

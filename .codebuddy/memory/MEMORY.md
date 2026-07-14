@@ -18,7 +18,15 @@
 - page/config.json: 站点配置文件
 - page/js/app.js: 路由、Markdown 渲染、导航逻辑
 - page/css/: 5 个 CSS 文件 (theme, layout, components, markdown, home)
-- docs/: 9 个 Markdown 文档
+- page/blocks-nav.json: 侧边栏方块子菜单数据
+- api/: 版本控制 API (latest.json, versions.json)
+- docs/blocks/: 87 个方块详细文档
+- docs/items/: 14 个物品文档 (index + 13 子文章)
+- docs/mobs/: 21 个生物文档 (index + 20 子文章)
+- docs/crafting/: 9 个合成文档 (index + 8 子文章)
+- docs/mechanics/: 15 个机制文档 (index + 14 子文章)
+- docs/versions/: 1 个版本历史文档
+- docs/ (根): 7 个顶层文档
 
 ## 自定义修改
 - index.html: navToPage 支持自定义 route
@@ -51,17 +59,22 @@
 - 向后兼容旧 MD3 CSS 变量名（映射到 OREUI 变量）
 
 ## 图片下载
-- download_images.py: Python 脚本，从 .md 文件中提取图片 URL 并下载到 page/images/blocks/
-- 图片保存路径: page/images/blocks/{block_name}/{hash}.ext
+- download_images.py: Python 脚本，递归处理所有 docs/ 下的 .md 文件
+- 支持分类：blocks, items, mobs, crafting, mechanics, versions
+- 图片保存路径: page/images/{category}/{doc_name}/{hash}.ext
 - 下载后自动更新 .md 文件中的 URL 为本地相对路径
+
+## API 版本控制
+- api/latest.json: 最新版本信息（Java 1.21.5 春日生机, 基岩 1.21.70）
+- api/versions.json: 完整版本历史列表（Java 20 个版本 + 基岩 13 个版本）
 
 ## 文档内容覆盖
 - README.md: 首页介绍
-- docs/blocks/: 87 个方块详细文档（所有方块均已扩展为完整内容，含 infobox 数据、用途、数据值、音效、你知道吗、图库等）
-- docs/items.md: 物品列表
-- docs/mobs.md: 生物图鉴
-- docs/crafting.md: 合成与烧炼配方
-- docs/mechanics.md: 游戏机制
-- docs/versions.md: 版本历史
+- docs/blocks/: 87 个方块详细文档（含 infobox、用途、数据值、音效、你知道吗、图库）
+- docs/items/: 14 个物品文档（index + 13 子文章：工具、武器、盔甲、食物、药水等）
+- docs/mobs/: 21 个生物文档（index + 20 子文章：被动/中立/敌对/Boss 全覆盖）
+- docs/crafting/: 9 个合成文档（index + 8 子文章：工具、武器、盔甲、方块、食物、红石、酿造、烧炼）
+- docs/mechanics/: 15 个机制文档（index + 14 子文章：红石、附魔、酿造、锻造、交易、以物易物、战斗、农业、养殖、信标、天气、铁砧、袭击、进度）
+- docs/versions/: 版本历史总览
 - docs/about.md: 关于页面
 - docs/_widgets.md: 首页功能面板

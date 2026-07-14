@@ -1,6 +1,6 @@
 # 石头
 
-![Stone](https://minecraft.wiki/images/Stone_JE5_BE3.png?format=original)
+![Stone](../page/images/blocks/stone/99f0154b.png)
 
 > **稀有度**：常见 | **可再生**：是 | **可堆叠**：64 | **工具**：木镐或更好
 > **硬度**：1.5 | **爆炸抗性**：6 | **发光**：否 | **透明**：否 | **可燃**：否
@@ -31,7 +31,7 @@
 ### 可再生生成（刷石机）
 当**熔岩流到水源上方**时，水会被替换为石头。这是可再生石头的主要来源。
 
-![Stone generator](https://minecraft.wiki/images/Stone_generator.gif?format=original)
+![Stone generator](../page/images/blocks/stone/7fa63938.gif)
 
 ### 破坏
 - 用镐（无精准采集）→ 掉落**圆石**
@@ -160,14 +160,14 @@
 
 ## 图库
 
-![Natural Stone Generation](https://minecraft.wiki/images/Natural_Stone_Generation.png?format=original)
+![Natural Stone Generation](../page/images/blocks/stone/c69dc2fc.png)
 *自然生成的石头岩壁*
 
-![Stone in Cave](https://minecraft.wiki/images/Stone_in_Cave.png?format=original)
+![Stone in Cave](../page/images/blocks/stone/3c9f4d13.png)
 *洞穴中的石头*
 
-![BlockWeek stone](https://minecraft.wiki/images/BlockWeek_stone.png?format=original)
+![BlockWeek stone](../page/images/blocks/stone/06c40e96.png)
 *本周方块宣传图*
 
-![StoneVariants](https://minecraft.wiki/images/StoneVariants.png?format=original)
+![StoneVariants](../page/images/blocks/stone/bcd68207.png)
 *石头及其加工变体对比*

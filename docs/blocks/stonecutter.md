@@ -1,6 +1,6 @@
 # 切石机
 
-![Stonecutter](https://minecraft.wiki/images/Stonecutter_JE2_BE2.png?format=original)
+![Stonecutter](../page/images/blocks/stonecutter/8650d8e8.png)
 
 > **稀有度**：常见 | **可再生**：是 | **可堆叠**：64 | **工具**：木镐或更好
 > **硬度**：3.5 | **爆炸抗性**：3.5 | **发光**：否 | **透明**：否 | **可燃**：否
@@ -72,5 +72,5 @@
 
 ## 图库
 
-![Stonecutter GUI](https://minecraft.wiki/images/Stonecutter_GUI.png?format=original)
+![Stonecutter GUI](../page/images/blocks/stonecutter/ff63e8b9.png)
 *切石机的独特 GUI 界面*

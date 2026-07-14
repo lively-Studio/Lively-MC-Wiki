@@ -1,6 +1,6 @@
 # 凝灰岩
 
-![Tuff](https://minecraft.wiki/images/Tuff_JE2_BE1.png?format=original)
+![Tuff](../page/images/blocks/tuff/5dcf59f4.png)
 
 > **稀有度**：常见 | **可再生**：否 | **可堆叠**：64 | **工具**：木镐或更好
 > **硬度**：1.5 | **爆炸抗性**：6 | **发光**：否 | **透明**：否 | **可燃**：否
@@ -86,8 +86,8 @@
 
 ## 图库
 
-![Tuff Blob](https://minecraft.wiki/images/Tuff_Blob.png?format=original)
+![Tuff Blob](../page/images/blocks/tuff/00d83237.png)
 *凝灰岩大型矿脉在深板岩中生成*
 
-![Tuff Bricks](https://minecraft.wiki/images/Tuff_Bricks_JE1_BE1.png?format=original)
+![Tuff Bricks](../page/images/blocks/tuff/8b124e61.png)
 *凝灰岩砖——1.21 新增的建筑选择*

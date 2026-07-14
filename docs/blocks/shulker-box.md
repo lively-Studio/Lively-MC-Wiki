@@ -1,6 +1,6 @@
 # 潜影盒
 
-![Shulker Box](https://minecraft.wiki/images/Shulker_Box_JE4_BE3.png?format=original)
+![Shulker Box](../page/images/blocks/shulker-box/c300740f.png)
 
 > **稀有度**：不常见 | **可再生**：是 | **可堆叠**：1 | **工具**：任何
 > **硬度**：2 | **爆炸抗性**：2 | **发光**：否 | **透明**：否 | **可燃**：否
@@ -97,8 +97,8 @@
 
 ## 图库
 
-![Colored Shulker Boxes](https://minecraft.wiki/images/Shulker_Boxes.png?format=original)
+![Colored Shulker Boxes](../page/images/blocks/shulker-box/ca369868.png)
 *全部 17 种染色潜影盒*
 
-![Shulker Box GUI](https://minecraft.wiki/images/Shulker_Box_GUI.png?format=original)
+![Shulker Box GUI](../page/images/blocks/shulker-box/9e1b51e5.png)
 *潜影盒的 27 格 GUI*

@@ -1,6 +1,6 @@
 # 沙子
 
-![Sand](https://minecraft.wiki/images/Sand_JE5_BE4.png?format=original)
+![Sand](../page/images/blocks/sand/f3ec6aae.png)
 
 > **稀有度**：常见 | **可再生**：是（与流浪商人交易） | **可堆叠**：64 | **工具**：任何（锹最快）
 > **硬度**：0.5 | **爆炸抗性**：0.5 | **发光**：否 | **透明**：否 | **可燃**：否
@@ -52,7 +52,7 @@
 
 ## 红沙
 
-![Red Sand](https://minecraft.wiki/images/Red_Sand_JE3_BE2.png?format=original)
+![Red Sand](../page/images/blocks/sand/ada04580.png)
 
 - 仅生成于恶地生物群系
 - 所有合成配方与沙子完全相同

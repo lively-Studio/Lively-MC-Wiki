@@ -1,6 +1,6 @@
 # 石砖
 
-![Stone Bricks](https://minecraft.wiki/images/Stone_Bricks_JE4_BE2.png?format=original)
+![Stone Bricks](../page/images/blocks/stone-bricks/7488ea5f.png)
 
 > **稀有度**：常见 | **可再生**：是 | **可堆叠**：64 | **工具**：木镐或更好
 > **硬度**：1.5 | **爆炸抗性**：6 | **发光**：否 | **透明**：否 | **可燃**：否

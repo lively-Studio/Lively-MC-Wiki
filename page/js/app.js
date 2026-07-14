@@ -528,12 +528,135 @@
     renderSidebarLinks();
     if (!window.location.hash) window.location.hash = DEFAULT_ROUTE;
     else handleRoute();
+
+    // Build search index
+    buildSearchIndex();
+
     window.OWD = { config:SITE, routes:ROUTES, nav:NAV, cache:pageCache,
       navigate(r) { if (r) navigate('#' + r.replace(/^#/, '')); },
       async getPage(route) { const r=ROUTES[route]; if(!r)return null; if(pageCache[route])return pageCache[route]; try{const resp=await fetch(`${SITE.docDir}/${r.file}`);if(!resp.ok)return null;const t=await resp.text();pageCache[route]={title:r.title,content:t,file:r.file};return pageCache[route];}catch(e){return null;} },
       search(q) { const w=q.toLowerCase(),res=[]; for(const[k,p]of Object.entries(pageCache)){if(p.content.toLowerCase().includes(w)){const i=p.content.toLowerCase().indexOf(w);const s=p.content.substring(Math.max(0,i-30),i+w.length+80).replace(/\n/g,' ');res.push({route:k,title:p.title,snippet:'...'+s+'...',file:p.file});}} return res; },
       async searchAll(q) { await Promise.all(Object.keys(ROUTES).map(r=>this.getPage(r))); return this.search(q); }
     };
+  }
+
+  // ===== Search in doc pages =====
+  let searchIndex = [];
+  let searchTimeout = null;
+
+  function buildSearchIndex() {
+    searchIndex = [];
+    NAV.forEach(function(item) {
+      if (!item.children) {
+        searchIndex.push({
+          title: item.title,
+          route: item.route || '/' + item.title.toLowerCase(),
+          type: 'page',
+          keywords: item.title
+        });
+      } else {
+        searchIndex.push({
+          title: item.title,
+          route: item.route || '/' + item.title.toLowerCase(),
+          type: 'category',
+          keywords: item.title
+        });
+        if (item.children) {
+          item.children.forEach(function(child) {
+            searchIndex.push({
+              title: child.title,
+              route: child.route,
+              type: 'page',
+              keywords: child.title + ' ' + item.title
+            });
+          });
+        }
+      }
+    });
+  }
+
+  function searchDocs(query) {
+    if (!query || query.trim().length < 1) return [];
+    var q = query.toLowerCase().trim();
+    var results = [];
+    searchIndex.forEach(function(item) {
+      if (item.keywords.toLowerCase().indexOf(q) !== -1) {
+        results.push(item);
+      }
+    });
+    results.sort(function(a, b) {
+      var aExact = a.title.toLowerCase() === q ? 2 : (a.title.toLowerCase().indexOf(q) === 0 ? 1 : 0);
+      var bExact = b.title.toLowerCase() === q ? 2 : (b.title.toLowerCase().indexOf(q) === 0 ? 1 : 0);
+      return bExact - aExact;
+    });
+    return results.slice(0, 8);
+  }
+
+  function renderDocSearchResults(results) {
+    var container = document.getElementById('docSearchResults');
+    var inner = document.getElementById('docSearchResultsInner');
+    if (!container || !inner) return;
+    if (!results || results.length === 0) {
+      container.style.display = 'none';
+      return;
+    }
+    inner.innerHTML = results.map(function(r) {
+      var iconName = r.type === 'category' ? 'computer' : 'info';
+      return '<a class="doc-search-result" href="#' + r.route + '">' +
+        '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">' + (ICONS[iconName] || ICONS.info) + '</svg>' +
+        '<div class="doc-search-result__body">' +
+          '<span class="doc-search-result__title">' + r.title + '</span>' +
+          '<span class="doc-search-result__badge">' + (r.type === 'category' ? '分类' : '页面') + '</span>' +
+        '</div>' +
+      '</a>';
+    }).join('');
+    container.style.display = 'block';
+  }
+
+  // Initialize doc search
+  var docSearchInput = document.getElementById('docSearchInput');
+  var docSearchShortcut = document.querySelector('.doc-search__shortcut');
+  if (docSearchInput) {
+    docSearchInput.addEventListener('input', function() {
+      clearTimeout(searchTimeout);
+      var val = this.value;
+      var self = this;
+      searchTimeout = setTimeout(function() {
+        var results = searchDocs(val);
+        renderDocSearchResults(results);
+      }, 150);
+    });
+    docSearchInput.addEventListener('focus', function() {
+      if (docSearchShortcut) docSearchShortcut.style.display = 'none';
+      if (this.value.trim().length > 0) {
+        renderDocSearchResults(searchDocs(this.value));
+      }
+    });
+    docSearchInput.addEventListener('blur', function() {
+      if (docSearchShortcut) {
+        docSearchShortcut.style.display = this.value.trim().length > 0 ? 'none' : 'inline-flex';
+      }
+    });
+    document.addEventListener('click', function(e) {
+      var searchWrap = document.getElementById('docSearch');
+      if (searchWrap && !searchWrap.contains(e.target)) {
+        var resultsEl = document.getElementById('docSearchResults');
+        if (resultsEl) resultsEl.style.display = 'none';
+      }
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === '/' && document.activeElement !== docSearchInput &&
+          document.activeElement.tagName !== 'INPUT' &&
+          document.activeElement.tagName !== 'TEXTAREA') {
+        e.preventDefault();
+        docSearchInput.focus();
+      }
+      if (e.key === 'Escape') {
+        var resultsEl = document.getElementById('docSearchResults');
+        if (resultsEl) resultsEl.style.display = 'none';
+        docSearchInput.blur();
+      }
+    });
   }
   function waitForDeps() { if (typeof marked!=='undefined' && typeof hljs!=='undefined') init(); else setTimeout(waitForDeps, 100); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', waitForDeps);

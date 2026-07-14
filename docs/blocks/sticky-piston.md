@@ -1,6 +1,6 @@
 # 黏性活塞
 
-![Sticky Piston](https://minecraft.wiki/images/Sticky_Piston_JE4_BE4.png?format=original)
+![Sticky Piston](../page/images/blocks/sticky-piston/622ed952.png)
 
 > **稀有度**：常见 | **可再生**：是 | **可堆叠**：64 | **工具**：任何
 > **硬度**：0.5 | **爆炸抗性**：0.5 | **发光**：否 | **透明**：是 | **可燃**：否
@@ -125,5 +125,5 @@
 
 ## 图库
 
-![Sticky Piston Pulling](https://minecraft.wiki/images/Sticky_Piston_Pulling.gif?format=original)
+![Sticky Piston Pulling](../page/images/blocks/sticky-piston/9e62ad23.gif)
 *黏性活塞拉回方块动画*

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lively Minecraft Wiki · 我的世界中文维基</title>
+  <title>Lively Minecraft Wiki</title>
   <meta name="description" content="Lively Minecraft Wiki · 灵动--我的世界中文百科，从基础的草方块到复杂的红石机械，收录关于 Minecraft 的一切知识">
 
   <link rel="preconnect" href="https://fonts.loli.net">
@@ -21,6 +21,22 @@
       <img class="home-topbar__logo" id="topLogo" src="page/logo.jpg" alt="Logo">
       <span class="home-topbar__name" id="topName">Minecraft Wiki</span>
     </a>
+    <div class="home-topbar__search" id="homeSearch">
+      <div class="search-box">
+        <svg class="search-box__icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input type="text" class="search-box__input" id="homeSearchInput" placeholder="搜索文章..." autocomplete="off">
+        <kbd class="search-box__shortcut">/</kbd>
+        <button class="search-box__clear" id="homeSearchClear" aria-label="清除搜索" style="display:none">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="search-results" id="homeSearchResults" style="display:none">
+        <div class="search-results__inner" id="homeSearchResultsInner"></div>
+        <div class="search-results__footer">按 <kbd>/</kbd> 快速聚焦搜索框</div>
+      </div>
+    </div>
     <div class="home-topbar__actions">
       <button class="icon-button" id="themeToggle" aria-label="切换主题">
         <svg viewBox="0 0 24 24" width="24" height="24" id="themeIcon" fill="none" stroke="currentColor" stroke-width="2">
@@ -42,7 +58,7 @@
       <p class="hero__subtitle" id="heroSubtitle">探索、建造与生存的终极指南</p>
       <p class="hero__description" id="heroDescription">从基础的草方块到复杂的红石机械，从下界的烈焰人到末地的末影龙 — 这里收录了关于 Minecraft 的一切知识。</p>
       <div class="hero__actions" id="heroActions">
-        <a class="btn btn--primary" href="page/" id="heroPrimary">
+        <a class="btn btn--primary" href="#categoryPortal" id="heroPrimary">
           <span>开始探索</span>
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
         </a>
@@ -59,15 +75,17 @@
     </div>
   </section>
 
-  <!-- Features Section -->
-  <section class="features" id="featuresSection">
-    <div class="features__header">
-      <span class="features__label" id="featuresLabel">Minecraft 世界</span>
-      <h2 class="features__title" id="featuresTitle">探索这个无限可能的方块世界</h2>
-      <p class="features__description" id="featuresDescription">超过 150 种方块、丰富的物品系统、多样的生物群落等你来发现</p>
-    </div>
-    <div class="features__grid" id="featuresGrid">
-      <!-- Dynamic feature cards inserted by JS -->
+  <!-- Category Portal - MC Wiki Style -->
+  <section class="category-portal" id="categoryPortal">
+    <div class="category-portal__inner">
+      <div class="category-portal__header">
+        <span class="category-portal__label">百科分类</span>
+        <h2 class="category-portal__title">探索 Minecraft 世界</h2>
+        <p class="category-portal__subtitle">选择一个分类，深入了解 Minecraft 的方方面面</p>
+      </div>
+      <div class="category-portal__grid" id="categoryGrid">
+        <!-- Dynamic category cards inserted by JS -->
+      </div>
     </div>
   </section>
 
@@ -81,19 +99,6 @@
       </div>
       <div class="widgets__grid" id="widgetsGrid">
         <!-- Dynamic widgets inserted by JS -->
-      </div>
-    </div>
-  </section>
-
-  <!-- Nav Cards Section -->
-  <section class="nav-cards" id="navCardsSection">
-    <div class="nav-cards__inner">
-      <div class="nav-cards__header">
-        <span class="nav-cards__label">百科</span>
-        <h2 class="nav-cards__title" id="navCardsTitle">知识导航</h2>
-      </div>
-      <div class="nav-cards__grid" id="navCardsGrid">
-        <!-- Dynamic nav cards inserted by JS -->
       </div>
     </div>
   </section>
@@ -137,7 +142,14 @@
       external: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>',
       chevronRight: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>',
       sun: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>',
-      moon: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>'
+      moon: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>',
+      search: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>',
+      cube: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>',
+      sword: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/><line x1="13" y1="19" x2="19" y2="13"/><line x1="16" y1="16" x2="20" y2="20"/><line x1="19" y1="21" x2="21" y2="19"/></svg>',
+      monster: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="9" cy="10" r="1.5"/><circle cx="15" cy="10" r="1.5"/><path d="M9 15c0 0 1.5 2 3 2s3-2 3-2"/></svg>',
+      anvil: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h12v4H6z"/><path d="M8 10v8h8v-8"/><path d="M10 18v4h4v-4"/></svg>',
+      gear: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>',
+      history: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>'
     };
 
     // ===== Theme =====
@@ -164,9 +176,224 @@
       setTimeout(function() { html.classList.remove('theme-transition'); }, 300);
     }
 
-    // Initialize theme
     applyTheme(getPreferredTheme());
     document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+
+    // ===== Category Data =====
+    var CATEGORIES = [
+      {
+        id: 'blocks',
+        title: '方块',
+        icon: 'cube',
+        description: '从草方块到远古残骸，超过 150 种方块的完整知识库。每种方块都有详细的属性、获取方式与用途说明。',
+        color: '#3C8527',
+        link: 'page/#/blocks',
+        count: '87 篇文章',
+        tags: ['石头', '木头', '矿石', '红石', '建筑', '装饰']
+      },
+      {
+        id: 'items',
+        title: '物品',
+        icon: 'sword',
+        description: '工具、武器、盔甲、食物、药水 — 所有可持有和使用的物品。含合成配方与推荐附魔。',
+        color: '#2E6BE5',
+        link: 'page/#/items',
+        count: '14 篇文章',
+        tags: ['工具', '武器', '盔甲', '食物', '药水', '附魔书']
+      },
+      {
+        id: 'mobs',
+        title: '生物',
+        icon: 'monster',
+        description: '从友好的村民到可怕的末影龙，认识每一种生物的行为、掉落物与战斗策略。',
+        color: '#C33636',
+        link: 'page/#/mobs',
+        count: '21 篇文章',
+        tags: ['被动', '中立', '敌对', 'Boss', '下界', '末地']
+      },
+      {
+        id: 'crafting',
+        title: '合成',
+        icon: 'anvil',
+        description: '工作台、熔炉、酿造台 — 所有合成、烧炼与酿造配方一应俱全。',
+        color: '#D4A017',
+        link: 'page/#/crafting',
+        count: '9 篇文章',
+        tags: ['工具', '武器', '盔甲', '红石', '酿造', '烧炼']
+      },
+      {
+        id: 'mechanics',
+        title: '游戏机制',
+        icon: 'gear',
+        description: '红石电路、附魔、交易、战斗 — 深入了解 Minecraft 的每一个游戏系统。',
+        color: '#7B2D8B',
+        link: 'page/#/mechanics',
+        count: '15 篇文章',
+        tags: ['红石', '附魔', '酿造', '交易', '战斗', '养殖']
+      },
+      {
+        id: 'versions',
+        title: '版本历史',
+        icon: 'history',
+        description: '从 Classic 到最新版本，追溯 Minecraft 的完整进化历程与每个版本的更新内容。',
+        color: '#1A8B8B',
+        link: 'page/#/versions',
+        count: '1 篇文章',
+        tags: ['Java版', '基岩版', '更新日志', '版本对比']
+      }
+    ];
+
+    // ===== Search System =====
+    var SEARCH_INDEX = null;
+    var searchTimeout = null;
+
+    function buildSearchIndex() {
+      SEARCH_INDEX = [];
+      // Add categories
+      CATEGORIES.forEach(function(cat) {
+        SEARCH_INDEX.push({
+          type: 'category',
+          title: cat.title,
+          description: cat.description,
+          link: cat.link,
+          icon: cat.icon,
+          keywords: cat.id + ' ' + cat.title + ' ' + cat.description + ' ' + cat.tags.join(' ')
+        });
+      });
+      // Add from config.json nav
+      if (window._siteNav) {
+        window._siteNav.forEach(function(item) {
+          if (!item.children) {
+            SEARCH_INDEX.push({
+              type: 'page',
+              title: item.title,
+              description: 'Minecraft Wiki 文档',
+              link: 'page/#' + (item.route || '/' + item.title.toLowerCase()),
+              icon: item.icon || 'info',
+              keywords: item.title
+            });
+          } else if (item.children) {
+            // Add parent as category
+            SEARCH_INDEX.push({
+              type: 'category',
+              title: item.title,
+              description: item.title + ' 分类索引',
+              link: 'page/#' + (item.route || '/' + item.title.toLowerCase()),
+              icon: item.icon || 'info',
+              keywords: item.title
+            });
+            // Add all children
+            item.children.forEach(function(child) {
+              SEARCH_INDEX.push({
+                type: 'page',
+                title: child.title,
+                description: item.title + ' 分类',
+                link: 'page/#' + child.route,
+                icon: item.icon || 'info',
+                keywords: child.title + ' ' + item.title
+              });
+            });
+          }
+        });
+      }
+    }
+
+    function searchWiki(query) {
+      if (!query || query.trim().length < 1) return [];
+      if (!SEARCH_INDEX) buildSearchIndex();
+      var q = query.toLowerCase().trim();
+      var results = [];
+      SEARCH_INDEX.forEach(function(item) {
+        var keywords = item.keywords.toLowerCase();
+        if (keywords.indexOf(q) !== -1) {
+          results.push(item);
+        }
+      });
+      // Sort: exact title match first, then starts-with, then contains
+      results.sort(function(a, b) {
+        var aExact = a.title.toLowerCase() === q ? 2 : (a.title.toLowerCase().indexOf(q) === 0 ? 1 : 0);
+        var bExact = b.title.toLowerCase() === q ? 2 : (b.title.toLowerCase().indexOf(q) === 0 ? 1 : 0);
+        return bExact - aExact;
+      });
+      return results.slice(0, 8);
+    }
+
+    function renderSearchResults(results) {
+      var container = document.getElementById('homeSearchResults');
+      var inner = document.getElementById('homeSearchResultsInner');
+      if (!results || results.length === 0) {
+        container.style.display = 'none';
+        return;
+      }
+      inner.innerHTML = results.map(function(r) {
+        return '<a class="search-result-item" href="' + r.link + '">' +
+          '<div class="search-result-item__icon">' + (ICONS[r.icon] || ICONS.info) + '</div>' +
+          '<div class="search-result-item__body">' +
+            '<div class="search-result-item__title">' + r.title + '</div>' +
+            '<div class="search-result-item__desc">' + (r.description || '') + '</div>' +
+          '</div>' +
+          '<div class="search-result-item__badge">' + (r.type === 'category' ? '分类' : '页面') + '</div>' +
+        '</a>';
+      }).join('');
+      container.style.display = 'block';
+    }
+
+    function handleSearchInput(val) {
+      var clearBtn = document.getElementById('homeSearchClear');
+      if (val.trim().length > 0) {
+        clearBtn.style.display = 'flex';
+        var results = searchWiki(val);
+        renderSearchResults(results);
+      } else {
+        clearBtn.style.display = 'none';
+        document.getElementById('homeSearchResults').style.display = 'none';
+      }
+    }
+
+    // Search input events
+    var searchInput = document.getElementById('homeSearchInput');
+    var searchShortcut = document.querySelector('.search-box__shortcut');
+    searchInput.addEventListener('input', function() {
+      clearTimeout(searchTimeout);
+      var val = this.value;
+      searchTimeout = setTimeout(function() { handleSearchInput(val); }, 150);
+    });
+    searchInput.addEventListener('focus', function() {
+      searchShortcut.style.display = 'none';
+      if (this.value.trim().length > 0) {
+        handleSearchInput(this.value);
+      }
+    });
+    searchInput.addEventListener('blur', function() {
+      searchShortcut.style.display = this.value.trim().length > 0 ? 'none' : 'inline-flex';
+    });
+    // Close search results when clicking outside
+    document.addEventListener('click', function(e) {
+      var searchWrap = document.getElementById('homeSearch');
+      if (!searchWrap.contains(e.target)) {
+        document.getElementById('homeSearchResults').style.display = 'none';
+      }
+    });
+    // Clear button
+    document.getElementById('homeSearchClear').addEventListener('click', function() {
+      searchInput.value = '';
+      searchInput.focus();
+      handleSearchInput('');
+    });
+    // Keyboard shortcut: / to focus search
+    document.addEventListener('keydown', function(e) {
+      if (e.key === '/' && document.activeElement !== searchInput &&
+          document.activeElement.tagName !== 'INPUT' &&
+          document.activeElement.tagName !== 'TEXTAREA') {
+        e.preventDefault();
+        searchInput.focus();
+      }
+      // Escape to close results
+      if (e.key === 'Escape') {
+        document.getElementById('homeSearchResults').style.display = 'none';
+        searchInput.blur();
+      }
+    });
 
     // ===== Config Loader =====
     var DEFAULT_CONFIG = {
@@ -184,20 +411,42 @@
         heroTitle: 'Minecraft 中文维基',
         heroSubtitle: '探索、建造与生存的终极指南',
         heroDescription: '从基础的草方块到复杂的红石机械，从下界的烈焰人到末地的末影龙 — 这里收录了关于 Minecraft 的一切知识。',
-        primaryAction: { text: '开始探索', link: 'page/' },
+        primaryAction: { text: '开始探索', link: '#categoryPortal' },
         secondaryAction: { text: 'Minecraft 官网', link: 'https://www.minecraft.net/' }
       }
     };
 
-    function navToPage(item) {
-      if (item.route) return 'page/#' + item.route;
-      var slug = item.title.toLowerCase().replace(/\s+/g, '-');
-      return 'page/#/' + (item.title === '首页' ? '' : slug);
+    function renderCategoryCards() {
+      var grid = document.getElementById('categoryGrid');
+      if (!grid) return;
+      grid.innerHTML = '';
+      CATEGORIES.forEach(function(cat, i) {
+        var card = document.createElement('a');
+        card.className = 'cat-card';
+        card.href = cat.link;
+        card.style.animationDelay = (i * 0.06) + 's';
+        card.innerHTML =
+          '<div class="cat-card__accent" style="background:' + cat.color + '"></div>' +
+          '<div class="cat-card__icon" style="color:' + cat.color + ';background:' + cat.color + '18">' + (ICONS[cat.icon] || ICONS.cube) + '</div>' +
+          '<div class="cat-card__body">' +
+            '<h3 class="cat-card__title">' + cat.title + '</h3>' +
+            '<p class="cat-card__description">' + cat.description + '</p>' +
+            '<div class="cat-card__tags">' + cat.tags.map(function(t) { return '<span class="cat-card__tag">' + t + '</span>'; }).join('') + '</div>' +
+          '</div>' +
+          '<div class="cat-card__meta">' +
+            '<span class="cat-card__count">' + cat.count + '</span>' +
+            '<span class="cat-card__arrow">' + ICONS.chevronRight + '</span>' +
+          '</div>';
+        grid.appendChild(card);
+      });
     }
 
     function applyConfig(cfg) {
       var site = cfg.site || {};
       var home = cfg.home || {};
+
+      // Store nav for search index
+      if (cfg.nav) window._siteNav = cfg.nav;
 
       // Site info
       document.title = site.name || 'My Docs';
@@ -220,7 +469,7 @@
       document.getElementById('heroDescription').textContent = home.heroDescription || '';
 
       // Hero actions
-      var primary = home.primaryAction || { text: '开始阅读', link: 'page/' };
+      var primary = home.primaryAction || { text: '开始阅读', link: '#categoryPortal' };
       var secondary = home.secondaryAction || { text: 'GitHub', link: 'https://github.com' };
       var heroPrimary = document.getElementById('heroPrimary');
       heroPrimary.href = primary.link;
@@ -229,51 +478,9 @@
       heroSecondary.href = secondary.link;
       heroSecondary.lastElementChild.textContent = secondary.text;
 
-      // Features
-      var features = home.features || [];
-      if (features.length > 0) {
-        document.getElementById('featuresLabel').textContent = home.featuresTitle || '核心特性';
-        document.getElementById('featuresTitle').textContent = home.featuresTitle || '核心特性';
-        document.getElementById('featuresDescription').textContent = home.featuresDescription || '';
-        var grid = document.getElementById('featuresGrid');
-        grid.innerHTML = '';
-        features.forEach(function(f) {
-          var card = document.createElement('div');
-          card.className = 'feature-card';
-          card.innerHTML =
-            '<div class="feature-card__icon">' + (ICONS[f.icon] || ICONS.edit) + '</div>' +
-            '<h3 class="feature-card__title">' + f.title + '</h3>' +
-            '<p class="feature-card__description">' + f.description + '</p>';
-          grid.appendChild(card);
-        });
-        document.getElementById('featuresSection').style.display = '';
-      } else {
-        document.getElementById('featuresSection').style.display = 'none';
-      }
-
-      // Nav cards
-      var nav = cfg.nav || [];
-      if (nav.length > 0) {
-        document.getElementById('navCardsTitle').textContent = home.navCardsTitle || '文档导航';
-        var navGrid = document.getElementById('navCardsGrid');
-        navGrid.innerHTML = '';
-        nav.forEach(function(item) {
-          var card = document.createElement('a');
-          card.className = 'nav-card';
-          card.href = navToPage(item);
-          card.innerHTML =
-            '<div class="nav-card__icon">' + (ICONS[item.icon] || ICONS.home) + '</div>' +
-            '<div class="nav-card__body">' +
-              '<div class="nav-card__title">' + item.title + '</div>' +
-              '<div class="nav-card__description">阅读 ' + item.title + ' 文档</div>' +
-            '</div>' +
-            '<div class="nav-card__arrow">' + ICONS.chevronRight + '</div>';
-          navGrid.appendChild(card);
-        });
-        document.getElementById('navCardsSection').style.display = '';
-      } else {
-        document.getElementById('navCardsSection').style.display = 'none';
-      }
+      // Render category cards
+      renderCategoryCards();
+      buildSearchIndex();
 
       // Links
       var links = cfg.sidebarLinks || [];
@@ -369,7 +576,6 @@
           color: params.color || 'primary'
         };
 
-        // Parse heading (## Emoji Title)
         var hMatch = block.match(/^##\s+(.+)$/m);
         if (hMatch) {
           var raw = hMatch[1].trim();
@@ -383,7 +589,6 @@
           }
         }
 
-        // Parse body content — split into sections by ### markers
         var sections = [];
         var lines = block.split('\n');
         var currentSection = null;
@@ -398,37 +603,31 @@
           skipHeading = false;
 
           if (trimmed.startsWith('### ')) {
-            // New sub-section
             if (currentSection) sections.push(currentSection);
             currentSection = { heading: trimmed.slice(4).trim(), items: [] };
           } else if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
             var itemText = trimmed.slice(2).trim();
-            // Check for markdown link: [text](url)
             var linkMatch = itemText.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
             if (currentSection) {
               currentSection.items.push(linkMatch
                 ? { type: 'link', text: linkMatch[1], url: linkMatch[2] }
                 : { type: 'bullet', text: itemText });
             } else {
-              // top-level list items
               currentSection = { heading: '', items: [] };
               currentSection.items.push(linkMatch
                 ? { type: 'link', text: linkMatch[1], url: linkMatch[2] }
                 : { type: 'bullet', text: itemText });
             }
           } else if (trimmed.startsWith('|')) {
-            // Table row
             if (!currentSection) currentSection = { heading: '', items: [] };
             currentSection.items.push({ type: 'tableRow', cells: trimmed.split('|').map(function(c) { return c.trim(); }).filter(Boolean) });
           } else if (trimmed.length > 0 && !trimmed.startsWith('[')) {
-            // Regular paragraph text
             if (currentSection) {
               currentSection.items.push({ type: 'text', text: trimmed });
             } else {
               currentSection = { heading: '', items: [{ type: 'text', text: trimmed }] };
             }
           } else if (trimmed.startsWith('[')) {
-            // Standalone link
             var lnkMatch = trimmed.match(/\[([^\]]+)\]\(([^)]+)\)/);
             if (lnkMatch) {
               if (currentSection) {
@@ -438,12 +637,10 @@
               }
             }
           }
-          // empty lines = section boundary (only if not in news mode)
         }
         if (currentSection) sections.push(currentSection);
 
         widget.sections = sections;
-        // Backward compat: description from first text
         if (sections.length > 0) {
           var firstText = sections[0].items.find(function(it) { return it.type === 'text'; });
           widget.description = firstText ? firstText.text : '';
@@ -457,7 +654,6 @@
           if (ctaItem) {
             widget.linkUrl = ctaItem.url;
             widget.linkText = ctaItem.text;
-            // Remove CTA from items so it renders as footer button
             lastSection.items = lastSection.items.filter(function(it) { return it.type !== 'cta'; });
             if (lastSection.items.length === 0) sections.pop();
           }
@@ -475,7 +671,6 @@
 
       switch (type) {
         case 'news':
-          // News style: each ### is a news entry with date
           sections.forEach(function(sec) {
             html += '<div class=\"widget-news__item\">';
             html += '<span class=\"widget-news__date\">' + sec.heading + '</span>';
@@ -487,7 +682,6 @@
           break;
 
         case 'stats':
-          // Stats style: table rows
           html += '<table class=\"widget-stats__table\">';
           sections.forEach(function(sec) {
             if (sec.heading) {
@@ -505,7 +699,6 @@
           break;
 
         case 'versions':
-          // Versions style: compact platform grid
           html += '<div class=\"widget-versions__grid\">';
           sections.forEach(function(sec) {
             sec.items.forEach(function(item) {
@@ -521,7 +714,6 @@
           break;
 
         case 'links':
-          // Quick links: grid of link pills
           html += '<div class=\"widget-links__list\">';
           sections.forEach(function(sec) {
             sec.items.forEach(function(item) {
@@ -537,7 +729,6 @@
 
         case 'featured':
         default:
-          // Standard text content
           sections.forEach(function(sec) {
             if (sec.heading) {
               html += '<h4 class=\"widget-body__subtitle\">' + sec.heading + '</h4>';
@@ -563,19 +754,16 @@
       el.style.gridArea = widget.area;
       el.style.animationDelay = (index * 0.08) + 's';
 
-      // Header
       var headerHtml =
         '<div class=\"widget-panel__header\">' +
           '<span class=\"widget-panel__icon\">' + (widget.emoji || '') + '</span>' +
           '<h3 class=\"widget-panel__title\">' + widget.title + '</h3>' +
         '</div>';
 
-      // Body
       var bodyHtml = '<div class=\"widget-panel__body\">' +
         renderWidgetBody(widget.sections, widget.type) +
         '</div>';
 
-      // Footer (CTA link)
       var footerHtml = '';
       if (widget.linkUrl && widget.linkText) {
         footerHtml =
@@ -599,12 +787,10 @@
         return;
       }
 
-      // Render widgets
       layoutData.widgets.forEach(function(w, i) {
         grid.appendChild(renderWidget(w, i));
       });
 
-      // Apply responsive templates
       var templates = layoutData.templates || {};
       var platforms = Object.keys(templates);
       var applied = false;
@@ -670,10 +856,10 @@
     // ===== Scroll behavior =====
     var topBar = document.getElementById('topBar');
     var scrollIndicator = document.getElementById('scrollIndicator');
-    var featuresSection = document.getElementById('featuresSection');
+    var categoryPortal = document.getElementById('categoryPortal');
 
     scrollIndicator.addEventListener('click', function() {
-      featuresSection.scrollIntoView({ behavior: 'smooth' });
+      categoryPortal.scrollIntoView({ behavior: 'smooth' });
     });
 
     var ticking = false;
