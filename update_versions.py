@@ -27,7 +27,7 @@ from pathlib import Path
 
 SCRIPT_DIR = Path(__file__).parent.absolute()
 VERSIONS_FILE = SCRIPT_DIR / "versions.json"
-DOCS_DIR = SCRIPT_DIR / "docs"
+DOCS_DIR = SCRIPT_DIR / "docs"  # scans all edition subdirectories
 
 PLACEHOLDERS = [
     "JE_VERSION", "BE_VERSION", "JE_NAME", "BE_NAME",

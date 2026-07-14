@@ -97,12 +97,19 @@
     </div>
   </section>
 
+  <!-- Edition Tabs -->
+  <div class="edition-tabs" id="editionTabs">
+    <div class="edition-tabs__inner" id="editionTabsInner"></div>
+  </div>
+
   <!-- Main Content Grid -->
   <section class="main-grid" id="categoryPortal">
     <div class="main-grid__inner">
       <!-- Left Column: Category Sections -->
       <div class="main-grid__left" id="wikiSections">
         <!-- Dynamic wiki sections inserted by JS -->
+        <!-- Edition cards row -->
+        <div class="edition-row" id="editionRow"></div>
       </div>
 
       <!-- Right Column: Quick Reference -->
@@ -133,7 +140,7 @@
             <a class="qr-link" href="page/#/mechanics">游戏机制</a>
             <a class="qr-link" href="page/#/versions">版 本 历 史</a>
             <a class="qr-link qr-link--ext" href="https://www.minecraft.net/" target="_blank" rel="noopener">Minecraft 官网 ↗</a>
-            <a class="qr-link qr-link--ext" href="https://zh.minecraft.wiki/" target="_blank" rel="noopener">MC Wiki (官方) ↗</a>
+            <a class="qr-link qr-link--ext" href="https://zh.minecraft.wiki/" target="_blank" rel="noopener">MC Wiki 社区百科 ↗</a>
           </div>
         </div>
       </aside>
@@ -326,6 +333,16 @@
           { title: '1.16 下界更新', route: '/versions' }
         ]
       }
+    ];
+
+    var EDITIONS = [
+      { id: 'java', title: 'Java 版', icon: 'cube', color: '#3C8527', desc: 'Minecraft: Java Edition 完整百科，涵盖方块、物品、生物、合成与游戏机制。', link: 'page/#/java' },
+      { id: 'bedrock', title: '基岩版', icon: 'devices', color: '#2E6BE5', desc: 'Minecraft: Bedrock Edition，跨平台统一版本，支持移动端、主机和 PC。', link: 'page/#/bedrock' },
+      { id: 'china', title: '中国版', icon: 'star', color: '#C33636', desc: '我的世界中国版，由网易代理运营，免费畅玩 Java 与基岩双版本。', link: 'page/#/china' },
+      { id: 'dungeons', title: 'Dungeons', icon: 'sword', color: '#D4A017', desc: 'Minecraft Dungeons 地下城探险指南，暗黑风格动作冒险游戏。', link: 'page/#/dungeons' },
+      { id: 'legends', title: 'Legends', icon: 'flag', color: '#7B2D8B', desc: 'Minecraft Legends 即时战略指南，带领盟友对抗猪灵入侵。', link: 'page/#/legends' },
+      { id: 'earth', title: 'Earth', icon: 'globe', color: '#1A8B8B', desc: 'Minecraft Earth AR 增强现实游戏历史存档（已停运）。', link: 'page/#/earth' },
+      { id: 'story-mode', title: 'Story Mode', icon: 'book', color: '#E67E22', desc: 'Minecraft: Story Mode 叙事冒险游戏，Telltale 经典之作。', link: 'page/#/story-mode' }
     ];
 
     // ===== Version Data - Loaded from api/latest.json =====
@@ -590,6 +607,56 @@
           '<div class="wiki-section__links">' + linksHtml + '</div>';
 
         container.appendChild(section);
+      });
+
+      // Render edition tabs and cards
+      renderEditionTabs();
+      renderEditionCards();
+    }
+
+    function renderEditionTabs() {
+      var tabsInner = document.getElementById('editionTabsInner');
+      if (!tabsInner) return;
+      tabsInner.innerHTML = '';
+      EDITIONS.forEach(function(ed, i) {
+        var a = document.createElement('a');
+        a.href = 'page/#/' + ed.id;
+        a.className = 'edition-tab';
+        a.style.cssText = 'display:inline-flex;align-items:center;gap:5px;padding:8px 16px;' +
+          'background:#3C3D3E;border:2px solid #262627;' +
+          'color:#D0D1D4;text-decoration:none;font-family:NotoSans,sans-serif;' +
+          'font-size:0.75rem;font-weight:800;letter-spacing:0.02em;' +
+          'border-bottom:3px solid #262627;text-align:center;transition:all 0.12s;';
+        a.innerHTML = '<span style="width:8px;height:8px;border-radius:50%;flex-shrink:0;background:' + (ed.color || '#666') + '"></span>' +
+          '<span>' + ed.title + '</span>';
+        a.addEventListener('mouseenter', function() {
+          this.style.borderBottomColor = ed.color;
+          this.style.color = ed.color;
+        });
+        a.addEventListener('mouseleave', function() {
+          this.style.borderBottomColor = '#262627';
+          this.style.color = '#D0D1D4';
+        });
+        tabsInner.appendChild(a);
+      });
+    }
+
+    function renderEditionCards() {
+      var row = document.getElementById('editionRow');
+      if (!row) return;
+      row.innerHTML = '<div class="wiki-section"><div class="wiki-section__header" style="position:relative;padding:8px 14px 8px 14px;border-bottom:2px solid var(--oreui-border-dark);box-shadow:0 1px 0 0 var(--oreui-border-light);background:var(--oreui-panel-header-bg)"><h3 class="wiki-section__title">全部版本站点</h3></div><div class="wiki-section__links" style="grid-template-columns:repeat(7,1fr)" id="editionLinks"></div></div>';
+
+      var linksEl = document.getElementById('editionLinks');
+      if (!linksEl) return;
+
+      EDITIONS.forEach(function(ed) {
+        var a = document.createElement('a');
+        a.className = 'wiki-section__link';
+        a.href = ed.link;
+        a.style.borderLeft = '2px solid ' + ed.color;
+        a.innerHTML = (ICONS[ed.icon] ? ICONS[ed.icon] : '') + ' <span>' + ed.title + '</span>';
+        a.title = ed.desc;
+        linksEl.appendChild(a);
       });
     }
 

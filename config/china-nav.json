@@ -1,0 +1,7 @@
+[
+  { "title": "特色功能", "route": "/features", "file": "features/index.md" },
+  { "title": "新手指南", "route": "/guide", "file": "guide/index.md" },
+  { "title": "服务器", "route": "/servers", "file": "servers.md" },
+  { "title": "启动器", "route": "/launcher", "file": "launcher.md" },
+  { "title": "与国际版差异", "route": "/differences", "file": "differences.md" }
+]

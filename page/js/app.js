@@ -6,11 +6,36 @@
 
   const ROUTES = {};
   let FILE_TO_ROUTE = {};
-  let SITE = { name:'Openwebdocs.kit-MD3', titleSuffix:'Openwebdocs.kit-MD3', meta:'Openwebdocs.kit-MD3 · 文档站点框架', docDir:'../docs' };
+  let SITE = { name:'Lively Minecraft Wiki', titleSuffix:'Lively Minecraft Wiki', meta:'灵影 Minecraft Wiki · 灵影中文百科', docDir:'../docs' };
   let NAV = [];
   let SIDEBAR_LINKS = [];
   let CURRENT_ROUTE = '/';
+  let CURRENT_EDITION = 'java';
+  let EDITIONS = [];
   const DEFAULT_ROUTE = '/';
+  let lastEdition = 'java';
+  const EDITION_IDS = ['java', 'bedrock', 'china', 'dungeons', 'legends', 'earth', 'story-mode'];
+
+  function getEditionFromHash(hash) {
+    for (var i = 0; i < EDITION_IDS.length; i++) {
+      if (hash === '/' + EDITION_IDS[i] || hash.startsWith('/' + EDITION_IDS[i] + '/')) {
+        return EDITION_IDS[i];
+      }
+    }
+    return null; // no edition prefix in hash
+  }
+
+  function stripEditionPrefix(hash, edition) {
+    if (edition === 'java') return hash;
+    var prefix = '/' + edition;
+    if (hash === prefix) return '/';
+    return hash.slice(prefix.length);
+  }
+
+  function resolveDocPath(file, edition) {
+    if (edition === 'java') return file;
+    return edition + '/' + file;
+  }
 
   const ICONS = {
     home: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
@@ -41,8 +66,19 @@
           });
         }
       }
+      // Load editions
+      if (cfg.editions && Array.isArray(cfg.editions)) {
+        EDITIONS = cfg.editions;
+        CURRENT_EDITION = getEditionFromHash(window.location.hash.slice(1)) || 'java';
+      }
+      // Clear old routes when switching editions
+      if (CURRENT_EDITION !== lastEdition) {
+        for (var k in ROUTES) delete ROUTES[k];
+        for (var k in FILE_TO_ROUTE) delete FILE_TO_ROUTE[k];
+        lastEdition = CURRENT_EDITION;
+      }
+
       if (cfg.nav && Array.isArray(cfg.nav)) {
-        NAV = cfg.nav;
         const nr = {}, nf = {};
         function processNav(items, parentRoute) {
           items.forEach(item => {
@@ -62,55 +98,140 @@
             if (item.children) processNav(item.children, route);
           });
         }
-        processNav(cfg.nav);
+        // Only use config nav for Java edition; other editions use their own nav
+        if (CURRENT_EDITION === 'java') {
+          NAV = cfg.nav;
+          processNav(cfg.nav);
+        } else {
+          NAV = [{ title: '首页', icon: 'home', route: '/' }];
+          nr['/'] = { file: 'README.md', title: '首页', icon: 'home' };
+          nf['README.md'] = '/';
+        }
 
-        // Load blocks-nav.json from config/ and inject as children of "方块" item
-        try {
-          const blocksResp = await fetch('../config/blocks-nav.json');
-          if (blocksResp.ok) {
-            const blocksList = await blocksResp.json();
-            const blocksNavItem = NAV.find(item => item.route === '/blocks');
-            if (blocksNavItem) {
-              blocksNavItem.children = blocksList;
-              blocksList.forEach(block => {
-                nr[block.route] = { file: block.file, title: block.title, icon: 'computer' };
-                nf[block.file] = block.route;
-              });
-            }
+        // Register Java edition overview route (so /java loads java/index.md)
+        // Don't push to NAV (no need to show in sidebar as it's the default)
+        var javaIndexFile = 'java/index.md';
+        if (!FILE_TO_ROUTE[javaIndexFile]) {
+          var javaInfo = EDITIONS.find(function(e) { return e.id === 'java'; });
+          nr['/java'] = { file: javaIndexFile, title: javaInfo ? javaInfo.title : 'Java 版', icon: javaInfo ? javaInfo.icon : 'cube' };
+          nf[javaIndexFile] = '/java';
+        }
+
+        // Load category nav files for current edition
+        if (CURRENT_EDITION === 'java') {
+          // Java edition: load individual category nav files
+          var catNavFiles = {
+            '/blocks':     '../config/blocks-nav.json',
+            '/items':      '../config/items-nav.json',
+            '/mobs':       '../config/mobs-nav.json',
+            '/crafting':   '../config/crafting-nav.json',
+            '/mechanics':  '../config/mechanics-nav.json',
+            '/versions':   '../config/versions-nav.json'
+          };
+          for (var route in catNavFiles) {
+            try {
+              var navResp = await fetch(catNavFiles[route]);
+              if (navResp.ok) {
+                var children = await navResp.json();
+                var navItem = NAV.find(function(item) { return item.route === route; });
+                if (navItem && children.length > 0) {
+                  // Prefix routes with edition for non-java
+                  navItem.children = children.map(function(a) {
+                    return { title: a.title, route: a.route, file: a.file, icon: navItem.icon || 'info' };
+                  });
+                  navItem.children.forEach(function(a) {
+                    nr[a.route] = { file: a.file, title: a.title, icon: navItem.icon || 'info' };
+                    nf[a.file] = a.route;
+                  });
+                }
+              }
+            } catch (e) { console.warn(catNavFiles[route] + ' load failed:', e.message); }
           }
-        } catch (e) { console.warn('blocks-nav.json load failed:', e.message); }
-
-        // Load individual category nav files for items, mobs, crafting, mechanics, versions
-        var catNavFiles = {
-          '/items':     '../config/items-nav.json',
-          '/mobs':      '../config/mobs-nav.json',
-          '/crafting':  '../config/crafting-nav.json',
-          '/mechanics': '../config/mechanics-nav.json',
-          '/versions':  '../config/versions-nav.json'
-        };
-
-        for (var route in catNavFiles) {
+        } else {
+          // Other editions: load single {edition}-nav.json
           try {
-            var resp = await fetch(catNavFiles[route]);
-            if (resp.ok) {
-              var children = await resp.json();
-              var navItem = NAV.find(function(item) { return item.route === route; });
-              if (navItem && children.length > 0) {
-                navItem.children = children;
-                var icon = navItem.icon || 'info';
-                children.forEach(function(a) {
-                  nr[a.route] = { file: a.file, title: a.title, icon: icon };
+            var editionResp = await fetch('../config/' + CURRENT_EDITION + '-nav.json');
+            if (editionResp.ok) {
+              var editionChildren = await editionResp.json();
+              if (editionChildren.length > 0) {
+                // Create edition category in NAV
+                var editionInfo = EDITIONS.find(function(e) { return e.id === CURRENT_EDITION; });
+                var editionNavItem = { title: editionInfo ? editionInfo.title : CURRENT_EDITION, route: '/' + CURRENT_EDITION, icon: editionInfo ? editionInfo.icon : 'info', children: [], file: CURRENT_EDITION + '/index.md' };
+                editionNavItem.children = editionChildren.map(function(a) {
+                  // Route WITHOUT edition prefix (stripEditionPrefix removes it for lookup)
+                  var childRoute = a.route.startsWith('/') ? a.route : '/' + a.route;
+                  return { title: a.title, route: childRoute, file: CURRENT_EDITION + '/' + a.file, icon: editionNavItem.icon };
+                });
+                editionNavItem.children.forEach(function(a) {
+                  nr[a.route] = { file: a.file, title: a.title, icon: editionNavItem.icon };
                   nf[a.file] = a.route;
                 });
+                // Add edition overview route
+                nr[editionNavItem.route] = { file: editionNavItem.file, title: editionNavItem.title, icon: editionNavItem.icon };
+                nf[editionNavItem.file] = editionNavItem.route;
+                NAV.push(editionNavItem);
               }
             }
-          } catch (e) { console.warn(catNavFiles[route] + ' load failed:', e.message); }
+          } catch (e) { console.warn(CURRENT_EDITION + '-nav.json load failed:', e.message); }
         }
 
         Object.assign(ROUTES, nr); Object.assign(FILE_TO_ROUTE, nf);
       }
       SIDEBAR_LINKS = cfg.sidebarLinks || [];
+      // Init version toggle
+      initVersionToggle();
     } catch (e) { console.warn('config.json load failed:', e.message); }
+  }
+
+  // ===== Version Toggle (top bar dropdown) =====
+  function initVersionToggle() {
+    var btn = document.getElementById('versionToggle');
+    var label = document.getElementById('versionToggleLabel');
+    var arrow = document.getElementById('versionToggleArrow');
+    var dropdown = document.getElementById('versionDropdown');
+    if (!btn || !EDITIONS.length) return;
+
+    // Update label to current edition
+    var currentEd = EDITIONS.find(function(e) { return e.id === CURRENT_EDITION; });
+    if (label && currentEd) label.textContent = currentEd.title;
+
+    // Toggle dropdown
+    btn.onclick = function(e) {
+      e.stopPropagation();
+      if (dropdown) {
+        var isOpen = dropdown.style.display === 'block';
+        dropdown.style.display = isOpen ? 'none' : 'block';
+        btn.classList.toggle('version-toggle--open', !isOpen);
+        if (!isOpen) renderVersionDropdown();
+      } else {
+        // Create dropdown on first click
+        dropdown = document.createElement('div');
+        dropdown.id = 'versionDropdown';
+        dropdown.className = 'version-dropdown';
+        btn.parentElement.appendChild(dropdown);
+        renderVersionDropdown();
+        btn.classList.add('version-toggle--open');
+      }
+    };
+
+    // Close on outside click
+    document.addEventListener('click', function() {
+      if (dropdown) { dropdown.style.display = 'none'; btn.classList.remove('version-toggle--open'); }
+    });
+  }
+
+  function renderVersionDropdown() {
+    var dropdown = document.getElementById('versionDropdown');
+    if (!dropdown) return;
+    dropdown.innerHTML = '';
+    dropdown.style.display = 'block';
+    EDITIONS.forEach(function(ed) {
+      var a = document.createElement('a');
+      a.className = 'version-dropdown__item' + (ed.id === CURRENT_EDITION ? ' version-dropdown__item--active' : '');
+      a.href = '#/' + ed.id;
+      a.innerHTML = '<span class="version-dropdown__dot" style="background:' + (ed.color || '#666') + '"></span><span>' + ed.title + '</span>';
+      dropdown.appendChild(a);
+    });
   }
 
   /* ============================================
@@ -119,6 +240,37 @@
   function renderSidebar() {
     if (!NAV.length) return;
     var html = '';
+
+    // Pre-process edition nav items: prefix child routes with edition for sidebar links
+    NAV.forEach(function(item) {
+      if (CURRENT_EDITION !== 'java' && item.route && item.route.startsWith('/' + CURRENT_EDITION) && item.children) {
+        item.children.forEach(function(child) {
+          if (!child._displayRoute) {
+            child._displayRoute = '#/' + CURRENT_EDITION + child.route;
+          }
+        });
+      }
+    });
+
+    // Edition selector (collapsible)
+    if (EDITIONS.length > 0) {
+      var currentEd = EDITIONS.find(function(e) { return e.id === CURRENT_EDITION; });
+      html += '<div class="nav-edition-selector">';
+      html += '<div class="nav-edition-selector__header" id="editionHeader">';
+      html += '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" class="nav-section__icon"><polyline points="16 4 22 12 16 20"/><polyline points="8 20 2 12 8 4"/></svg>';
+      html += '<span class="nav-section__title">当前版本: ' + (currentEd ? currentEd.title : 'Java 版') + '</span>';
+      html += '<svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" class="nav-edition-selector__arrow" id="editionArrow"><polyline points="6 9 12 15 18 9"/></svg>';
+      html += '</div>';
+      html += '<div class="nav-edition-list" id="editionList">';
+      EDITIONS.forEach(function(ed) {
+        var isActive = ed.id === CURRENT_EDITION;
+        html += '<a href="#/' + ed.id + '" class="nav-edition-item' + (isActive ? ' nav-edition-item--active' : '') + '" data-edition="' + ed.id + '" style="border-left-color:' + (ed.color || '#666') + '">';
+        html += '<span class="nav-edition-dot" style="background:' + (ed.color || '#666') + '"></span>';
+        html += '<span>' + ed.title + '</span>';
+        html += '</a>';
+      });
+      html += '</div></div>';
+    }
 
     NAV.forEach(function(item) {
       // Skip items without children (standalone pages handled separately)
@@ -145,17 +297,32 @@
       html += '</div>';
 
       // Category overview link
-      html += '<a href="#' + catRoute + '" class="nav-cat-link" data-route="' + catRoute + '">' + item.title + '总览</a>';
+      var overviewLink = CURRENT_EDITION !== 'java' ? '#/' + CURRENT_EDITION : '#' + catRoute;
+      var overviewDataRoute = CURRENT_EDITION !== 'java' ? '/' + CURRENT_EDITION : catRoute;
+      html += '<a href="' + overviewLink + '" class="nav-cat-link" data-route="' + overviewDataRoute + '">' + item.title + '总览</a>';
 
       // Child links
       item.children.forEach(function(child) {
-        var childRoute = child.route || '';
-        html += '<a href="#' + childRoute + '" class="nav-child-link" data-route="' + childRoute + '">' + child.title + '</a>';
+        var displayHref = child._displayRoute || ('#' + child.route);
+        var lookupRoute = child.route || ''; // stripped route for active state matching
+        html += '<a href="' + displayHref + '" class="nav-child-link" data-route="' + lookupRoute + '">' + child.title + '</a>';
       });
       html += '</div>';
     });
 
     navList.innerHTML = html;
+
+    // Collapsible edition selector
+    var editionHeader = document.getElementById('editionHeader');
+    var editionList = document.getElementById('editionList');
+    var editionArrow = document.getElementById('editionArrow');
+    if (editionHeader && editionList) {
+      editionHeader.addEventListener('click', function() {
+        var open = editionList.style.display !== 'none';
+        editionList.style.display = open ? 'none' : 'block';
+        if (editionArrow) editionArrow.style.transform = open ? 'rotate(0deg)' : 'rotate(180deg)';
+      });
+    }
   }
 
   function renderSidebarLinks() {
@@ -452,7 +619,16 @@
 
   async function loadDocument(route, outputFormat) {
     var asJson = outputFormat === 'json';
-    let config = ROUTES[route];
+    // For non-java editions, try lookup with edition prefix first
+    var lookupRoute = route;
+    if (CURRENT_EDITION !== 'java') {
+      if (!ROUTES[lookupRoute]) {
+        // Try with edition prefix (e.g., /story-mode/season1)
+        var prefixed = '/' + CURRENT_EDITION + lookupRoute;
+        if (ROUTES[prefixed]) lookupRoute = prefixed;
+      }
+    }
+    let config = ROUTES[lookupRoute];
     // If route contains a sub-path like "/blocks/stone", auto-resolve to file path
     if (!config && route.includes('/')) {
       const cleanRoute = route.replace(/^\//, ''); // remove leading /
@@ -471,19 +647,23 @@
         FILE_TO_ROUTE[last + '.md'] = route;
       }
     }
-    if (!config && (route.endsWith('.md') || route.endsWith('.txt'))) config = { file: route, title: route.replace(/\.(md|txt)$/i, '') };
+    if (!config && (lookupRoute.endsWith('.md') || lookupRoute.endsWith('.txt'))) config = { file: lookupRoute, title: lookupRoute.replace(/\.(md|txt)$/i, '') };
     if (!config) { navigate(DEFAULT_ROUTE); return; }
-    CURRENT_ROUTE = route;
-    docTitle.textContent = config.title;
+      CURRENT_ROUTE = lookupRoute;
+      // docFile already includes edition prefix (e.g. java/blocks/stone.md)
+      var docFile = config.file;
+      docTitle.textContent = config.title;
     document.title = `${config.title} - ${SITE.titleSuffix}`;
     docBody.innerHTML = '<div class="loading-state"><div class="loading-spinner"></div><p>加载文档中...</p></div>';
-    tocList.innerHTML = ''; updateActiveNav(route);
+    tocList.innerHTML = ''; updateActiveNav(lookupRoute);
     try {
-      const response = await fetch(`${SITE.docDir}/${config.file}`);
+      // All docs are under ../docs/{edition}/..., fetch directly
+      var fetchPath = SITE.docDir + '/' + docFile;
+      const response = await fetch(fetchPath);
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       let md = await response.text();
       md = replaceVersionPlaceholders(md);
-      pageCache[route] = { title: config.title, content: md, file: config.file };
+      pageCache[route] = { title: config.title, content: md, file: docFile };
 
       // JSON API mode: render raw JSON instead of HTML
       if (asJson) {
@@ -536,12 +716,33 @@
     const hash = window.location.hash.slice(1);
     var format = 'html';
     var route = hash;
+
     // JSON API: #/api/json/blocks/stone → JSON output
     if (hash.startsWith('/api/json/')) {
       format = 'json';
       route = hash.replace('/api/json', '');
     }
-    // Load doc if: empty, starts with /, is a .md/.txt file, or contains / (sub-document like blocks/stone)
+
+    // Detect edition from hash — only switch if prefix is explicitly present
+    var newEdition = getEditionFromHash(route);
+    if (newEdition && newEdition !== CURRENT_EDITION) {
+      CURRENT_EDITION = newEdition;
+      loadConfig().then(function() {
+        renderSidebar();
+        var loadRoute = stripEditionPrefix(route, CURRENT_EDITION);
+        if (!loadRoute || loadRoute === '/') loadRoute = '/' + CURRENT_EDITION;
+        loadDocument(loadRoute, format);
+      });
+      return;
+    }
+
+    // Strip edition prefix for route lookup
+    route = stripEditionPrefix(route, CURRENT_EDITION);
+    // In non-java edition, bare / means load the edition index
+    if (CURRENT_EDITION !== 'java' && (!route || route === '/')) {
+      route = '/' + CURRENT_EDITION;
+    }
+
     if (!route || route.startsWith('/') || route.endsWith('.md') || route.endsWith('.txt') || (route.includes('/') && !route.startsWith('http'))) {
       loadDocument(route || DEFAULT_ROUTE, format);
     }

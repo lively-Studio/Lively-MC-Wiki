@@ -1,0 +1,7 @@
+[
+  { "title": "单位与生物", "route": "/units", "file": "units/index.md" },
+  { "title": "建筑与结构", "route": "/structures", "file": "structures/index.md" },
+  { "title": "战役模式", "route": "/campaign", "file": "campaign.md" },
+  { "title": "资源系统", "route": "/mechanics", "file": "mechanics/index.md" },
+  { "title": "PvP 对战", "route": "/pvp", "file": "pvp.md" }
+]

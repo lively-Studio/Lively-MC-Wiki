@@ -1,0 +1,6 @@
+[
+  { "title": "物品", "route": "/items", "file": "items/index.md" },
+  { "title": "生物", "route": "/mobs", "file": "mobs/index.md" },
+  { "title": "玩法概述", "route": "/gameplay", "file": "gameplay.md" },
+  { "title": "收集品 (Tappables)", "route": "/tappables", "file": "tappables.md" }
+]

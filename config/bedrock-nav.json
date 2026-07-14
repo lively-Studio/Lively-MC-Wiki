@@ -1,0 +1,11 @@
+[
+  { "title": "方块", "route": "/blocks", "file": "blocks/index.md" },
+  { "title": "物品", "route": "/items", "file": "items/index.md" },
+  { "title": "生物", "route": "/mobs", "file": "mobs/index.md" },
+  { "title": "游戏机制", "route": "/mechanics", "file": "mechanics/index.md" },
+  { "title": "版本历史", "route": "/versions", "file": "versions/index.md" },
+  { "title": "市场 (Marketplace)", "route": "/marketplace", "file": "marketplace.md" },
+  { "title": "领域 (Realms)", "route": "/realms", "file": "realms.md" },
+  { "title": "命令差异", "route": "/commands", "file": "commands.md" },
+  { "title": "Add-Ons 系统", "route": "/addons", "file": "addons.md" }
+]

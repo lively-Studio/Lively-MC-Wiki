@@ -8,13 +8,22 @@
   },
   "nav": [
     { "title": "首页", "icon": "home" },
-    { "title": "方块", "icon": "computer", "route": "/blocks", "file": "blocks/index.md" },
-    { "title": "物品", "icon": "customize", "route": "/items", "file": "items/index.md" },
-    { "title": "生物", "icon": "info", "route": "/mobs", "file": "mobs/index.md" },
-    { "title": "合成", "icon": "schedule", "route": "/crafting", "file": "crafting/index.md" },
-    { "title": "游戏机制", "icon": "devices", "route": "/mechanics", "file": "mechanics/index.md" },
-    { "title": "版本历史", "icon": "schedule", "route": "/versions", "file": "versions/index.md" },
-    { "title": "关于", "icon": "info", "route": "/about" }
+    { "title": "方块", "icon": "computer", "route": "/blocks", "file": "java/blocks/index.md" },
+    { "title": "物品", "icon": "customize", "route": "/items", "file": "java/items/index.md" },
+    { "title": "生物", "icon": "info", "route": "/mobs", "file": "java/mobs/index.md" },
+    { "title": "合成", "icon": "schedule", "route": "/crafting", "file": "java/crafting/index.md" },
+    { "title": "游戏机制", "icon": "devices", "route": "/mechanics", "file": "java/mechanics/index.md" },
+    { "title": "版本历史", "icon": "schedule", "route": "/versions", "file": "java/versions/index.md" },
+    { "title": "关于", "icon": "info", "route": "/about", "file": "java/about.md" }
+  ],
+  "editions": [
+    { "id": "java", "title": "Java 版", "icon": "computer", "color": "#3C8527", "description": "Minecraft: Java Edition 完整百科" },
+    { "id": "bedrock", "title": "基岩版", "icon": "devices", "color": "#2E6BE5", "description": "Minecraft: Bedrock Edition 完整百科" },
+    { "id": "china", "title": "中国版", "icon": "star", "color": "#C33636", "description": "我的世界中国版完整百科" },
+    { "id": "dungeons", "title": "Dungeons", "icon": "sword", "color": "#D4A017", "description": "Minecraft Dungeons 地下城指南" },
+    { "id": "legends", "title": "Legends", "icon": "flag", "color": "#7B2D8B", "description": "Minecraft Legends 战略指南" },
+    { "id": "earth", "title": "Earth", "icon": "globe", "color": "#1A8B8B", "description": "Minecraft Earth AR 指南" },
+    { "id": "story-mode", "title": "Story Mode", "icon": "book", "color": "#E67E22", "description": "Minecraft: Story Mode 故事指南" }
   ],
   "sidebarLinks": [
     { "title": "Minecraft 官网", "url": "https://www.minecraft.net/", "external": true },

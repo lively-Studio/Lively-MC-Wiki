@@ -1,15 +1,67 @@
 [
-  { "title": "盔甲", "route": "/items/armor", "file": "items/armor.md" },
-  { "title": "斧", "route": "/items/axe", "file": "items/axe.md" },
-  { "title": "弓", "route": "/items/bow", "file": "items/bow.md" },
-  { "title": "弩", "route": "/items/crossbow", "file": "items/crossbow.md" },
-  { "title": "附魔书", "route": "/items/enchanted-book", "file": "items/enchanted-book.md" },
-  { "title": "食物", "route": "/items/food", "file": "items/food.md" },
-  { "title": "锄", "route": "/items/hoe", "file": "items/hoe.md" },
-  { "title": "镐", "route": "/items/pickaxe", "file": "items/pickaxe.md" },
-  { "title": "药水", "route": "/items/potion", "file": "items/potion.md" },
-  { "title": "盾牌", "route": "/items/shield", "file": "items/shield.md" },
-  { "title": "锹", "route": "/items/shovel", "file": "items/shovel.md" },
-  { "title": "剑", "route": "/items/sword", "file": "items/sword.md" },
-  { "title": "三叉戟", "route": "/items/trident", "file": "items/trident.md" }
+  {
+    "title": "盔甲",
+    "route": "/items/armor",
+    "file": "java/items/armor.md"
+  },
+  {
+    "title": "斧",
+    "route": "/items/axe",
+    "file": "java/items/axe.md"
+  },
+  {
+    "title": "弓",
+    "route": "/items/bow",
+    "file": "java/items/bow.md"
+  },
+  {
+    "title": "弩",
+    "route": "/items/crossbow",
+    "file": "java/items/crossbow.md"
+  },
+  {
+    "title": "附魔书",
+    "route": "/items/enchanted-book",
+    "file": "java/items/enchanted-book.md"
+  },
+  {
+    "title": "食物",
+    "route": "/items/food",
+    "file": "java/items/food.md"
+  },
+  {
+    "title": "锄",
+    "route": "/items/hoe",
+    "file": "java/items/hoe.md"
+  },
+  {
+    "title": "镐",
+    "route": "/items/pickaxe",
+    "file": "java/items/pickaxe.md"
+  },
+  {
+    "title": "药水",
+    "route": "/items/potion",
+    "file": "java/items/potion.md"
+  },
+  {
+    "title": "盾牌",
+    "route": "/items/shield",
+    "file": "java/items/shield.md"
+  },
+  {
+    "title": "锹",
+    "route": "/items/shovel",
+    "file": "java/items/shovel.md"
+  },
+  {
+    "title": "剑",
+    "route": "/items/sword",
+    "file": "java/items/sword.md"
+  },
+  {
+    "title": "三叉戟",
+    "route": "/items/trident",
+    "file": "java/items/trident.md"
+  }
 ]

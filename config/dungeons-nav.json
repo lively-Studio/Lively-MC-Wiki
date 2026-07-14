@@ -1,0 +1,10 @@
+[
+  { "title": "武器", "route": "/weapons", "file": "weapons/index.md" },
+  { "title": "盔甲", "route": "/armor", "file": "armor/index.md" },
+  { "title": "法器", "route": "/artifacts", "file": "artifacts.md" },
+  { "title": "生物", "route": "/mobs", "file": "mobs/index.md" },
+  { "title": "附魔", "route": "/enchantments", "file": "enchantments.md" },
+  { "title": "关卡", "route": "/levels", "file": "levels.md" },
+  { "title": "游戏机制", "route": "/mechanics", "file": "mechanics/index.md" },
+  { "title": "DLC 扩展", "route": "/dlc", "file": "dlc.md" }
+]

@@ -1,0 +1,6 @@
+[
+  { "title": "第一季 (2015)", "route": "/season1", "file": "season1.md" },
+  { "title": "第二季 (2017)", "route": "/season2", "file": "season2.md" },
+  { "title": "角色", "route": "/characters", "file": "characters.md" },
+  { "title": "选择与结局", "route": "/choices", "file": "choices/index.md" }
+]

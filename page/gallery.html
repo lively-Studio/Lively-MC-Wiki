@@ -22,30 +22,33 @@
     .gallery-header a:hover { text-decoration: underline; }
     .gallery-header h1 { margin: 0; font-size: 1.2rem; font-weight: 800; flex: 1; }
     .gallery-header__count { font-size: 0.75rem; color: var(--oreui-text-tertiary); }
+
     .gallery-filters {
-      padding: 12px 24px; display: flex; gap: 6px; flex-wrap: wrap;
+      padding: 10px 24px; display: flex; gap: 6px; flex-wrap: wrap;
       border-bottom: 2px solid var(--oreui-border-dark);
       box-shadow: inset 0 -1px 0 0 var(--oreui-border-light);
       background: var(--oreui-bg-base); position: sticky; top: 53px; z-index: 9;
     }
+    .gallery-filters__label { font-size: 0.65rem; font-weight: 800; color: var(--oreui-text-tertiary); padding: 5px 4px 5px 0; letter-spacing: 0.06em; }
     .gallery-filter {
       padding: 4px 12px; font-size: 0.72rem; font-weight: 800; cursor: pointer;
       border: 2px solid var(--oreui-border-dark);
       box-shadow: inset 0 0 0 1px var(--oreui-border-light);
       background: var(--oreui-bg-elevated); color: var(--oreui-text-secondary);
-      transition: all 0.1s ease;
+      transition: all 0.1s ease; letter-spacing: 0.02em;
     }
     .gallery-filter--active { background: var(--oreui-green); color: var(--oreui-green-text); border-color: var(--oreui-green); }
     .gallery-filter:hover:not(.gallery-filter--active) { border-color: var(--oreui-blue); color: var(--oreui-blue); }
+
     .gallery-grid {
       padding: 20px 24px; display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
       gap: 2px; background: var(--oreui-border-dark);
     }
     .gallery-item {
       background: var(--oreui-bg-elevated); overflow: hidden;
       display: flex; flex-direction: column;
-      border: none; cursor: pointer; transition: transform 0.1s;
+      cursor: pointer; transition: transform 0.1s;
     }
     .gallery-item:hover { transform: scale(1.02); z-index: 1; }
     .gallery-item__img {
@@ -53,27 +56,39 @@
       background: var(--oreui-bg-base);
     }
     .gallery-item__info {
-      padding: 8px 10px; border-top: 1px solid var(--oreui-border-dark);
-      font-size: 0.65rem; color: var(--oreui-text-tertiary); font-weight: 600;
+      padding: 8px 10px; display: flex; flex-direction: column; gap: 2px;
+      border-top: 1px solid var(--oreui-border-dark);
+    }
+    .gallery-item__name {
+      font-size: 0.7rem; color: var(--oreui-text-primary); font-weight: 700;
       overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     }
+    .gallery-item__edition {
+      font-size: 0.6rem; color: var(--oreui-text-tertiary); font-weight: 600;
+    }
     .gallery-empty {
-      padding: 60px 24px; text-align: center; color: var(--oreui-text-tertiary);
+      padding: 80px 24px; text-align: center; color: var(--oreui-text-tertiary);
       font-size: 0.9rem; font-weight: 600;
     }
     .gallery-lightbox {
       position: fixed; inset: 0; z-index: 1000;
-      background: rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
+      background: rgba(0,0,0,0.92); display: flex; flex-direction: column;
+      align-items: center; justify-content: center; cursor: pointer;
     }
     .gallery-lightbox img {
-      max-width: 90vw; max-height: 90vh; object-fit: contain;
+      max-width: 90vw; max-height: 80vh; object-fit: contain;
       border: 2px solid var(--oreui-border-dark);
       box-shadow: 0 0 40px rgba(0,0,0,0.5);
     }
+    .gallery-lightbox__info {
+      margin-top: 12px; color: #ccc; font-size: 0.75rem; font-weight: 600;
+    }
     .gallery-lightbox__close {
       position: absolute; top: 16px; right: 24px;
-      color: white; font-size: 2rem; cursor: pointer; font-weight: 800;
+      color: white; font-size: 2.5rem; cursor: pointer; font-weight: 300; line-height: 1;
+    }
+    @media (max-width: 768px) {
+      .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); padding: 12px 12px; }
     }
   </style>
 </head>
@@ -83,11 +98,14 @@
   <h1>图片画廊</h1>
   <span class="gallery-header__count" id="galleryCount"></span>
 </div>
-<div class="gallery-filters" id="galleryFilters"></div>
+<div class="gallery-filters" id="galleryFilters">
+  <span class="gallery-filters__label">版本:</span>
+</div>
 <div class="gallery-grid" id="galleryGrid"></div>
 <div id="galleryLightbox" class="gallery-lightbox" style="display:none" onclick="this.style.display='none'">
   <span class="gallery-lightbox__close">&times;</span>
   <img id="galleryLightboxImg" src="" alt="">
+  <div class="gallery-lightbox__info" id="galleryLightboxInfo"></div>
 </div>
 
 <script>
@@ -97,70 +115,92 @@
   var theme = localStorage.getItem('owd-home-theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
   html.setAttribute('data-theme', theme);
 
-  // Image manifest - update this to add images
-  var IMAGES = [];
-  // When adding images, use: IMAGES.push({ src: '../assets/images/...', category: 'blocks', name: 'Stone' });
-
-  // Scan known categories for images
-  var CATEGORIES = ['blocks', 'items', 'mobs', 'crafting', 'mechanics', 'other'];
+  // Load gallery data if available
+  var IMAGES = window.GALLERY_IMAGES || [];
+  var currentEdition = 'all';
 
   function initGallery() {
+    // Try to load gallery data
     if (IMAGES.length === 0) {
-      document.getElementById('galleryGrid').innerHTML = '<div class="gallery-empty">暂无图片<br><br>将图片放入 assets/images/ 目录后刷新页面</div>';
-      document.getElementById('galleryCount').textContent = '0 张';
-      return;
+      fetch('../page/gallery-data.js')
+        .then(function(r) { return r.text(); })
+        .then(function(text) {
+          eval(text);
+          IMAGES = window.GALLERY_IMAGES || [];
+          renderAll();
+        })
+        .catch(function() {
+          document.getElementById('galleryGrid').innerHTML = '<div class="gallery-empty">暂无图片<br><br>运行 <code>python3 download_images.py</code> 下载图片后刷新页面</div>';
+          document.getElementById('galleryCount').textContent = '0 张';
+        });
+    } else {
+      renderAll();
     }
-    renderAll();
+  }
+
+  function getEditions() {
+    var editions = { all: 0 };
+    IMAGES.forEach(function(img) {
+      var ed = img.edition || 'other';
+      editions[ed] = (editions[ed] || 0) + 1;
+      editions.all++;
+    });
+    return editions;
   }
 
   function renderAll() {
-    updateFilters();
-    renderGrid(IMAGES);
-  }
-
-  function updateFilters() {
-    var cats = {};
-    IMAGES.forEach(function(img) { cats[img.category] = (cats[img.category] || 0) + 1; });
-
+    var editions = getEditions();
     var filterEl = document.getElementById('galleryFilters');
-    filterEl.innerHTML = '<button class="gallery-filter gallery-filter--active" data-cat="all">全部 (' + IMAGES.length + ')</button>';
 
-    Object.keys(cats).sort().forEach(function(cat) {
-      filterEl.innerHTML += '<button class="gallery-filter" data-cat="' + cat + '">' + cat + ' (' + cats[cat] + ')</button>';
+    // Edition filters
+    var editionOrder = ['all', 'java', 'bedrock', 'china', 'dungeons', 'legends', 'earth', 'story-mode'];
+    editionOrder.forEach(function(ed) {
+      if (editions[ed]) {
+        var label = ed === 'all' ? '全部' : (IMAGES.find(function(i) { return i.edition === ed; }) || {}).editionName || ed;
+        filterEl.innerHTML += '<button class="gallery-filter' + (ed === 'all' ? ' gallery-filter--active' : '') + '" data-edition="' + ed + '">' + label + ' (' + editions[ed] + ')</button>';
+      }
     });
 
     filterEl.querySelectorAll('.gallery-filter').forEach(function(btn) {
       btn.addEventListener('click', function() {
         filterEl.querySelectorAll('.gallery-filter').forEach(function(b) { b.classList.remove('gallery-filter--active'); });
         this.classList.add('gallery-filter--active');
-        var cat = this.getAttribute('data-cat');
-        renderGrid(cat === 'all' ? IMAGES : IMAGES.filter(function(img) { return img.category === cat; }));
+        currentEdition = this.getAttribute('data-edition');
+        renderGrid();
       });
     });
+
+    renderGrid();
   }
 
-  function renderGrid(images) {
+  function renderGrid() {
+    var images = currentEdition === 'all' ? IMAGES : IMAGES.filter(function(img) { return img.edition === currentEdition; });
     var grid = document.getElementById('galleryGrid');
     document.getElementById('galleryCount').textContent = images.length + ' 张';
 
     if (images.length === 0) {
-      grid.innerHTML = '<div class="gallery-empty">该分类暂无图片</div>';
+      grid.innerHTML = '<div class="gallery-empty">该版本暂无图片</div>';
       return;
     }
 
     grid.innerHTML = images.map(function(img, i) {
-      return '<div class="gallery-item" onclick="openLightbox(\'' + img.src + '\', \'' + (img.name || '') + '\')">' +
-        '<img class="gallery-item__img" src="' + img.src + '" alt="' + (img.name || 'Image ' + i) + '" loading="lazy">' +
-        '<div class="gallery-item__info">' + (img.category ? img.category + ' / ' : '') + (img.name || 'Image ' + i) + '</div>' +
+      return '<div class="gallery-item" onclick="openLightbox(\'' + img.src + '\', \'' + (img.name || '') + '\', \'' + (img.editionName || '') + '\')">' +
+        '<img class="gallery-item__img" src="' + img.src + '" alt="' + (img.name || 'Image') + '" loading="lazy" onerror="this.src=\'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%23333%22 width=%22100%22 height=%22100%22/><text fill=%22%23666%22 x=%2250%22 y=%2255%22 text-anchor=%22middle%22 font-size=%2212%22>?</text></svg>\'">' +
+        '<div class="gallery-item__info">' +
+          '<span class="gallery-item__name">' + (img.name || 'Image ' + i) + '</span>' +
+          '<span class="gallery-item__edition">' + (img.editionName || '') + '</span>' +
+        '</div>' +
       '</div>';
     }).join('');
   }
 
-  window.openLightbox = function(src, name) {
+  window.openLightbox = function(src, name, edition) {
     var lb = document.getElementById('galleryLightbox');
     var img = document.getElementById('galleryLightboxImg');
+    var info = document.getElementById('galleryLightboxInfo');
     img.src = src;
     img.alt = name;
+    info.textContent = (edition ? edition + ' · ' : '') + name;
     lb.style.display = 'flex';
   };
 
