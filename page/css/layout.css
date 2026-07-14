@@ -31,6 +31,14 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.1s ease;
+}
+
+.top-app-bar__brand:hover {
+  text-decoration: none;
+  opacity: 0.85;
 }
 
 .brand-text {
@@ -100,6 +108,8 @@
   display: none;
   padding: 16px 12px 12px;
   align-items: center;
+  text-decoration: none;
+  color: inherit;
   gap: 8px;
   border-bottom: 2px solid var(--oreui-border-dark);
   box-shadow: 0 1px 0 0 var(--oreui-border-light);
