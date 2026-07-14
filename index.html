@@ -75,61 +75,68 @@
     </div>
   </section>
 
-  <!-- Stats Bar -->
-  <section class="stats-bar" id="statsBar">
-    <div class="stats-bar__inner">
-      <div class="stats-bar__item">
-        <span class="stats-bar__number" id="statsTotalArticles">152</span>
-        <span class="stats-bar__label">篇文章</span>
+  <!-- Version Bar -->
+  <section class="version-bar" id="versionBar">
+    <div class="version-bar__inner">
+      <div class="version-bar__item version-bar__item--java">
+        <span class="version-bar__edition">Java 版</span>
+        <span class="version-bar__version" id="vbarJavaVersion">26.2</span>
+        <span class="version-bar__name" id="vbarJavaName">混沌立方</span>
       </div>
-      <div class="stats-bar__item">
-        <span class="stats-bar__number" id="statsCategories">6</span>
-        <span class="stats-bar__label">个分类</span>
+      <div class="version-bar__divider"></div>
+      <div class="version-bar__item version-bar__item--bedrock">
+        <span class="version-bar__edition">基岩版</span>
+        <span class="version-bar__version" id="vbarBedrockVersion">26.30</span>
+        <span class="version-bar__name" id="vbarBedrockName">混沌立方</span>
       </div>
-      <div class="stats-bar__item" id="statsVersionItem">
-        <span class="stats-bar__number" id="statsLatestVersion">Java 26.2</span>
-        <span class="stats-bar__label">最新版本</span>
-      </div>
-      <div class="stats-bar__item">
-        <span class="stats-bar__number" id="statsLang">简体中文</span>
-        <span class="stats-bar__label">语言</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Category Portal - MC Wiki Style -->
-  <section class="category-portal" id="categoryPortal">
-    <div class="category-portal__inner">
-      <div class="category-portal__header">
-        <span class="category-portal__label">百科分类</span>
-        <h2 class="category-portal__title">探索 Minecraft 世界</h2>
-        <p class="category-portal__subtitle">选择一个分类，深入了解 Minecraft 的方方面面</p>
-      </div>
-      <div class="category-portal__grid" id="categoryGrid">
-        <!-- Dynamic category cards inserted by JS -->
+      <div class="version-bar__divider"></div>
+      <div class="version-bar__item">
+        <span class="version-bar__edition">发布日期</span>
+        <span class="version-bar__version" id="vbarDate">2026-06-16</span>
       </div>
     </div>
   </section>
 
-  <!-- Widgets Section -->
-  <section class="widgets" id="widgetsSection">
-    <div class="widgets__inner">
-      <div class="widgets__header">
-        <span class="widgets__label" id="widgetsLabel">游戏数据</span>
-        <h2 class="widgets__title" id="widgetsTitle">Minecraft 数据库</h2>
-        <p class="widgets__description" id="widgetsDescription">快速查阅常用游戏数据与核心信息</p>
+  <!-- Main Content Grid -->
+  <section class="main-grid" id="categoryPortal">
+    <div class="main-grid__inner">
+      <!-- Left Column: Category Sections -->
+      <div class="main-grid__left" id="wikiSections">
+        <!-- Dynamic wiki sections inserted by JS -->
       </div>
-      <div class="widgets__grid" id="widgetsGrid">
-        <!-- Dynamic widgets inserted by JS -->
-      </div>
-    </div>
-  </section>
 
-  <!-- External Links Section -->
-  <section class="links-section" id="linksSection">
-    <h2 class="links-section__title" id="linksTitle">外部链接</h2>
-    <div class="links-grid" id="linksGrid">
-      <!-- Dynamic links inserted by JS -->
+      <!-- Right Column: Quick Reference -->
+      <aside class="main-grid__right" id="quickRef">
+        <!-- Quick Reference panels -->
+        <div class="quickref-panel" id="versionPanel">
+          <div class="quickref-panel__header quickref-panel__header--green">
+            <h3 class="quickref-panel__title">版本信息</h3>
+          </div>
+          <div class="quickref-panel__body" id="versionPanelBody">
+            <table class="qr-table"><tbody>
+              <tr><td>Java 版</td><td class="qr-table__val" id="qrJavaVer">26.2 混沌立方</td></tr>
+              <tr><td>基岩版</td><td class="qr-table__val" id="qrBeVer">26.30 混沌立方</td></tr>
+              <tr><td>发布日期</td><td class="qr-table__val" id="qrDate">2026-06-16</td></tr>
+            </tbody></table>
+          </div>
+        </div>
+
+        <div class="quickref-panel" id="linksPanel">
+          <div class="quickref-panel__header quickref-panel__header--blue">
+            <h3 class="quickref-panel__title">常 用 数 据 速 查</h3>
+          </div>
+          <div class="quickref-panel__body">
+            <a class="qr-link" href="page/#/blocks">方块完整列表</a>
+            <a class="qr-link" href="page/#/items">物品图鉴</a>
+            <a class="qr-link" href="page/#/mobs">生物图鉴</a>
+            <a class="qr-link" href="page/#/crafting">合成配方</a>
+            <a class="qr-link" href="page/#/mechanics">游戏机制</a>
+            <a class="qr-link" href="page/#/versions">版 本 历 史</a>
+            <a class="qr-link qr-link--ext" href="https://www.minecraft.net/" target="_blank" rel="noopener">Minecraft 官网 ↗</a>
+            <a class="qr-link qr-link--ext" href="https://zh.minecraft.wiki/" target="_blank" rel="noopener">MC Wiki (官方) ↗</a>
+          </div>
+        </div>
+      </aside>
     </div>
   </section>
 
@@ -274,8 +281,12 @@
           LATEST_VERSIONS = data;
           // Update stats bar
           var statsEl = document.getElementById('statsLatestVersion');
+          var beEl = document.getElementById('statsLatestBedrock');
           if (statsEl && data.java) {
             statsEl.textContent = 'Java ' + data.java.version;
+          }
+          if (beEl && data.bedrock) {
+            beEl.textContent = '基岩 ' + data.bedrock.version;
           }
         })
         .catch(function(err) {
