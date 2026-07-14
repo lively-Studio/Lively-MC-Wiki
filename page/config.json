@@ -39,15 +39,6 @@
       { "title": "活跃的社区", "icon": "devices", "description": "全球数以亿计的玩家社区，丰富的模组、材质包、服务器与地图等你探索" }
     ],
     "navCardsTitle": "文档导航",
-    "linksTitle": "外部链接",
-    "widgets": {
-      "enabled": true,
-      "file": "docs/_widgets.md",
-      "header": {
-        "label": "游戏数据",
-        "title": "Minecraft 数据库",
-        "description": "快速查阅常用游戏数据与核心信息"
-      }
-    }
+    "linksTitle": "外部链接"
   }
 }

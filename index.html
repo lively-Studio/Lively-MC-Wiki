@@ -208,67 +208,123 @@
     applyTheme(getPreferredTheme());
     document.getElementById('themeToggle').addEventListener('click', toggleTheme);
 
-    // ===== Category Data =====
-    var CATEGORIES = [
+    // ===== Wiki Section Data (with actual article links) =====
+    var WIKI_SECTIONS = [
       {
         id: 'blocks',
         title: '方块',
         icon: 'cube',
-        description: '从草方块到远古残骸，超过 150 种方块的完整知识库。每种方块都有详细的属性、获取方式与用途说明。',
         color: '#3C8527',
         link: 'page/#/blocks',
-        count: '87 篇文章',
-        tags: ['石头', '木头', '矿石', '红石', '建筑', '装饰']
+        links: [
+          { title: '草方块', route: '/blocks/grass-block' },
+          { title: '石头', route: '/blocks/stone' },
+          { title: '圆石', route: '/blocks/cobblestone' },
+          { title: '橡木', route: '/blocks/oak-wood' },
+          { title: '工作台', route: '/blocks/crafting-table' },
+          { title: '熔炉', route: '/blocks/furnace' },
+          { title: '箱子', route: '/blocks/chest' },
+          { title: '钻石矿石', route: '/blocks/diamond-ore' },
+          { title: '黑曜石', route: '/blocks/obsidian' },
+          { title: '附魔台', route: '/blocks/enchanting-table' },
+          { title: '信标', route: '/blocks/beacon' },
+          { title: '红石粉', route: '/blocks/redstone-dust' }
+        ]
       },
       {
         id: 'items',
         title: '物品',
         icon: 'sword',
-        description: '工具、武器、盔甲、食物、药水 — 所有可持有和使用的物品。含合成配方与推荐附魔。',
         color: '#2E6BE5',
         link: 'page/#/items',
-        count: '14 篇文章',
-        tags: ['工具', '武器', '盔甲', '食物', '药水', '附魔书']
+        links: [
+          { title: '镐', route: '/items/pickaxe' },
+          { title: '剑', route: '/items/sword' },
+          { title: '斧', route: '/items/axe' },
+          { title: '锹', route: '/items/shovel' },
+          { title: '锄', route: '/items/hoe' },
+          { title: '弓', route: '/items/bow' },
+          { title: '弩', route: '/items/crossbow' },
+          { title: '盔甲', route: '/items/armor' },
+          { title: '食物', route: '/items/food' },
+          { title: '药水', route: '/items/potion' },
+          { title: '盾牌', route: '/items/shield' },
+          { title: '附魔书', route: '/items/enchanted-book' }
+        ]
       },
       {
         id: 'mobs',
         title: '生物',
         icon: 'monster',
-        description: '从友好的村民到可怕的末影龙，认识每一种生物的行为、掉落物与战斗策略。',
         color: '#C33636',
         link: 'page/#/mobs',
-        count: '21 篇文章',
-        tags: ['被动', '中立', '敌对', 'Boss', '下界', '末地']
+        links: [
+          { title: '苦力怕', route: '/mobs/creeper' },
+          { title: '僵尸', route: '/mobs/zombie' },
+          { title: '骷髅', route: '/mobs/skeleton' },
+          { title: '末影人', route: '/mobs/enderman' },
+          { title: '蜘蛛', route: '/mobs/spider' },
+          { title: '村民', route: '/mobs/villager' },
+          { title: '铁傀儡', route: '/mobs/iron-golem' },
+          { title: '猪灵', route: '/mobs/piglin' },
+          { title: '末影龙', route: '/mobs/ender-dragon' },
+          { title: '凋灵', route: '/mobs/wither' },
+          { title: '监守者', route: '/mobs/warden' },
+          { title: '狼', route: '/mobs/wolf' }
+        ]
       },
       {
         id: 'crafting',
         title: '合成',
         icon: 'anvil',
-        description: '工作台、熔炉、酿造台 — 所有合成、烧炼与酿造配方一应俱全。',
         color: '#D4A017',
         link: 'page/#/crafting',
-        count: '9 篇文章',
-        tags: ['工具', '武器', '盔甲', '红石', '酿造', '烧炼']
+        links: [
+          { title: '工具合成', route: '/crafting/tools' },
+          { title: '武器合成', route: '/crafting/weapons' },
+          { title: '盔甲合成', route: '/crafting/armor-recipes' },
+          { title: '方块合成', route: '/crafting/block-recipes' },
+          { title: '食物合成', route: '/crafting/food-recipes' },
+          { title: '红石组件', route: '/crafting/redstone-components' },
+          { title: '酿造', route: '/crafting/brewing-setup' },
+          { title: '烧炼', route: '/crafting/smelting' }
+        ]
       },
       {
         id: 'mechanics',
         title: '游戏机制',
         icon: 'gear',
-        description: '红石电路、附魔、交易、战斗 — 深入了解 Minecraft 的每一个游戏系统。',
         color: '#7B2D8B',
         link: 'page/#/mechanics',
-        count: '15 篇文章',
-        tags: ['红石', '附魔', '酿造', '交易', '战斗', '养殖']
+        links: [
+          { title: '红石电路', route: '/mechanics/redstone' },
+          { title: '附魔', route: '/mechanics/enchanting' },
+          { title: '酿造', route: '/mechanics/brewing' },
+          { title: '锻造', route: '/mechanics/smithing' },
+          { title: '交易', route: '/mechanics/trading' },
+          { title: '战斗', route: '/mechanics/combat' },
+          { title: '农业', route: '/mechanics/farming' },
+          { title: '养殖', route: '/mechanics/breeding' },
+          { title: '信标', route: '/mechanics/beacon' },
+          { title: '袭击', route: '/mechanics/raids' }
+        ]
       },
       {
         id: 'versions',
         title: '版本历史',
         icon: 'history',
-        description: '从 Classic 到最新版本，追溯 Minecraft 的完整进化历程与每个版本的更新内容。',
         color: '#1A8B8B',
         link: 'page/#/versions',
-        count: '1 篇文章',
-        tags: ['Java版', '基岩版', '更新日志', '版本对比']
+        links: [
+          { title: '26.2 混沌立方', route: '/versions' },
+          { title: '26.1 小鬼当家', route: '/versions' },
+          { title: '1.21.5 春日生机', route: '/versions' },
+          { title: '1.21 棘巧试炼', route: '/versions' },
+          { title: '1.20 足迹与故事', route: '/versions' },
+          { title: '1.19 荒野更新', route: '/versions' },
+          { title: '1.18 洞穴与山崖 II', route: '/versions' },
+          { title: '1.16 下界更新', route: '/versions' }
+        ]
       }
     ];
 
@@ -279,14 +335,30 @@
         .then(function(r) { return r.json(); })
         .then(function(data) {
           LATEST_VERSIONS = data;
-          // Update stats bar
-          var statsEl = document.getElementById('statsLatestVersion');
-          var beEl = document.getElementById('statsLatestBedrock');
-          if (statsEl && data.java) {
-            statsEl.textContent = 'Java ' + data.java.version;
+          // Update version bar
+          var vbarJava = document.getElementById('vbarJavaVersion');
+          var vbarJavaName = document.getElementById('vbarJavaName');
+          var vbarBe = document.getElementById('vbarBedrockVersion');
+          var vbarBeName = document.getElementById('vbarBedrockName');
+          var vbarDate = document.getElementById('vbarDate');
+          // Update right panel
+          var qrJava = document.getElementById('qrJavaVer');
+          var qrBe = document.getElementById('qrBeVer');
+          var qrDate = document.getElementById('qrDate');
+
+          if (data.java) {
+            if (vbarJava) vbarJava.textContent = data.java.version;
+            if (vbarJavaName) vbarJavaName.textContent = data.java.name_zh || data.java.name;
+            if (qrJava) qrJava.textContent = data.java.version + ' ' + (data.java.name_zh || '');
           }
-          if (beEl && data.bedrock) {
-            beEl.textContent = '基岩 ' + data.bedrock.version;
+          if (data.bedrock) {
+            if (vbarBe) vbarBe.textContent = data.bedrock.version;
+            if (vbarBeName) vbarBeName.textContent = data.bedrock.name_zh || data.bedrock.name;
+            if (qrBe) qrBe.textContent = data.bedrock.version + ' ' + (data.bedrock.name_zh || '');
+          }
+          if (data.java && data.java.date) {
+            if (vbarDate) vbarDate.textContent = data.java.date;
+            if (qrDate) qrDate.textContent = data.java.date;
           }
         })
         .catch(function(err) {
@@ -314,14 +386,25 @@
     function buildSearchIndex() {
       SEARCH_INDEX = [];
       // Add categories
-      CATEGORIES.forEach(function(cat) {
+      WIKI_SECTIONS.forEach(function(cat) {
         SEARCH_INDEX.push({
           type: 'category',
           title: cat.title,
-          description: cat.description,
+          description: cat.title + ' 分类',
           link: cat.link,
           icon: cat.icon,
-          keywords: cat.id + ' ' + cat.title + ' ' + cat.description + ' ' + cat.tags.join(' ')
+          keywords: cat.id + ' ' + cat.title + ' ' + cat.links.map(function(l) { return l.title; }).join(' ')
+        });
+        // Add all article links for searching
+        cat.links.forEach(function(link) {
+          SEARCH_INDEX.push({
+            type: 'page',
+            title: link.title,
+            description: cat.title + ' 分类',
+            link: 'page/#' + link.route,
+            icon: cat.icon,
+            keywords: link.title + ' ' + cat.title
+          });
         });
       });
       // Add from config.json nav
@@ -480,41 +563,33 @@
       }
     };
 
-    function renderCategoryCards() {
-      var grid = document.getElementById('categoryGrid');
-      if (!grid) return;
-      grid.innerHTML = '';
+    function renderWikiSections() {
+      var container = document.getElementById('wikiSections');
+      if (!container) return;
+      container.innerHTML = '';
 
-      // Calculate total articles
-      var totalArticles = 0;
-      CATEGORIES.forEach(function(cat) {
-        totalArticles += parseInt(cat.count) || 0;
-      });
+      WIKI_SECTIONS.forEach(function(sec, i) {
+        var section = document.createElement('div');
+        section.className = 'wiki-section';
+        section.style.animationDelay = (i * 0.06) + 's';
 
-      // Update stats bar
-      var totalEl = document.getElementById('statsTotalArticles');
-      var catEl = document.getElementById('statsCategories');
-      if (totalEl) totalEl.textContent = totalArticles;
-      if (catEl) catEl.textContent = CATEGORIES.length;
+        var linksHtml = '';
+        sec.links.forEach(function(link) {
+          linksHtml += '<a class="wiki-section__link" href="page/#' + link.route + '">' + link.title + '</a>';
+        });
 
-      CATEGORIES.forEach(function(cat, i) {
-        var card = document.createElement('a');
-        card.className = 'cat-card';
-        card.href = cat.link;
-        card.style.animationDelay = (i * 0.06) + 's';
-        card.innerHTML =
-          '<div class="cat-card__accent" style="background:' + cat.color + '"></div>' +
-          '<div class="cat-card__icon" style="color:' + cat.color + ';background:' + cat.color + '18">' + (ICONS[cat.icon] || ICONS.cube) + '</div>' +
-          '<div class="cat-card__body">' +
-            '<h3 class="cat-card__title">' + cat.title + '</h3>' +
-            '<p class="cat-card__description">' + cat.description + '</p>' +
-            '<div class="cat-card__tags">' + cat.tags.map(function(t) { return '<span class="cat-card__tag">' + t + '</span>'; }).join('') + '</div>' +
+        section.innerHTML =
+          '<div class="wiki-section__header">' +
+            '<span class="wiki-section__header-bar" style="background:' + sec.color + '"></span>' +
+            '<h3 class="wiki-section__title">' +
+              '<span class="wiki-section__icon" style="color:' + sec.color + '">' + (ICONS[sec.icon] || ICONS.cube) + '</span>' +
+              sec.title +
+            '</h3>' +
+            '<a class="wiki-section__viewall" href="' + sec.link + '">全部 &rarr;</a>' +
           '</div>' +
-          '<div class="cat-card__meta">' +
-            '<span class="cat-card__count">' + cat.count + '</span>' +
-            '<span class="cat-card__arrow">' + ICONS.chevronRight + '</span>' +
-          '</div>';
-        grid.appendChild(card);
+          '<div class="wiki-section__links">' + linksHtml + '</div>';
+
+        container.appendChild(section);
       });
     }
 
@@ -526,10 +601,10 @@
       if (cfg.nav) window._siteNav = cfg.nav;
 
       // Site info
-      document.title = site.name || 'My Docs';
+      document.title = site.name || 'Minecraft Wiki';
       document.querySelector('meta[name="description"]').content = site.meta || '';
       var logoUrl = site.logo || 'page/logo.jpg';
-      var siteName = site.name || 'My Docs';
+      var siteName = site.name || 'Minecraft Wiki';
 
       // Set logo across all locations
       var logoEls = document.querySelectorAll('#heroLogo, #topLogo, #footerLogo');
@@ -540,14 +615,14 @@
       document.getElementById('footerName').textContent = siteName;
 
       // Hero section
-      document.getElementById('heroBadgeText').textContent = home.badge || ('基于 ' + siteName);
+      document.getElementById('heroBadgeText').textContent = home.badge || siteName;
       document.getElementById('heroTitle').textContent = home.heroTitle || siteName;
       document.getElementById('heroSubtitle').textContent = home.heroSubtitle || '';
       document.getElementById('heroDescription').textContent = home.heroDescription || '';
 
       // Hero actions
-      var primary = home.primaryAction || { text: '开始阅读', link: '#categoryPortal' };
-      var secondary = home.secondaryAction || { text: 'GitHub', link: 'https://github.com' };
+      var primary = home.primaryAction || { text: '开始探索', link: '#categoryPortal' };
+      var secondary = home.secondaryAction || { text: 'Minecraft 官网', link: 'https://www.minecraft.net/' };
       var heroPrimary = document.getElementById('heroPrimary');
       heroPrimary.href = primary.link;
       heroPrimary.firstElementChild.textContent = primary.text;
@@ -555,368 +630,12 @@
       heroSecondary.href = secondary.link;
       heroSecondary.lastElementChild.textContent = secondary.text;
 
-      // Render category cards
-      renderCategoryCards();
+      // Render wiki sections
+      renderWikiSections();
       buildSearchIndex();
-
-      // Links
-      var links = cfg.sidebarLinks || [];
-      if (links.length > 0) {
-        document.getElementById('linksTitle').textContent = home.linksTitle || '外部链接';
-        var linksGrid = document.getElementById('linksGrid');
-        linksGrid.innerHTML = '';
-        links.forEach(function(link) {
-          var a = document.createElement('a');
-          a.className = 'link-item';
-          a.href = link.url;
-          if (link.external) {
-            a.target = '_blank';
-            a.rel = 'noopener';
-          }
-          a.innerHTML = (ICONS[link.icon] || ICONS.external) + '<span>' + link.title + '</span>';
-          linksGrid.appendChild(a);
-        });
-        document.getElementById('linksSection').style.display = '';
-      } else {
-        document.getElementById('linksSection').style.display = 'none';
-      }
 
       // Footer
       document.getElementById('footerLink').href = secondary.link;
-    }
-
-    // ===== Widget System =====
-    var WIDGET_BREAKPOINTS = {
-      mobile:  '(max-width: 768px)',
-      tablet:  '(min-width: 769px) and (max-width: 1024px)',
-      desktop: '(min-width: 1025px)'
-    };
-
-    var WIDGET_COLORS = {
-      primary:   { bg: 'var(--md-sys-color-primary-container)',     fg: 'var(--md-sys-color-on-primary-container)',     border: 'var(--md-sys-color-primary)' },
-      secondary: { bg: 'var(--md-sys-color-secondary-container)',   fg: 'var(--md-sys-color-on-secondary-container)',   border: 'var(--md-sys-color-secondary)' },
-      tertiary:  { bg: 'var(--md-sys-color-tertiary-container)',    fg: 'var(--md-sys-color-on-tertiary-container)',    border: 'var(--md-sys-color-tertiary)' },
-      error:     { bg: 'var(--md-sys-color-error-container)',       fg: 'var(--md-sys-color-on-error-container)',       border: 'var(--md-sys-color-error)' },
-      neutral:   { bg: 'var(--md-sys-color-surface-container-high)',fg: 'var(--md-sys-color-on-surface)',               border: 'var(--md-sys-color-outline)' }
-    };
-
-    function parseAreas(md) {
-      var templateMap = {};
-      var regex = /<!--\s*areas:(\w+)=\"([^\"]+)\"\s*-->/g;
-      var match;
-      while ((match = regex.exec(md)) !== null) {
-        var platform = match[1].toLowerCase();
-        var rowsStr = match[2].trim();
-        var rows = [];
-        var rowRegex = /\"([^\"]+)\"/g;
-        var rowMatch;
-        while ((rowMatch = rowRegex.exec('\"' + rowsStr + '\"')) !== null) {
-          rows.push(rowMatch[1].trim());
-        }
-        if (rows.length === 0) rows = rowsStr.split(/\s*\"\s*\"/).filter(Boolean);
-        templateMap[platform] = rows.join('\" \"');
-      }
-      return templateMap;
-    }
-
-    function applyAreaTemplate(templateStr) {
-      var grid = document.getElementById('widgetsGrid');
-      if (!templateStr) { grid.style.gridTemplateAreas = ''; return; }
-      var rows = templateStr.split('\" \"');
-      var formatted = rows.map(function(r) { return \"'\" + r.trim() + \"'\"; }).join(' ');
-      grid.style.gridTemplateAreas = formatted;
-      if (rows.length > 0) {
-        var cols = rows[0].trim().split(/\s+/).length;
-        grid.style.gridTemplateColumns = 'repeat(' + cols + ', 1fr)';
-      }
-    }
-
-    function parseWidgetsMD(md) {
-      var templates = parseAreas(md);
-      var widgets = [];
-
-      var regex = /<!--\s*widget:([^>]+)\s*-->([\s\S]*?)<!--\s*\/widget\s*-->/g;
-      var match;
-      while ((match = regex.exec(md)) !== null) {
-        var paramsStr = match[1].trim();
-        var block = match[2].trim();
-
-        var params = {};
-        paramsStr.split(',').forEach(function(p) {
-          var kv = p.trim().split('=');
-          if (kv.length === 2) params[kv[0].trim()] = kv[1].trim();
-        });
-
-        var widget = {
-          area:  params.area  || 'default',
-          type:  params.type  || 'card',
-          color: params.color || 'primary'
-        };
-
-        var hMatch = block.match(/^##\s+(.+)$/m);
-        if (hMatch) {
-          var raw = hMatch[1].trim();
-          var emojiMatch = raw.match(/^([\p{Emoji_Presentation}\p{Emoji}\u{200D}\u{FE0F}]+)\s*/u);
-          if (emojiMatch) {
-            widget.emoji = emojiMatch[0].trim();
-            widget.title = raw.slice(emojiMatch[0].length).trim();
-          } else {
-            widget.emoji = '';
-            widget.title = raw;
-          }
-        }
-
-        var sections = [];
-        var lines = block.split('\n');
-        var currentSection = null;
-        var skipHeading = false;
-
-        for (var i = 0; i < lines.length; i++) {
-          var line = lines[i];
-          var trimmed = line.trim();
-
-          if (trimmed.startsWith('## ')) { skipHeading = true; continue; }
-          if (!skipHeading) continue;
-          skipHeading = false;
-
-          if (trimmed.startsWith('### ')) {
-            if (currentSection) sections.push(currentSection);
-            currentSection = { heading: trimmed.slice(4).trim(), items: [] };
-          } else if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
-            var itemText = trimmed.slice(2).trim();
-            var linkMatch = itemText.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
-            if (currentSection) {
-              currentSection.items.push(linkMatch
-                ? { type: 'link', text: linkMatch[1], url: linkMatch[2] }
-                : { type: 'bullet', text: itemText });
-            } else {
-              currentSection = { heading: '', items: [] };
-              currentSection.items.push(linkMatch
-                ? { type: 'link', text: linkMatch[1], url: linkMatch[2] }
-                : { type: 'bullet', text: itemText });
-            }
-          } else if (trimmed.startsWith('|')) {
-            if (!currentSection) currentSection = { heading: '', items: [] };
-            currentSection.items.push({ type: 'tableRow', cells: trimmed.split('|').map(function(c) { return c.trim(); }).filter(Boolean) });
-          } else if (trimmed.length > 0 && !trimmed.startsWith('[')) {
-            if (currentSection) {
-              currentSection.items.push({ type: 'text', text: trimmed });
-            } else {
-              currentSection = { heading: '', items: [{ type: 'text', text: trimmed }] };
-            }
-          } else if (trimmed.startsWith('[')) {
-            var lnkMatch = trimmed.match(/\[([^\]]+)\]\(([^)]+)\)/);
-            if (lnkMatch) {
-              if (currentSection) {
-                currentSection.items.push({ type: 'cta', text: lnkMatch[1], url: lnkMatch[2] });
-              } else {
-                currentSection = { heading: '', items: [{ type: 'cta', text: lnkMatch[1], url: lnkMatch[2] }] };
-              }
-            }
-          }
-        }
-        if (currentSection) sections.push(currentSection);
-
-        widget.sections = sections;
-        if (sections.length > 0) {
-          var firstText = sections[0].items.find(function(it) { return it.type === 'text'; });
-          widget.description = firstText ? firstText.text : '';
-        }
-
-        widget.linkUrl = '';
-        widget.linkText = '';
-        if (sections.length > 0) {
-          var lastSection = sections[sections.length - 1];
-          var ctaItem = lastSection.items.find(function(it) { return it.type === 'cta'; });
-          if (ctaItem) {
-            widget.linkUrl = ctaItem.url;
-            widget.linkText = ctaItem.text;
-            lastSection.items = lastSection.items.filter(function(it) { return it.type !== 'cta'; });
-            if (lastSection.items.length === 0) sections.pop();
-          }
-        }
-
-        widgets.push(widget);
-      }
-
-      return { templates: templates, widgets: widgets };
-    }
-
-    function renderWidgetBody(sections, type) {
-      var html = '';
-      if (!sections || sections.length === 0) return html;
-
-      switch (type) {
-        case 'news':
-          sections.forEach(function(sec) {
-            html += '<div class=\"widget-news__item\">';
-            html += '<span class=\"widget-news__date\">' + sec.heading + '</span>';
-            sec.items.forEach(function(item) {
-              if (item.type === 'text') html += '<p class=\"widget-news__text\">' + item.text + '</p>';
-            });
-            html += '</div>';
-          });
-          break;
-
-        case 'stats':
-          html += '<table class=\"widget-stats__table\">';
-          sections.forEach(function(sec) {
-            if (sec.heading) {
-              html += '<thead><tr><th colspan=\"2\">' + sec.heading + '</th></tr></thead>';
-            }
-            html += '<tbody>';
-            sec.items.forEach(function(item) {
-              if (item.type === 'tableRow' && item.cells.length >= 2) {
-                html += '<tr><td>' + item.cells[0] + '</td><td class=\"widget-stats__value\">' + item.cells[1] + '</td></tr>';
-              }
-            });
-            html += '</tbody>';
-          });
-          html += '</table>';
-          break;
-
-        case 'versions':
-          html += '<div class=\"widget-versions__grid\">';
-          sections.forEach(function(sec) {
-            sec.items.forEach(function(item) {
-              if (item.type === 'tableRow' && item.cells.length >= 2) {
-                html += '<div class=\"widget-versions__item\">';
-                html += '<span class=\"widget-versions__platform\">' + item.cells[0] + '</span>';
-                html += '<span class=\"widget-versions__version\">' + item.cells[1] + '</span>';
-                html += '</div>';
-              }
-            });
-          });
-          html += '</div>';
-          break;
-
-        case 'links':
-          html += '<div class=\"widget-links__list\">';
-          sections.forEach(function(sec) {
-            sec.items.forEach(function(item) {
-              if (item.type === 'link') {
-                html += '<a class=\"widget-links__item\" href=\"' + item.url + '\">' + item.text + '</a>';
-              } else if (item.type === 'text') {
-                html += '<span class=\"widget-links__label\">' + item.text + '</span>';
-              }
-            });
-          });
-          html += '</div>';
-          break;
-
-        case 'featured':
-        default:
-          sections.forEach(function(sec) {
-            if (sec.heading) {
-              html += '<h4 class=\"widget-body__subtitle\">' + sec.heading + '</h4>';
-            }
-            sec.items.forEach(function(item) {
-              if (item.type === 'text') {
-                html += '<p class=\"widget-body__text\">' + item.text + '</p>';
-              } else if (item.type === 'bullet') {
-                html += '<li class=\"widget-body__bullet\">' + item.text + '</li>';
-              } else if (item.type === 'link') {
-                html += '<a class=\"widget-body__link\" href=\"' + item.url + '\">' + item.text + '</a>';
-              }
-            });
-          });
-          break;
-      }
-      return html;
-    }
-
-    function renderWidget(widget, index) {
-      var el = document.createElement('div');
-      el.className = 'widget-panel widget-panel--' + widget.type + ' widget-panel--' + widget.color;
-      el.style.gridArea = widget.area;
-      el.style.animationDelay = (index * 0.08) + 's';
-
-      var headerHtml =
-        '<div class=\"widget-panel__header\">' +
-          '<span class=\"widget-panel__icon\">' + (widget.emoji || '') + '</span>' +
-          '<h3 class=\"widget-panel__title\">' + widget.title + '</h3>' +
-        '</div>';
-
-      var bodyHtml = '<div class=\"widget-panel__body\">' +
-        renderWidgetBody(widget.sections, widget.type) +
-        '</div>';
-
-      var footerHtml = '';
-      if (widget.linkUrl && widget.linkText) {
-        footerHtml =
-          '<a class=\"widget-panel__footer\" href=\"' + widget.linkUrl + '\">' +
-            widget.linkText +
-            ' <svg viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><polyline points=\"9 18 15 12 9 6\"/></svg>' +
-          '</a>';
-      }
-
-      el.innerHTML = headerHtml + bodyHtml + footerHtml;
-      return el;
-    }
-
-    function renderWidgets(layoutData) {
-      var section = document.getElementById('widgetsSection');
-      var grid = document.getElementById('widgetsGrid');
-      grid.innerHTML = '';
-
-      if (!layoutData || !layoutData.widgets || layoutData.widgets.length === 0) {
-        section.style.display = 'none';
-        return;
-      }
-
-      layoutData.widgets.forEach(function(w, i) {
-        grid.appendChild(renderWidget(w, i));
-      });
-
-      var templates = layoutData.templates || {};
-      var platforms = Object.keys(templates);
-      var applied = false;
-
-      platforms.forEach(function(platform) {
-        var template = templates[platform];
-        var query = WIDGET_BREAKPOINTS[platform];
-        if (query && template) {
-          if (window.matchMedia(query).matches) {
-            applyAreaTemplate(template);
-            applied = true;
-          }
-          window.matchMedia(query).addEventListener('change', function(e) {
-            if (e.matches) applyAreaTemplate(template);
-          });
-        }
-      });
-
-      if (!applied && platforms.length > 0) {
-        applyAreaTemplate(templates[platforms[0]]);
-      }
-
-      section.style.display = '';
-    }
-
-    function loadWidgets(widgetsCfg) {
-      var section = document.getElementById('widgetsSection');
-      if (!widgetsCfg || !widgetsCfg.enabled || !widgetsCfg.file) {
-        section.style.display = 'none';
-        return;
-      }
-
-      var header = widgetsCfg.header || {};
-      document.getElementById('widgetsLabel').textContent = header.label || 'Widgets';
-      document.getElementById('widgetsTitle').textContent = header.title || '功能面板';
-      document.getElementById('widgetsDescription').textContent = header.description || '';
-
-      fetch(widgetsCfg.file)
-        .then(function(r) {
-          if (!r.ok) throw new Error('HTTP ' + r.status);
-          return r.text();
-        })
-        .then(function(md) { return replaceVersionPlaceholders(md); })
-        .then(function(md) { return parseWidgetsMD(md); })
-        .then(function(layoutData) { renderWidgets(layoutData); })
-        .catch(function(err) {
-          console.warn('加载小组件文件失败:', err.message);
-          section.style.display = 'none';
-        });
     }
 
     // ===== Load =====
@@ -925,7 +644,6 @@
         .then(function(r) { return r.json(); })
         .then(function(cfg) {
           applyConfig(cfg);
-          loadWidgets((cfg.home || {}).widgets || null);
         })
         .catch(function() {
           console.warn('加载 config.json 失败，使用默认配置');
