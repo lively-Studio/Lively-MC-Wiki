@@ -24,13 +24,25 @@
 - page/index.html: 品牌名称改为 Minecraft Wiki
 - page/config.json: 完整 MC Wiki 配置
 
+## MC Wiki 风格组件 (2026-07-14)
+- **MC Infobox**: page/css/components.css 中添加 `.mc-infobox` 样式（右浮动信息框，MC Wiki 风格）
+- **MC Gallery**: page/css/components.css 中添加 `.mc-gallery` 样式（图片网格 + caption）
+- **MC Video**: `.mc-video` 样式用于视频嵌入容器
+- **GIF Badge**: `.mc-gif-badge` 标记动画图片
+- **Post-processing**: page/js/app.js 中 `processInfobox()`, `processGallery()`, `processAnimatedImages()` 三个函数在 marked 渲染后自动转换格式
+
+## 图片下载
+- download_images.py: Python 脚本，从 .md 文件中提取图片 URL 并下载到 page/images/blocks/
+- 图片保存路径: page/images/blocks/{block_name}/{hash}.ext
+- 下载后自动更新 .md 文件中的 URL 为本地相对路径
+
 ## 文档内容覆盖
 - README.md: 首页介绍
-- blocks.md: 方块列表（100+ 种）
-- items.md: 物品列表（工具/武器/盔甲/食物/药水/附魔）
-- mobs.md: 生物图鉴（友好/中立/敌对/Boss）
-- crafting.md: 合成与烧炼配方
-- mechanics.md: 游戏机制（红石/附魔/酿造/战斗/交易）
-- versions.md: 版本历史
-- about.md: 关于页面
-- _widgets.md: 首页功能面板
+- docs/blocks/: 87 个方块详细文档（所有方块均已扩展为完整内容，含 infobox 数据、用途、数据值、音效、你知道吗、图库等）
+- docs/items.md: 物品列表
+- docs/mobs.md: 生物图鉴
+- docs/crafting.md: 合成与烧炼配方
+- docs/mechanics.md: 游戏机制
+- docs/versions.md: 版本历史
+- docs/about.md: 关于页面
+- docs/_widgets.md: 首页功能面板
