@@ -4,7 +4,7 @@
     "titleSuffix": "Lively Minecraft Wiki",
     "meta": "Lively Minecraft Wiki · 灵动--我的世界中文百科",
     "docDir": "../docs",
-    "logo": "logo.jpg"
+    "logo": "/page/logo.jpg"
   },
   "nav": [
     { "title": "首页", "icon": "home" },
