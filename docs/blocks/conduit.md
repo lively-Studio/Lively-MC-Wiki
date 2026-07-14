@@ -1,6 +1,6 @@
 # 潮涌核心
 
-![Conduit](https://minecraft.wiki/images/Conduit_JE2_BE2.png?format=original)
+![Conduit](../page/images/blocks/conduit/f66f7026.png)
 
 > **稀有度**：稀有 | **可再生**：否 | **可堆叠**：64 | **工具**：任何
 > **硬度**：3 | **爆炸抗性**：3 | **发光**：是（15） | **透明**：否 | **可燃**：否
@@ -81,8 +81,8 @@
 
 ## 图库
 
-![Conduit Frame](https://minecraft.wiki/images/Conduit_Frame.png?format=original)
+![Conduit Frame](../page/images/blocks/conduit/586b458c.png)
 *42 块海晶石完全激活的潮涌核心框架*
 
-![Conduit Power](https://minecraft.wiki/images/Conduit_Power_Effect.png?format=original)
+![Conduit Power](../page/images/blocks/conduit/f64672a1.png)
 *潮涌能量效果下的水下清晰视野*

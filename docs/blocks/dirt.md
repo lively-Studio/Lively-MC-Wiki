@@ -1,6 +1,6 @@
 # 泥土
 
-![Dirt](https://minecraft.wiki/images/Dirt_JE3_BE3.png?format=original)
+![Dirt](../page/images/blocks/dirt/8428ff1e.png)
 
 > **稀有度**：极其常见 | **可再生**：是（砂土+锄头） | **可堆叠**：64 | **工具**：任何（锹最快）
 > **硬度**：0.5 | **爆炸抗性**：0.5 | **发光**：否 | **透明**：否 | **可燃**：否

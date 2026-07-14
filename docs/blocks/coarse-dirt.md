@@ -1,6 +1,6 @@
 # 砂土
 
-![Coarse Dirt](https://minecraft.wiki/images/Coarse_Dirt_JE2_BE2.png?format=original)
+![Coarse Dirt](../page/images/blocks/coarse-dirt/e327051d.png)
 
 > **稀有度**：常见 | **可再生**：是 | **可堆叠**：64 | **工具**：任何（锹最快）
 > **硬度**：0.5 | **爆炸抗性**：0.5 | **发光**：否 | **透明**：否 | **可燃**：否

@@ -1,6 +1,6 @@
 # 发射器
 
-![Dispenser](https://minecraft.wiki/images/Dispenser_JE3_BE3.png?format=original)
+![Dispenser](../page/images/blocks/dispenser/641e41b3.png)
 
 > **稀有度**：常见 | **可再生**：是 | **可堆叠**：64 | **工具**：木镐或更好
 > **硬度**：3.5 | **爆炸抗性**：3.5 | **发光**：否 | **透明**：否 | **可燃**：否
@@ -115,8 +115,8 @@
 
 ## 图库
 
-![Dispenser GUI](https://minecraft.wiki/images/Dispenser_GUI.png?format=original)
+![Dispenser GUI](../page/images/blocks/dispenser/0c3a32d3.png)
 *发射器的 9 格 GUI 界面*
 
-![Dispenser Shooting](https://minecraft.wiki/images/Dispenser_Shooting_Arrow.png?format=original)
+![Dispenser Shooting](../page/images/blocks/dispenser/f2ebbaff.png)
 *发射器射出箭矢*

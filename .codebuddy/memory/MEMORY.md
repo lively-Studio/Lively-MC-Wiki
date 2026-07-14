@@ -9,7 +9,8 @@
 - 框架: OWD.K-MD3 (https://github.com/Open-code-Studio/Open-web-docs.kit)
 - 内容驱动: Markdown 文件
 - 渲染引擎: marked.js v15.0.7 + highlight.js v11.11.1
-- 设计: Material Design 3 + 响应式布局
+- 设计: OREUI (Mojang Ore UI 设计系统，深色石板风格) + 响应式布局
+- 主题: 深色默认，支持亮色/暗色切换
 
 ## 项目结构
 - index.html: 首页（Hero + Features + Widgets）
@@ -30,6 +31,24 @@
 - **MC Video**: `.mc-video` 样式用于视频嵌入容器
 - **GIF Badge**: `.mc-gif-badge` 标记动画图片
 - **Post-processing**: page/js/app.js 中 `processInfobox()`, `processGallery()`, `processAnimatedImages()` 三个函数在 marked 渲染后自动转换格式
+
+## 版本号自动管理 (2026-07-14)
+- `versions.json`: 最新版本数据库（Java 1.21.5 春日生机, 基岩 1.21.70）
+- `update_versions.py`: 扫描 .md 文件替换 `{{JE_VERSION}}` 等占位符，支持 --check/--dry-run
+- `page/js/app.js`: `loadVersions()` + `replaceVersionPlaceholders()` 运行时替换
+- 占位符: `{{JE_VERSION}}`, `{{BE_VERSION}}`, `{{JE_NAME}}`, `{{BE_NAME}}`, `{{JE_NAME_ZH}}`, `{{BE_NAME_ZH}}`, `{{JE_DATE}}`, `{{BE_DATE}}`
+
+## OREUI 主题 (2026-07-14, v2)
+- 基于 Spectrollay-OreUI/OreUI 真实设计令牌完全重写（1700+ 行 CSS 参考）
+- **OreUI 核心特征**：
+  - 中灰背景 `#48494A` + 浅色顶栏 `#E6E8EB`（4px 粗底边框）
+  - 3D 斜面面板边框：双色 `#333334`/`#5A5B5C` 制造立体感
+  - 立体按钮：`#D0D1D4` 背景 + 底部阴影，按下缩进 2px
+  - 绿色 `#3C8527` / 蓝色 `#2E6BE9` / 红色 `#C33636`
+  - 0px 圆角（OreUI 全部直角），NotoSans Bold 字体
+  - 自定义 10px 宽滚动条（深灰轨道 + 白滑块加黑边）
+- 所有 5 个 CSS 文件已基于真实 OreUI 令牌重写
+- 向后兼容旧 MD3 CSS 变量名（映射到 OREUI 变量）
 
 ## 图片下载
 - download_images.py: Python 脚本，从 .md 文件中提取图片 URL 并下载到 page/images/blocks/

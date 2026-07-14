@@ -1,6 +1,6 @@
 # 白桦木
 
-![Birch Wood](https://minecraft.wiki/images/Birch_Wood_JE5_BE3.png?format=original)
+![Birch Wood](../images/blocks/birch-wood/a5f6bb9b.png)
 
 > **稀有度**：常见 | **可再生**：是 | **可堆叠**：64 | **工具**：任何（斧最快）
 > **硬度**：2 | **爆炸抗性**：2 | **发光**：否 | **透明**：否 | **可燃**：是

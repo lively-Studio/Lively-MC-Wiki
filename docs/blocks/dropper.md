@@ -1,6 +1,6 @@
 # 投掷器
 
-![Dropper](https://minecraft.wiki/images/Dropper_JE3_BE3.png?format=original)
+![Dropper](../page/images/blocks/dropper/5775caae.png)
 
 > **稀有度**：常见 | **可再生**：是 | **可堆叠**：64 | **工具**：木镐或更好
 > **硬度**：3.5 | **爆炸抗性**：3.5 | **发光**：否 | **透明**：否 | **可燃**：否
@@ -119,8 +119,8 @@
 
 ## 图库
 
-![Dropper GUI](https://minecraft.wiki/images/Dropper_GUI.png?format=original)
+![Dropper GUI](../page/images/blocks/dropper/3b17cd24.png)
 *投掷器的 9 格 GUI 界面*
 
-![Dropper Chain](https://minecraft.wiki/images/Dropper_Item_Elevator.png?format=original)
+![Dropper Chain](../page/images/blocks/dropper/4cc83b49.png)
 *投掷器垂直物品电梯*

@@ -1,0 +1,45 @@
+{
+  "latest": {
+    "java": { "version": "1.21.5", "name": "Spring to Life", "name_zh": "春日生机", "date": "2025-03-25" },
+    "bedrock": { "version": "1.21.70", "name": "Spring to Life", "name_zh": "春日生机", "date": "2025-03-25" }
+  },
+  "java_versions": [
+    { "version": "1.21.5", "name": "Spring to Life", "name_zh": "春日生机", "date": "2025-03-25", "major": false },
+    { "version": "1.21.4", "name": "The Garden Awakens", "name_zh": "花园觉醒", "date": "2024-12-03", "major": false },
+    { "version": "1.21.3", "name": "Bundles of Bravery", "name_zh": "勇气之包", "date": "2024-10-22", "major": false },
+    { "version": "1.21.2", "name": "Bundles of Bravery", "name_zh": "勇气之包", "date": "2024-10-22", "major": false },
+    { "version": "1.21", "name": "Tricky Trials", "name_zh": "棘巧试炼", "date": "2024-06-13", "major": true },
+    { "version": "1.20", "name": "Trails & Tales", "name_zh": "足迹与故事", "date": "2023-06-07", "major": true },
+    { "version": "1.19", "name": "The Wild Update", "name_zh": "荒野更新", "date": "2022-06-07", "major": true },
+    { "version": "1.18", "name": "Caves & Cliffs Part II", "name_zh": "洞穴与山崖 II", "date": "2021-11-30", "major": true },
+    { "version": "1.17", "name": "Caves & Cliffs Part I", "name_zh": "洞穴与山崖 I", "date": "2021-06-08", "major": true },
+    { "version": "1.16", "name": "Nether Update", "name_zh": "下界更新", "date": "2020-06-23", "major": true },
+    { "version": "1.15", "name": "Buzzy Bees", "name_zh": "嗡嗡蜂群", "date": "2019-12-10", "major": true },
+    { "version": "1.14", "name": "Village & Pillage", "name_zh": "村庄与掠夺", "date": "2019-04-23", "major": true },
+    { "version": "1.13", "name": "Update Aquatic", "name_zh": "水域更新", "date": "2018-07-18", "major": true },
+    { "version": "1.12", "name": "World of Color", "name_zh": "多彩世界", "date": "2017-06-07", "major": true },
+    { "version": "1.11", "name": "Exploration Update", "name_zh": "探险更新", "date": "2016-11-14", "major": true },
+    { "version": "1.10", "name": "Frostburn Update", "name_zh": "霜灸更新", "date": "2016-06-08", "major": true },
+    { "version": "1.9", "name": "Combat Update", "name_zh": "战斗更新", "date": "2016-02-29", "major": true },
+    { "version": "1.8", "name": "Bountiful Update", "name_zh": "缤纷更新", "date": "2014-09-02", "major": true },
+    { "version": "1.7", "name": "The Update that Changed the World", "name_zh": "改变世界的更新", "date": "2013-10-25", "major": true },
+    { "version": "1.0", "name": "Adventure Update", "name_zh": "冒险更新", "date": "2011-11-18", "major": true }
+  ],
+  "bedrock_versions": [
+    { "version": "1.21.70", "name": "Spring to Life", "name_zh": "春日生机", "date": "2025-03-25" },
+    { "version": "1.21", "name": "Tricky Trials", "name_zh": "棘巧试炼", "date": "2024-06-13" },
+    { "version": "1.20", "name": "Trails & Tales", "name_zh": "足迹与故事", "date": "2023-06-07" },
+    { "version": "1.19", "name": "The Wild Update", "name_zh": "荒野更新", "date": "2022-06-07" },
+    { "version": "1.18", "name": "Caves & Cliffs Part II", "name_zh": "洞穴与山崖 II", "date": "2021-12-01" },
+    { "version": "1.17", "name": "Caves & Cliffs Part I", "name_zh": "洞穴与山崖 I", "date": "2021-06-08" },
+    { "version": "1.16", "name": "Nether Update", "name_zh": "下界更新", "date": "2020-06-23" },
+    { "version": "1.14", "name": "Buzzy Bees", "name_zh": "嗡嗡蜂群", "date": "2019-12-10" },
+    { "version": "1.13", "name": "Suspicious Stew", "name_zh": "迷之炖菜", "date": "2019-10-29" },
+    { "version": "1.11", "name": "Village & Pillage", "name_zh": "村庄与掠夺", "date": "2019-04-23" },
+    { "version": "1.4", "name": "Update Aquatic Phase 1", "name_zh": "水域更新 I", "date": "2018-05-16" },
+    { "version": "1.2", "name": "Better Together", "name_zh": "基岩版统一更新", "date": "2017-09-20" },
+    { "version": "1.0", "name": "Ender Update", "name_zh": "末影更新", "date": "2016-12-19" }
+  ],
+  "updated": "2025-07-14",
+  "description": "Minecraft 版本数据库 - 修改此文件即可控制全站版本号显示"
+}

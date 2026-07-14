@@ -1,6 +1,6 @@
 # 黏土
 
-![Clay](https://minecraft.wiki/images/Clay_JE4_BE3.png?format=original)
+![Clay](../page/images/blocks/clay/02adc44c.png)
 
 > **稀有度**：常见 | **可再生**：是（泥巴→黏土） | **可堆叠**：64 | **工具**：任何（锹最快）
 > **硬度**：0.6 | **爆炸抗性**：0.6 | **发光**：否 | **透明**：否 | **可燃**：否

@@ -8,7 +8,7 @@
   },
   "nav": [
     { "title": "首页", "icon": "home" },
-    { "title": "方块", "icon": "computer", "route": "/blocks" },
+    { "title": "方块", "icon": "computer", "route": "/blocks", "file": "blocks/index.md" },
     { "title": "物品", "icon": "customize", "route": "/items" },
     { "title": "生物", "icon": "info", "route": "/mobs" },
     { "title": "合成", "icon": "schedule", "route": "/crafting" },

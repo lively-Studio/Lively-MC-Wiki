@@ -9,6 +9,7 @@
   let SITE = { name:'Openwebdocs.kit-MD3', titleSuffix:'Openwebdocs.kit-MD3', meta:'Openwebdocs.kit-MD3 · 文档站点框架', docDir:'../docs' };
   let NAV = [];
   let SIDEBAR_LINKS = [];
+  let CURRENT_ROUTE = '/';
   const DEFAULT_ROUTE = '/';
 
   const ICONS = {
@@ -50,6 +51,24 @@
           });
         }
         processNav(cfg.nav);
+
+        // Load blocks-nav.json and inject as children of "方块" item
+        try {
+          const blocksResp = await fetch('blocks-nav.json');
+          if (blocksResp.ok) {
+            const blocksList = await blocksResp.json();
+            const blocksNavItem = NAV.find(item => item.route === '/blocks');
+            if (blocksNavItem) {
+              blocksNavItem.children = blocksList;
+              // Also register all block routes
+              blocksList.forEach(block => {
+                nr[block.route] = { file: block.file, title: block.title, icon: 'computer' };
+                nf[block.file] = block.route;
+              });
+            }
+          }
+        } catch (e) { console.warn('blocks-nav.json load failed:', e.message); }
+
         Object.assign(ROUTES, nr); Object.assign(FILE_TO_ROUTE, nf);
       }
       SIDEBAR_LINKS = cfg.sidebarLinks || [];
@@ -61,10 +80,19 @@
     function buildHTML(items, depth) {
       return items.map(item => {
         const hasKids = item.children && item.children.length;
-        const route = hasKids ? null : (item.route || (item.title || '').toLowerCase().replace(/[^\w\u4e00-\u9fff]+/g, '-').replace(/^-+|-+$/g, ''));
+        const route = item.route || (hasKids ? null : (item.title || '').toLowerCase().replace(/[^\w\u4e00-\u9fff]+/g, '-').replace(/^-+|-+$/g, ''));
         const pad = depth * 16;
         if (hasKids) {
-          return `<li class="nav-category" style="padding-left:${pad}px;font-size:11px;font-weight:600;color:var(--md-sys-color-on-surface-variant);padding-top:12px;padding-bottom:4px;text-transform:uppercase;letter-spacing:0.05em;">${item.title}</li>` + buildHTML(item.children, depth + 1);
+          const catRoute = route || '#' + (item.title || '').toLowerCase().replace(/[^\w\u4e00-\u9fff]+/g, '-');
+          const catId = 'nav-cat-' + depth + '-' + item.title.replace(/[^\w\u4e00-\u9fff]/g, '');
+          const isBlocksCat = route === '/blocks';
+          return `<li class="nav-category-wrapper">
+            <div class="nav-category-header" data-cat="${catId}" style="padding-left:${pad}px;" role="button" tabindex="0" aria-expanded="${isBlocksCat ? 'false' : 'true'}">
+              <svg class="nav-category-chevron" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+              <a href="#${route}" class="nav-category-title" data-action="nav">${item.title}</a>
+            </div>
+            <ul class="nav-category-children${isBlocksCat ? '' : ' nav-category-children--open'}" data-cat="${catId}">${buildHTML(item.children, depth + 1)}</ul>
+          </li>`;
         }
         return `<li class="nav-item${route === DEFAULT_ROUTE ? ' active' : ''}" data-route="#${route}" style="padding-left:${pad}px;">
           <a href="#${route}" class="nav-link">
@@ -75,6 +103,19 @@
       }).join('');
     }
     navList.innerHTML = buildHTML(NAV, 0);
+    // Category expand/collapse handlers
+    navList.querySelectorAll('.nav-category-header').forEach(header => {
+      header.addEventListener('click', function(e) {
+        // Don't toggle if clicking the link directly
+        if (e.target.closest('[data-action="nav"]')) return;
+        const catId = this.dataset.cat;
+        const children = navList.querySelector(`.nav-category-children[data-cat="${catId}"]`);
+        if (children) {
+          const isOpen = children.classList.toggle('nav-category-children--open');
+          this.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        }
+      });
+    });
   }
 
   function renderSidebarLinks() {
@@ -92,6 +133,47 @@
   const navList = $('#navList'), sidebar = $('#sidebar'), drawerOverlay = $('#drawerOverlay');
   const menuToggle = $('#menuToggle'), themeToggle = $('#themeToggle'), themeIcon = $('#themeIcon');
   const scrollTopBtn = $('#scrollTop'), tocList = $('#tocList');
+
+  /* ============================================
+     Version Data - Loaded from versions.json
+     ============================================ */
+  let VERSIONS = null;
+  async function loadVersions() {
+    try {
+      const resp = await fetch('../versions.json');
+      if (resp.ok) VERSIONS = await resp.json();
+    } catch (e) { console.warn('versions.json load failed:', e.message); }
+  }
+  function getLatestVersion(edition) {
+    if (!VERSIONS || !VERSIONS.latest) return edition === 'bedrock' ? '1.21.70' : '1.21.5';
+    return edition === 'bedrock' ? VERSIONS.latest.bedrock : VERSIONS.latest.java;
+  }
+  function getLatestVersionName(edition) {
+    if (!VERSIONS || !VERSIONS.latest) return edition === 'bedrock' ? 'Spring to Life' : 'Spring to Life';
+    return edition === 'bedrock' ? VERSIONS.latest.bedrock_name : VERSIONS.latest.java_name;
+  }
+  function getLatestVersionNameZh(edition) {
+    if (!VERSIONS || !VERSIONS.latest) return '春日生机';
+    return edition === 'bedrock' ? VERSIONS.latest.bedrock_name_zh : VERSIONS.latest.java_name_zh;
+  }
+  function getVersionDate(edition) {
+    if (!VERSIONS || !VERSIONS.latest) return '';
+    return edition === 'bedrock' ? VERSIONS.latest.bedrock_date : VERSIONS.latest.java_date;
+  }
+
+  function replaceVersionPlaceholders(md) {
+    // Replace {{JE_VERSION}}, {{BE_VERSION}}, {{JE_NAME}}, {{BE_NAME}}, {{JE_DATE}}, {{BE_DATE}}
+    // Also support {{JE_NAME_ZH}}, {{BE_NAME_ZH}}
+    return md
+      .replace(/\{\{JE_VERSION\}\}/g, getLatestVersion('java'))
+      .replace(/\{\{BE_VERSION\}\}/g, getLatestVersion('bedrock'))
+      .replace(/\{\{JE_NAME\}\}/g, getLatestVersionName('java'))
+      .replace(/\{\{BE_NAME\}\}/g, getLatestVersionName('bedrock'))
+      .replace(/\{\{JE_NAME_ZH\}\}/g, getLatestVersionNameZh('java'))
+      .replace(/\{\{BE_NAME_ZH\}\}/g, getLatestVersionNameZh('bedrock'))
+      .replace(/\{\{JE_DATE\}\}/g, getVersionDate('java'))
+      .replace(/\{\{BE_DATE\}\}/g, getVersionDate('bedrock'));
+  }
 
   function getPreferredTheme() { return localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); }
   function setTheme(theme) {
@@ -112,7 +194,30 @@
   window.addEventListener('scroll', () => { scrollTopBtn.classList.toggle('visible', window.scrollY > 300); }, { passive: true });
   scrollTopBtn.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
 
-  function updateActiveNav(route) { navList.querySelectorAll('.nav-item').forEach(item => item.classList.toggle('active', item.dataset.route === route)); }
+  function updateActiveNav(route) {
+    // Deactivate all nav items
+    navList.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+    // Activate the matching nav item
+    const matchItem = navList.querySelector(`.nav-item[data-route="#${route}"]`);
+    if (matchItem) matchItem.classList.add('active');
+    // Auto-expand parent category when viewing a child page (e.g., /blocks/stone)
+    if (route.includes('/')) {
+      const parts = route.replace(/^\//, '').split('/');
+      const parentRoute = '/' + parts.slice(0, -1).join('/');
+      const parentLink = navList.querySelector(`.nav-category-title[href="#${parentRoute}"]`);
+      if (parentLink) {
+        const wrapper = parentLink.closest('.nav-category-wrapper');
+        if (wrapper) {
+          const children = wrapper.querySelector('.nav-category-children');
+          const header = wrapper.querySelector('.nav-category-header');
+          if (children && !children.classList.contains('nav-category-children--open')) {
+            children.classList.add('nav-category-children--open');
+            if (header) header.setAttribute('aria-expanded', 'true');
+          }
+        }
+      }
+    }
+  }
 
   function generateTOC(el) {
     tocList.innerHTML = '';
@@ -301,8 +406,27 @@
 
   async function loadDocument(route) {
     let config = ROUTES[route];
+    // If route contains a sub-path like "/blocks/stone", auto-resolve to file path
+    if (!config && route.includes('/')) {
+      const cleanRoute = route.replace(/^\//, ''); // remove leading /
+      const parts = cleanRoute.split('/');
+      const last = parts[parts.length - 1];
+      // Check if parent route exists (e.g., /blocks) and child is a sub-document
+      const parentRoute = '/' + parts.slice(0, -1).join('/');
+      const parentConfig = ROUTES[parentRoute];
+      if (parentConfig) {
+        const file = cleanRoute + '.md';
+        const title = last.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+        config = { file, title };
+        // Register so subsequent navigation and FILE_TO_ROUTE lookups work
+        ROUTES[route] = config;
+        FILE_TO_ROUTE[file] = route;
+        FILE_TO_ROUTE[last + '.md'] = route;
+      }
+    }
     if (!config && (route.endsWith('.md') || route.endsWith('.txt'))) config = { file: route, title: route.replace(/\.(md|txt)$/i, '') };
     if (!config) { navigate(DEFAULT_ROUTE); return; }
+    CURRENT_ROUTE = route;
     docTitle.textContent = config.title;
     document.title = `${config.title} - ${SITE.titleSuffix}`;
     docBody.innerHTML = '<div class="loading-state"><div class="loading-spinner"></div><p>加载文档中...</p></div>';
@@ -310,7 +434,8 @@
     try {
       const response = await fetch(`${SITE.docDir}/${config.file}`);
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      const md = await response.text();
+      let md = await response.text();
+      md = replaceVersionPlaceholders(md);
       pageCache[route] = { title: config.title, content: md, file: config.file };
       const renderer = new marked.Renderer();
       renderer.heading = function({ text, depth }) {
@@ -344,7 +469,8 @@
   function navigate(route) { window.location.hash = (route.startsWith('#') ? route.slice(1) : route) || DEFAULT_ROUTE; }
   function handleRoute() {
     const hash = window.location.hash.slice(1);
-    if (!hash || hash.startsWith('/') || hash.endsWith('.md') || hash.endsWith('.txt')) {
+    // Load doc if: empty, starts with /, is a .md/.txt file, or contains / (sub-document like blocks/stone)
+    if (!hash || hash.startsWith('/') || hash.endsWith('.md') || hash.endsWith('.txt') || (hash.includes('/') && !hash.startsWith('http'))) {
       loadDocument(hash || DEFAULT_ROUTE);
     }
   }
@@ -358,7 +484,35 @@
     const decoded = decodeURIComponent(filename.split('?')[0]);
     if (!decoded.endsWith('.md') && !decoded.endsWith('.txt')) return;
     e.preventDefault();
-    const route = FILE_TO_ROUTE[decoded] || decoded;
+    // Try FILE_TO_ROUTE first, then use full relative path from href
+    let route = FILE_TO_ROUTE[decoded] || FILE_TO_ROUTE[href];
+    if (!route) {
+      // If href is just "stone.md" (relative), prepend current doc's directory
+      if (!href.includes('/') && CURRENT_ROUTE !== '/') {
+        // Get the current route's directory from its file mapping
+        const currentConfig = ROUTES[CURRENT_ROUTE];
+        let dirPrefix = '';
+        if (currentConfig && currentConfig.file) {
+          // e.g., file = "blocks.md" → prefix = "blocks/"
+          // e.g., file = "blocks/stone.md" → prefix = "blocks/"
+          const parts = currentConfig.file.replace(/\.(md|txt)$/i, '').split('/');
+          if (parts.length > 1) {
+            dirPrefix = parts.slice(0, -1).join('/') + '/';
+          } else {
+            // Single file like "blocks.md" → use its name as directory
+            dirPrefix = parts[0] + '/';
+          }
+        } else {
+          // Fallback: use CURRENT_ROUTE path components (exclude last part = current doc)
+          const parts = CURRENT_ROUTE.replace(/^\//, '').split('/');
+          dirPrefix = parts.slice(0, -1).join('/');
+          if (dirPrefix) dirPrefix += '/';
+        }
+        route = '/' + dirPrefix + href.replace(/\.(md|txt)$/i, '');
+      } else {
+        route = href.replace(/\.(md|txt)$/i, '');
+      }
+    }
     if (anchor) sessionStorage.setItem('scrollTo', anchor);
     navigate(`#${route}`);
   });
@@ -369,6 +523,7 @@
   const pageCache = {};
   async function init() {
     await loadConfig();
+    await loadVersions();
     renderSidebar();
     renderSidebarLinks();
     if (!window.location.hash) window.location.hash = DEFAULT_ROUTE;

@@ -1,6 +1,6 @@
 # 深色橡木
 
-![Dark Oak Wood](https://minecraft.wiki/images/Dark_Oak_Wood_JE2_BE2.png?format=original)
+![Dark Oak Wood](../page/images/blocks/dark-oak-wood/6065d73e.png)
 
 > **稀有度**：常见 | **可再生**：是 | **可堆叠**：64 | **工具**：任何（斧最快）
 > **硬度**：2 | **爆炸抗性**：2 | **可燃**：是

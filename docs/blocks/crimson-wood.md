@@ -1,7 +1,7 @@
 # 绯红菌柄 / 诡异菌柄
 
-![Crimson Stem](https://minecraft.wiki/images/Crimson_Stem_JE2_BE1.png?format=original)
-![Warped Stem](https://minecraft.wiki/images/Warped_Stem_JE2_BE1.png?format=original)
+![Crimson Stem](../page/images/blocks/crimson-wood/f363c443.png)
+![Warped Stem](../page/images/blocks/crimson-wood/d840ce60.png)
 
 > **稀有度**：常见 | **可再生**：是 | **可堆叠**：64 | **工具**：任何（斧最快）
 > **硬度**：2 | **爆炸抗性**：2 | **可燃**：否 | **抗火**

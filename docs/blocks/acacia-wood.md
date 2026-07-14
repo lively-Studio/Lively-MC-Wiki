@@ -1,6 +1,6 @@
 # 金合欢木
 
-![Acacia Wood](https://minecraft.wiki/images/Acacia_Wood_JE3_BE2.png?format=original)
+![Acacia Wood](../images/blocks/acacia-wood/1b3743c4.png)
 
 > **稀有度**：常见 | **可再生**：是 | **可堆叠**：64 | **工具**：任何（斧最快）
 > **硬度**：2 | **爆炸抗性**：2 | **可燃**：是

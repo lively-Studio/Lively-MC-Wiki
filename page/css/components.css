@@ -1,209 +1,222 @@
 /* ============================================
-   Components - MD3 Styled UI Elements
+   OREUI Components - 3D 立体按钮 + 斜面边框面板
    ============================================ */
 
-/* === Icon Button === */
-.icon-button {
-  width: 40px;
-  height: 40px;
-  border-radius: var(--md-sys-shape-full);
-  border: none;
-  background: transparent;
-  color: var(--md-sys-color-on-surface-variant);
+/* === OreUI Icon Button (在浅色顶栏中) === */
+.top-app-bar .icon-button {
+  width: 36px;
+  height: 36px;
+  border: 2px solid var(--oreui-border-main);
+  background-color: var(--oreui-btn-bg);
+  color: var(--oreui-btn-text);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
-  position: relative;
-  overflow: hidden;
+  transition: all 0.1s ease;
+  /* 3D 凸起效果 */
+  box-shadow: 0 2px 0 0 rgba(0,0,0,0.25), inset 0 1px 0 0 rgba(255,255,255,0.3);
+}
+
+.top-app-bar .icon-button:hover {
+  background-color: var(--oreui-btn-bg-hover);
+}
+
+.top-app-bar .icon-button:active {
+  background-color: var(--oreui-green);
+  color: var(--oreui-green-text);
+  box-shadow: none;
+  transform: translateY(2px);
+}
+
+.top-app-bar .icon-button svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Sidebar / other icon buttons */
+.icon-button {
+  width: 36px;
+  height: 36px;
+  border: 2px solid var(--oreui-border-main);
+  background-color: var(--oreui-btn-bg);
+  color: var(--oreui-btn-text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.1s ease;
+  box-shadow: 0 2px 0 0 rgba(0,0,0,0.25), inset 0 1px 0 0 rgba(255,255,255,0.3);
+}
+
+.icon-button:hover {
+  background-color: var(--oreui-btn-bg-hover);
+}
+
+.icon-button:active {
+  box-shadow: none;
+  transform: translateY(2px);
 }
 
 .icon-button svg {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   position: relative;
   z-index: 1;
 }
 
-.icon-button::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background-color: currentColor;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.icon-button:hover::after {
-  opacity: 0.08;
-}
-
-.icon-button:active::after {
-  opacity: 0.12;
-}
-
-.icon-button:hover {
-  color: var(--md-sys-color-on-surface);
-}
-
 /* === Doc Header === */
 .doc-header {
-  margin-bottom: 32px;
-  padding-bottom: 24px;
-  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--oreui-border-dark);
+  box-shadow: 0 1px 0 0 var(--oreui-border-light);
 }
 
 .doc-title {
-  font-family: 'Noto Sans SC', "PingFang SC", "Microsoft YaHei", sans-serif;
-  font-size: 2.25rem;
-  font-weight: 700;
-  line-height: 1.25;
-  color: var(--md-sys-color-on-surface);
-  margin-bottom: 8px;
+  font-family: var(--oreui-font-family);
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--oreui-text-primary);
+  margin-bottom: 4px;
 }
 
 .doc-meta {
-  font-size: 14px;
-  color: var(--md-sys-color-on-surface-variant);
+  font-size: 11px;
+  color: var(--oreui-text-tertiary);
 }
 
 .doc-meta a {
-  color: var(--md-sys-color-primary);
+  color: var(--oreui-blue);
 }
 
-/* === Details / Accordion === */
+/* === Details / Accordion (OreUI 边框风格) === */
 details {
-  margin: 16px 0;
-  border-radius: var(--md-sys-shape-medium);
+  margin: 12px 0;
   overflow: hidden;
-  background-color: var(--md-sys-color-surface-container-low);
-  border: 1px solid var(--md-sys-color-outline-variant);
-  transition: border-color 0.2s ease;
+  background-color: var(--oreui-bg-elevated);
+  border: 2px solid var(--oreui-border-dark);
+  box-shadow: inset 0 0 0 1px var(--oreui-border-light);
 }
 
 details[open] {
-  border-color: var(--md-sys-color-primary);
+  border-color: var(--oreui-green);
 }
 
 summary {
-  padding: 12px 16px;
+  padding: 10px 14px;
   cursor: pointer;
-  font-weight: 500;
-  font-size: 14px;
-  color: var(--md-sys-color-primary);
+  font-family: var(--oreui-font-family);
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--oreui-text-primary);
   user-select: none;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 summary::marker {
-  color: var(--md-sys-color-primary);
+  color: var(--oreui-green);
 }
 
 details > :not(summary) {
-  padding: 0 16px 16px;
+  padding: 0 14px 14px;
 }
 
-/* === Blockquote === */
+/* === Blockquote (OreUI 蓝色左边框) === */
 blockquote {
-  margin: 16px 0;
-  padding: 16px 20px;
-  border-radius: var(--md-sys-shape-medium);
-  background-color: var(--md-sys-color-surface-container-low);
-  border-left: 4px solid var(--md-sys-color-primary);
-  color: var(--md-sys-color-on-surface-variant);
+  margin: 12px 0;
+  padding: 12px 16px;
+  background-color: var(--oreui-bg-elevated);
+  border-left: 3px solid var(--oreui-blue);
+  color: var(--oreui-text-secondary);
 }
 
 blockquote p {
-  margin: 4px 0;
+  margin: 3px 0;
 }
 
-blockquote > :first-child {
-  margin-top: 0;
-}
-
-blockquote > :last-child {
-  margin-bottom: 0;
-}
+blockquote > :first-child { margin-top: 0; }
+blockquote > :last-child { margin-bottom: 0; }
 
 /* === Horizontal Rule === */
 hr {
   border: none;
-  height: 1px;
-  background-color: var(--md-sys-color-outline-variant);
-  margin: 24px 0;
+  height: 2px;
+  background-color: var(--oreui-border-dark);
+  box-shadow: 0 1px 0 0 var(--oreui-border-light);
+  margin: 20px 0;
 }
 
-/* === Brand Icon SVG === */
-.brand-icon svg {
-  display: block;
-  flex-shrink: 0;
-}
+/* === Brand Icon === */
+.brand-icon svg { display: block; flex-shrink: 0; }
+.brand-icon img { border-radius: 2px; }
 
 /* === Theme Transition === */
 html.transitioning * {
-  transition: background-color 0.3s ease,
-              color 0.3s ease,
-              border-color 0.3s ease,
-              box-shadow 0.3s ease !important;
+  transition: background-color 0.15s ease,
+              color 0.15s ease,
+              border-color 0.15s ease,
+              box-shadow 0.15s ease !important;
 }
 
 /* ============================================
-   MC Wiki Infobox - Right-floating info panel
+   MC Wiki Infobox (OreUI 风格)
    ============================================ */
 
 .mc-infobox {
   float: right;
   width: 280px;
-  margin: 0 0 20px 24px;
-  background: var(--md-sys-color-surface-container);
-  border: 2px solid var(--md-sys-color-outline);
-  border-radius: var(--md-sys-shape-medium);
+  margin: 0 0 16px 20px;
+  background: var(--oreui-panel-bg);
+  /* OreUI 3D 双色边框 */
+  border: 2px solid var(--oreui-border-dark);
+  box-shadow: inset 0 0 0 1px var(--oreui-border-light), var(--oreui-shadow-md);
   overflow: hidden;
-  font-size: 13px;
+  font-size: 12px;
   line-height: 1.5;
-  box-shadow: var(--md-sys-elevation-2);
   clear: right;
   position: relative;
   z-index: 2;
 }
 
 .mc-infobox__header {
-  background: var(--md-sys-color-primary-container);
-  color: var(--md-sys-color-on-primary-container);
-  font-family: 'Noto Sans SC', "PingFang SC", "Microsoft YaHei", sans-serif;
-  font-size: 17px;
-  font-weight: 700;
+  background: var(--oreui-panel-header-bg);
+  color: var(--oreui-text-primary);
+  font-family: var(--oreui-font-family);
+  font-size: 14px;
+  font-weight: 800;
   text-align: center;
-  padding: 12px 14px;
+  padding: 10px 12px;
   letter-spacing: 0.02em;
+  border-bottom: 2px solid var(--oreui-border-dark);
+  box-shadow: 0 1px 0 0 var(--oreui-border-light);
 }
 
 .mc-infobox__image {
   text-align: center;
-  padding: 12px 14px 8px;
-  background: var(--md-sys-color-surface);
-  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  padding: 8px 10px 4px;
+  background: var(--oreui-bg-base);
+  border-bottom: 2px solid var(--oreui-border-dark);
+  box-shadow: 0 1px 0 0 var(--oreui-border-light);
 }
 
 .mc-infobox__image img {
   max-width: 100%;
   height: auto;
-  image-rendering: auto;
+  image-rendering: pixelated;
   margin: 0;
-  border-radius: 2px;
 }
 
 .mc-infobox__rows {
-  padding: 4px 0;
+  padding: 0;
 }
 
 .mc-infobox__row {
   display: flex;
-  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  border-bottom: 1px solid var(--oreui-border-subtle);
 }
 
 .mc-infobox__row:last-child {
@@ -211,13 +224,14 @@ html.transitioning * {
 }
 
 .mc-infobox__label {
-  width: 90px;
-  min-width: 90px;
-  padding: 8px 10px;
-  font-weight: 700;
-  font-size: 12px;
-  color: var(--md-sys-color-on-surface);
-  background: var(--md-sys-color-surface-container-low);
+  width: 80px;
+  min-width: 80px;
+  padding: 6px 8px;
+  font-family: var(--oreui-font-family);
+  font-weight: 800;
+  font-size: 10px;
+  color: var(--oreui-text-primary);
+  background: var(--oreui-bg-base);
   display: flex;
   align-items: center;
   white-space: nowrap;
@@ -225,59 +239,58 @@ html.transitioning * {
 
 .mc-infobox__value {
   flex: 1;
-  padding: 8px 10px;
-  color: var(--md-sys-color-on-surface-variant);
+  padding: 6px 8px;
+  color: var(--oreui-text-secondary);
   display: flex;
   align-items: center;
   flex-wrap: wrap;
 }
 
 .mc-infobox__value code {
-  font-size: 12px;
-  padding: 1px 5px;
-  background: var(--md-sys-color-surface-container-high);
-  border-radius: 3px;
-  color: var(--md-sys-color-tertiary);
+  font-size: 11px;
+  padding: 1px 4px;
+  background: var(--oreui-bg-overlay);
+  color: var(--oreui-green);
+  border: 1px solid var(--oreui-border-main);
 }
 
 .mc-infobox__value a {
-  color: var(--md-sys-color-primary);
+  color: var(--oreui-blue);
   text-decoration: none;
   border-bottom: none;
 }
 
-/* Infobox on mobile: no float, full width */
 @media (max-width: 768px) {
   .mc-infobox {
     float: none;
     width: 100%;
-    margin: 0 0 24px 0;
+    margin: 0 0 20px 0;
   }
 }
 
 /* ============================================
-   MC Gallery - Image grid with captions
+   MC Gallery (OreUI 风格)
    ============================================ */
 
 .mc-gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 16px;
-  margin: 24px 0;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+  margin: 20px 0;
 }
 
 .mc-gallery__item {
-  background: var(--md-sys-color-surface-container-low);
-  border: 1px solid var(--md-sys-color-outline-variant);
-  border-radius: var(--md-sys-shape-medium);
+  background: var(--oreui-panel-bg);
+  border: 2px solid var(--oreui-border-dark);
+  box-shadow: inset 0 0 0 1px var(--oreui-border-light);
   overflow: hidden;
-  transition: all 0.2s ease;
+  transition: all 0.1s ease;
 }
 
 .mc-gallery__item:hover {
-  border-color: var(--md-sys-color-primary);
-  box-shadow: var(--md-sys-elevation-2);
-  transform: translateY(-2px);
+  border-color: var(--oreui-green);
+  transform: translateY(-1px);
+  box-shadow: inset 0 0 0 1px var(--oreui-green), var(--oreui-shadow-md);
 }
 
 .mc-gallery__item a {
@@ -288,36 +301,38 @@ html.transitioning * {
 
 .mc-gallery__item img {
   width: 100%;
-  height: 160px;
+  height: 140px;
   object-fit: contain;
   display: block;
   margin: 0;
-  border-radius: 0;
-  padding: 12px;
+  padding: 10px;
   box-sizing: border-box;
-  background: var(--md-sys-color-surface);
+  background: var(--oreui-bg-base);
+  image-rendering: pixelated;
 }
 
 .mc-gallery__caption {
-  padding: 8px 12px;
-  font-size: 12px;
-  color: var(--md-sys-color-on-surface-variant);
+  padding: 6px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--oreui-text-secondary);
   text-align: center;
-  line-height: 1.4;
-  background: var(--md-sys-color-surface-container);
-  border-top: 1px solid var(--md-sys-color-outline-variant);
+  line-height: 1.3;
+  background: var(--oreui-panel-bg);
+  border-top: 1px solid var(--oreui-border-subtle);
   font-style: italic;
 }
 
-/* Video embed container */
+/* Video embed */
 .mc-video {
   position: relative;
   padding-bottom: 56.25%;
   height: 0;
   overflow: hidden;
-  margin: 24px 0;
-  border-radius: var(--md-sys-shape-medium);
+  margin: 20px 0;
   background: #000;
+  border: 2px solid var(--oreui-border-dark);
+  box-shadow: inset 0 0 0 1px var(--oreui-border-light);
 }
 
 .mc-video iframe,
@@ -328,32 +343,29 @@ html.transitioning * {
   width: 100%;
   height: 100%;
   border: none;
-  border-radius: var(--md-sys-shape-medium);
 }
 
 /* Animated GIF badge */
 .mc-gif-badge {
   display: inline-block;
-  padding: 1px 6px;
-  font-size: 10px;
-  font-weight: 700;
-  background: var(--md-sys-color-tertiary-container);
-  color: var(--md-sys-color-on-tertiary-container);
-  border-radius: 3px;
-  margin-left: 6px;
+  padding: 1px 5px;
+  font-size: 9px;
+  font-weight: 800;
+  background: var(--oreui-red);
+  color: var(--oreui-green-text);
+  margin-left: 5px;
   vertical-align: middle;
 }
 
 /* === Keyboard shortcuts === */
 kbd {
   display: inline-block;
-  padding: 2px 6px;
-  font-family: 'JetBrains Mono', "SF Mono", "Fira Code", "Fira Mono", "Roboto Mono", Menlo, Courier, monospace;
-  font-size: 12px;
-  line-height: 1.4;
-  color: var(--md-sys-color-on-surface);
-  background-color: var(--md-sys-color-surface-container-high);
-  border: 1px solid var(--md-sys-color-outline-variant);
-  border-radius: var(--md-sys-shape-extra-small);
-  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  padding: 2px 5px;
+  font-family: var(--oreui-font-mono);
+  font-size: 11px;
+  line-height: 1.3;
+  color: var(--oreui-text-primary);
+  background-color: var(--oreui-bg-elevated);
+  border: 2px solid var(--oreui-border-dark);
+  box-shadow: 0 2px 0 0 rgba(0,0,0,0.3), inset 0 1px 0 0 var(--oreui-border-light);
 }

@@ -1,6 +1,6 @@
 # 砖块
 
-![Bricks](https://minecraft.wiki/images/Bricks_JE4_BE3.png?format=original)
+![Bricks](../images/blocks/bricks/cdb04a2f.png)
 
 > **稀有度**：常见 | **可再生**：是 | **可堆叠**：64 | **工具**：木镐或更好
 > **硬度**：2 | **爆炸抗性**：6 | **发光**：否 | **透明**：否 | **可燃**：否

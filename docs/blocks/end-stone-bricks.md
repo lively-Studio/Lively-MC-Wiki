@@ -1,6 +1,6 @@
 # 末地石砖
 
-![End Stone Bricks](https://minecraft.wiki/images/End_Stone_Bricks_JE2_BE2.png?format=original)
+![End Stone Bricks](../page/images/blocks/end-stone-bricks/433169e3.png)
 
 > **稀有度**：不常见 | **可再生**：否 | **可堆叠**：64 | **工具**：木镐或更好
 > **硬度**：3 | **爆炸抗性**：9 | **发光**：否 | **透明**：否 | **可燃**：否

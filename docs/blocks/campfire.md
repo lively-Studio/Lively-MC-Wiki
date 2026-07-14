@@ -1,6 +1,6 @@
 # 营火
 
-![Campfire](https://minecraft.wiki/images/Campfire_JE4_BE4.png?format=original)
+![Campfire](../page/images/blocks/campfire/add32944.png)
 
 > **稀有度**：常见 | **可再生**：是 | **可堆叠**：64 | **工具**：任何（斧最快）
 > **硬度**：2 | **爆炸抗性**：2 | **发光**：是（15，点燃时） | **透明**：否 | **可燃**：否
@@ -62,7 +62,7 @@
 
 ## 灵魂营火
 
-![Soul Campfire](https://minecraft.wiki/images/Soul_Campfire_JE2_BE2.png?format=original)
+![Soul Campfire](../page/images/blocks/campfire/a6fcbb07.png)
 
 | 特性 | 普通营火 | 灵魂营火 |
 |------|----------|----------|
@@ -111,8 +111,8 @@
 
 ## 图库
 
-![Campfire Smoke](https://minecraft.wiki/images/Campfire_Smoke.png?format=original)
+![Campfire Smoke](../page/images/blocks/campfire/dd9e820b.png)
 *营火的烟柱信号*
 
-![Soul Campfire](https://minecraft.wiki/images/Soul_Campfire_JE2_BE2.png?format=original)
+![Soul Campfire](../page/images/blocks/campfire/a6fcbb07.png)
 *灵魂营火（蓝色火焰）*

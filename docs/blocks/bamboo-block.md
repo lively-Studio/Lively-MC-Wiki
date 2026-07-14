@@ -1,6 +1,6 @@
 # 竹块
 
-![Bamboo Block](https://minecraft.wiki/images/Bamboo_Block_JE1_BE1.png?format=original)
+![Bamboo Block](../images/blocks/bamboo-block/e73485e8.png)
 
 > **稀有度**：常见 | **可再生**：是 | **可堆叠**：64 | **工具**：任何（斧最快）
 > **硬度**：2 | **爆炸抗性**：2 | **可燃**：是

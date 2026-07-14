@@ -1,126 +1,266 @@
 /* ============================================
-   Material Design 3 Theme - OCS Open-code-Studio Docs
+   OREUI Theme - 基于 Spectrollay-OreUI/OreUI 设计规范
+   Minecraft Bedrock Edition UI 风格
+   3D 斜面边框 + 像素字体 + 立体按钮
    ============================================ */
 
-/* === Light Theme (default) === */
+/* === Ore UI 颜色令牌 (Dark Theme) === */
 :root,
-[data-theme="light"] {
-  /* Primary - Green #4AA26F */
-  --md-sys-color-primary: #3A8E5E;
-  --md-sys-color-on-primary: #FFFFFF;
-  --md-sys-color-primary-container: #C7EDD4;
-  --md-sys-color-on-primary-container: #002112;
+[data-theme="dark"] {
+  /* 背景 - OreUI 使用中灰色，非纯黑 */
+  --oreui-bg-base: #48494A;
+  --oreui-bg-elevated: #3C3D3E;
+  --oreui-bg-overlay: #313233;
+  --oreui-bg-dialog: #313233;
+  --oreui-bg-input: #313233;
+  --oreui-bg-header: #48494A;
+  --oreui-bg-footer: #242425;
 
-  /* Secondary */
-  --md-sys-color-secondary: #4B6356;
+  /* 顶栏 (OreUI 特色：浅色顶栏) */
+  --oreui-topbar-bg: #E6E8EB;
+  --oreui-topbar-border: #B1B2B5;
+  --oreui-topbar-text: #1E1E1F;
+
+  /* 主绿色系 */
+  --oreui-green: #3C8527;
+  --oreui-green-hover: #2A641C;
+  --oreui-green-active: #1D4D13;
+  --oreui-green-text: #FFFFFF;
+  --oreui-green-badge: #6CC349;
+
+  /* 红色系 */
+  --oreui-red: #C33636;
+  --oreui-red-hover: #C02D2D;
+  --oreui-red-active: #AD1D1D;
+  --oreui-red-badge: #F46D6D;
+
+  /* 蓝色系 */
+  --oreui-blue: #2E6BE5;
+  --oreui-blue-badge: #8CB3FF;
+
+  /* 黄色系 */
+  --oreui-yellow: #FFE866;
+
+  /* 文字颜色 */
+  --oreui-text-primary: #FFFFFF;
+  --oreui-text-secondary: #B1B2B5;
+  --oreui-text-tertiary: #8C8D90;
+  --oreui-text-disabled: #8C8D90;
+  --oreui-text-inverse: #000000;
+
+  /* 按钮 */
+  --oreui-btn-bg: #D0D1D4;
+  --oreui-btn-bg-hover: #B1B2B5;
+  --oreui-btn-text: #000000;
+  --oreui-btn-border: #1E1E1F;
+  --oreui-btn-disabled-border: #8C8D90;
+  --oreui-btn-disabled-text: #48494A;
+
+  /* 3D 斜面边框 (OreUI 核心特征) */
+  --oreui-border-dark: #333334;
+  --oreui-border-light: #5A5B5C;
+  --oreui-border-main: #1E1E1F;
+  --oreui-border-subtle: #58585A;
+
+  /* 侧边栏 */
+  --oreui-sidebar-bg: #3C3D3E;
+  --oreui-sidebar-active: #313233;
+
+  /* 面板 / infobox */
+  --oreui-panel-bg: #3C3D3E;
+  --oreui-panel-header-bg: #48494A;
+
+  /* 阴影 */
+  --oreui-shadow-sm: 0 1px 0 0 rgba(0,0,0,0.3), inset 0 1px 0 0 rgba(255,255,255,0.1);
+  --oreui-shadow-md: 0 2px 4px rgba(0,0,0,0.5);
+  --oreui-shadow-lg: 0 4px 8px rgba(0,0,0,0.6);
+  --oreui-shadow-btn: 0 2px 0 0 rgba(0,0,0,0.3);
+
+  /* 圆角 - OreUI 几乎不用大圆角 */
+  --oreui-radius: 0px;
+
+  /* 间距 */
+  --oreui-spacing-xs: 4px;
+  --oreui-spacing-sm: 8px;
+  --oreui-spacing-md: 12px;
+  --oreui-spacing-lg: 16px;
+  --oreui-spacing-xl: 24px;
+  --oreui-spacing-2xl: 32px;
+
+  /* 字体 */
+  --oreui-font-family: 'NotoSans Bold', 'Noto Sans SC', "PingFang SC", "Microsoft YaHei", -apple-system, sans-serif;
+  --oreui-font-mono: 'JetBrains Mono', "SF Mono", "Fira Code", Menlo, monospace;
+  --oreui-font-size-xs: 11px;
+  --oreui-font-size-sm: 12px;
+  --oreui-font-size-md: 14px;
+  --oreui-font-size-lg: 16px;
+  --oreui-font-size-xl: 20px;
+  --oreui-font-size-2xl: 28px;
+
+  /* 兼容旧 MD3 变量 */
+  --md-sys-color-primary: var(--oreui-green);
+  --md-sys-color-on-primary: var(--oreui-green-text);
+  --md-sys-color-primary-container: #1D4D13;
+  --md-sys-color-on-primary-container: #FFFFFF;
+
+  --md-sys-color-secondary: #8C8D90;
   --md-sys-color-on-secondary: #FFFFFF;
-  --md-sys-color-secondary-container: #CDE8D8;
-  --md-sys-color-on-secondary-container: #082015;
+  --md-sys-color-secondary-container: #3C3D3E;
+  --md-sys-color-on-secondary-container: #B1B2B5;
 
-  /* Tertiary */
-  --md-sys-color-tertiary: #426277;
+  --md-sys-color-tertiary: var(--oreui-blue);
   --md-sys-color-on-tertiary: #FFFFFF;
-  --md-sys-color-tertiary-container: #C6E6FF;
-  --md-sys-color-on-tertiary-container: #001E2F;
+  --md-sys-color-tertiary-container: #1A2D5A;
+  --md-sys-color-on-tertiary-container: #8CB3FF;
 
-  /* Error */
-  --md-sys-color-error: #BA1A1A;
+  --md-sys-color-error: var(--oreui-red);
   --md-sys-color-on-error: #FFFFFF;
-  --md-sys-color-error-container: #FFDAD6;
-  --md-sys-color-on-error-container: #410002;
 
-  /* Surface - warm off-white */
-  --md-sys-color-surface: #FDFBFA;
-  --md-sys-color-on-surface: #1C1B1A;
-  --md-sys-color-surface-dim: #DDDBD9;
-  --md-sys-color-surface-bright: #FDFBFA;
+  --md-sys-color-surface: var(--oreui-bg-base);
+  --md-sys-color-on-surface: var(--oreui-text-primary);
+  --md-sys-color-surface-dim: #3C3D3E;
+  --md-sys-color-surface-bright: #58585A;
 
-  --md-sys-color-surface-container-lowest: #FFFFFF;
-  --md-sys-color-surface-container-low: #F7F5F2;
-  --md-sys-color-surface-container: #F0EEEC;
-  --md-sys-color-surface-container-high: #EAE8E5;
-  --md-sys-color-surface-container-highest: #D4D2CF;
+  --md-sys-color-surface-container-lowest: #242425;
+  --md-sys-color-surface-container-low: #313233;
+  --md-sys-color-surface-container: #3C3D3E;
+  --md-sys-color-surface-container-high: #48494A;
+  --md-sys-color-surface-container-highest: #58585A;
 
-  --md-sys-color-on-surface-variant: #494846;
-  --md-sys-color-outline: #7A7875;
-  --md-sys-color-outline-variant: #CAC8C5;
+  --md-sys-color-on-surface-variant: var(--oreui-text-secondary);
+  --md-sys-color-outline: var(--oreui-border-dark);
+  --md-sys-color-outline-variant: var(--oreui-border-subtle);
 
-  /* Inverse */
-  --md-sys-color-inverse-surface: #31302E;
-  --md-sys-color-inverse-on-surface: #F4F0ED;
-  --md-sys-color-inverse-primary: #81DAAB;
+  --md-sys-color-inverse-surface: #E6E8EB;
+  --md-sys-color-inverse-on-surface: #1E1E1F;
+  --md-sys-color-inverse-primary: var(--oreui-green);
 
-  /* Shadows */
   --md-sys-color-shadow: #000000;
-  --md-sys-color-scrim: #000000;
+  --md-sys-color-scrim: rgba(0,0,0,0.6);
+  --md-sys-color-surface-tint: var(--oreui-green);
 
-  /* Surface Tint */
-  --md-sys-color-surface-tint: #3A8E5E;
-
-  /* Elevation levels */
   --md-sys-elevation-0: none;
-  --md-sys-elevation-1: 0 1px 3px 1px rgba(0,0,0,0.08), 0 1px 2px 0 rgba(0,0,0,0.04);
-  --md-sys-elevation-2: 0 2px 6px 2px rgba(0,0,0,0.10), 0 1px 2px 0 rgba(0,0,0,0.06);
-  --md-sys-elevation-3: 0 4px 8px 3px rgba(0,0,0,0.10), 0 2px 3px 0 rgba(0,0,0,0.06);
-  --md-sys-elevation-4: 0 6px 12px 4px rgba(0,0,0,0.10), 0 2px 3px 0 rgba(0,0,0,0.06);
-  --md-sys-elevation-5: 0 8px 16px 6px rgba(0,0,0,0.10), 0 4px 4px 0 rgba(0,0,0,0.06);
+  --md-sys-elevation-1: var(--oreui-shadow-sm);
+  --md-sys-elevation-2: var(--oreui-shadow-md);
+  --md-sys-elevation-3: var(--oreui-shadow-lg);
 
-  /* Shape */
-  --md-sys-shape-extra-small: 4px;
-  --md-sys-shape-small: 8px;
-  --md-sys-shape-medium: 12px;
-  --md-sys-shape-large: 16px;
-  --md-sys-shape-extra-large: 28px;
+  --md-sys-shape-extra-small: var(--oreui-radius);
+  --md-sys-shape-small: var(--oreui-radius);
+  --md-sys-shape-medium: var(--oreui-radius);
+  --md-sys-shape-large: var(--oreui-radius);
+  --md-sys-shape-extra-large: var(--oreui-radius);
   --md-sys-shape-full: 9999px;
 }
 
-/* === Dark Theme === */
-[data-theme="dark"] {
-  --md-sys-color-primary: #81DAAB;
-  --md-sys-color-on-primary: #003920;
-  --md-sys-color-primary-container: #2E6B48;
-  --md-sys-color-on-primary-container: #C7EDD4;
+/* === Light Theme (OreUI 亮色变体，参考浅色顶栏) === */
+[data-theme="light"] {
+  --oreui-bg-base: #D0D1D4;
+  --oreui-bg-elevated: #C4C5C8;
+  --oreui-bg-overlay: #B8B9BC;
+  --oreui-bg-dialog: #E6E8EB;
+  --oreui-bg-input: #E6E8EB;
+  --oreui-bg-header: #D0D1D4;
+  --oreui-bg-footer: #C4C5C8;
 
-  --md-sys-color-secondary: #B7C4CC;
-  --md-sys-color-on-secondary: #222F35;
-  --md-sys-color-secondary-container: #39474E;
-  --md-sys-color-on-secondary-container: #D3DFE6;
+  --oreui-topbar-bg: #E6E8EB;
+  --oreui-topbar-border: #B1B2B5;
+  --oreui-topbar-text: #1E1E1F;
 
-  --md-sys-color-tertiary: #D5BEDD;
-  --md-sys-color-on-tertiary: #3B2944;
-  --md-sys-color-tertiary-container: #533F5C;
-  --md-sys-color-on-tertiary-container: #F6DAFF;
+  --oreui-green: #3C8527;
+  --oreui-green-hover: #2A641C;
+  --oreui-green-active: #1D4D13;
+  --oreui-green-text: #FFFFFF;
 
-  --md-sys-color-error: #FFB4AB;
-  --md-sys-color-on-error: #690005;
-  --md-sys-color-error-container: #93000A;
-  --md-sys-color-on-error-container: #FFDAD6;
+  --oreui-red: #C33636;
+  --oreui-red-hover: #C02D2D;
+  --oreui-red-active: #AD1D1D;
 
-  --md-sys-color-surface: #121212;
-  --md-sys-color-on-surface: #E4E2DF;
-  --md-sys-color-surface-dim: #121212;
-  --md-sys-color-surface-bright: #3A3836;
+  --oreui-blue: #2E6BE5;
+  --oreui-yellow: #FFE866;
 
-  --md-sys-color-surface-container-lowest: #0D0D0D;
-  --md-sys-color-surface-container-low: #1D1B1A;
-  --md-sys-color-surface-container: #252322;
-  --md-sys-color-surface-container-high: #302D2B;
-  --md-sys-color-surface-container-highest: #3B3836;
+  --oreui-text-primary: #1E1E1F;
+  --oreui-text-secondary: #58585A;
+  --oreui-text-tertiary: #8C8D90;
+  --oreui-text-disabled: #8C8D90;
+  --oreui-text-inverse: #FFFFFF;
 
-  --md-sys-color-on-surface-variant: #C8C5C2;
-  --md-sys-color-outline: #928F8C;
-  --md-sys-color-outline-variant: #494846;
+  --oreui-btn-bg: #D0D1D4;
+  --oreui-btn-bg-hover: #B1B2B5;
+  --oreui-btn-text: #1E1E1F;
+  --oreui-btn-border: #1E1E1F;
 
-  --md-sys-color-inverse-surface: #E4E2DF;
-  --md-sys-color-inverse-on-surface: #31302E;
-  --md-sys-color-inverse-primary: #3A8E5E;
+  --oreui-border-dark: #58585A;
+  --oreui-border-light: #8C8D90;
+  --oreui-border-main: #1E1E1F;
+  --oreui-border-subtle: #8C8D90;
+
+  --oreui-sidebar-bg: #C4C5C8;
+  --oreui-sidebar-active: #B8B9BC;
+
+  --oreui-panel-bg: #E6E8EB;
+  --oreui-panel-header-bg: #D0D1D4;
+
+  --oreui-shadow-sm: 0 1px 0 0 rgba(0,0,0,0.15);
+  --oreui-shadow-md: 0 2px 4px rgba(0,0,0,0.2);
+  --oreui-shadow-lg: 0 4px 8px rgba(0,0,0,0.3);
+  --oreui-shadow-btn: 0 2px 0 0 rgba(0,0,0,0.2);
+
+  /* Remap MD3 */
+  --md-sys-color-primary: var(--oreui-green);
+  --md-sys-color-on-primary: var(--oreui-green-text);
+  --md-sys-color-primary-container: #D8F5CE;
+  --md-sys-color-on-primary-container: #1D4D13;
+
+  --md-sys-color-secondary: #58585A;
+  --md-sys-color-on-secondary: #FFFFFF;
+  --md-sys-color-secondary-container: #C4C5C8;
+  --md-sys-color-on-secondary-container: #1E1E1F;
+
+  --md-sys-color-tertiary: var(--oreui-blue);
+  --md-sys-color-on-tertiary: #FFFFFF;
+  --md-sys-color-tertiary-container: #D8E5FF;
+  --md-sys-color-on-tertiary-container: #1A2D5A;
+
+  --md-sys-color-error: var(--oreui-red);
+  --md-sys-color-on-error: #FFFFFF;
+
+  --md-sys-color-surface: var(--oreui-bg-base);
+  --md-sys-color-on-surface: var(--oreui-text-primary);
+  --md-sys-color-surface-dim: #C4C5C8;
+  --md-sys-color-surface-bright: #E6E8EB;
+
+  --md-sys-color-surface-container-lowest: #E6E8EB;
+  --md-sys-color-surface-container-low: #D0D1D4;
+  --md-sys-color-surface-container: #C4C5C8;
+  --md-sys-color-surface-container-high: #B8B9BC;
+  --md-sys-color-surface-container-highest: #A8A9AC;
+
+  --md-sys-color-on-surface-variant: var(--oreui-text-secondary);
+  --md-sys-color-outline: var(--oreui-border-dark);
+  --md-sys-color-outline-variant: var(--oreui-border-subtle);
+
+  --md-sys-color-inverse-surface: #1E1E1F;
+  --md-sys-color-inverse-on-surface: #E6E8EB;
+  --md-sys-color-inverse-primary: var(--oreui-green);
 
   --md-sys-color-shadow: #000000;
-  --md-sys-color-scrim: #000000;
-  --md-sys-color-surface-tint: #81DAAB;
+  --md-sys-color-scrim: rgba(0,0,0,0.4);
+  --md-sys-color-surface-tint: var(--oreui-green);
+
+  --md-sys-elevation-0: none;
+  --md-sys-elevation-1: var(--oreui-shadow-sm);
+  --md-sys-elevation-2: var(--oreui-shadow-md);
+  --md-sys-elevation-3: var(--oreui-shadow-lg);
+
+  --md-sys-shape-extra-small: var(--oreui-radius);
+  --md-sys-shape-small: var(--oreui-radius);
+  --md-sys-shape-medium: var(--oreui-radius);
+  --md-sys-shape-large: var(--oreui-radius);
+  --md-sys-shape-extra-large: var(--oreui-radius);
+  --md-sys-shape-full: 9999px;
 }
 
-/* === Global Styles === */
+/* === Global Reset === */
 *, *::before, *::after {
   margin: 0;
   padding: 0;
@@ -133,45 +273,56 @@ html {
 }
 
 body {
-  font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background-color: var(--md-sys-color-surface);
-  color: var(--md-sys-color-on-surface);
+  font-family: var(--oreui-font-family);
+  font-weight: 600;
+  background-color: var(--oreui-bg-base);
+  color: var(--oreui-text-primary);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  /* Disable tap highlight for touch devices (OreUI behavior) */
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
 }
 
 a {
-  color: var(--md-sys-color-primary);
+  color: var(--oreui-blue);
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color 0.1s ease;
 }
 
 a:hover {
-  color: var(--md-sys-color-primary);
+  color: var(--oreui-text-primary);
   text-decoration: underline;
 }
 
 ::selection {
-  background-color: var(--md-sys-color-primary-container);
-  color: var(--md-sys-color-on-primary-container);
+  background-color: transparent;
+  color: inherit;
 }
 
+img {
+  image-rendering: auto;
+}
+
+/* === OreUI 自定义滚动条 (22px 宽) === */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: var(--oreui-border-subtle);
+  border: 1px solid var(--oreui-border-dark);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--md-sys-color-outline-variant);
-  border-radius: var(--md-sys-shape-full);
+  background: var(--oreui-btn-bg);
+  border: 1px solid var(--oreui-border-main);
+  box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.2), inset 0 -1px 0 0 rgba(0,0,0,0.2);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--md-sys-color-outline);
+  background: var(--oreui-btn-bg-hover);
 }

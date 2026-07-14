@@ -1,6 +1,6 @@
 # 樱花木
 
-![Cherry Wood](https://minecraft.wiki/images/Cherry_Wood_JE1_BE1.png?format=original)
+![Cherry Wood](../page/images/blocks/cherry-wood/9893e95e.png)
 
 > **稀有度**：常见 | **可再生**：是 | **可堆叠**：64 | **工具**：任何（斧最快）
 > **硬度**：2 | **爆炸抗性**：2 | **可燃**：是

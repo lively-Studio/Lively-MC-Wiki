@@ -1,6 +1,6 @@
 # 混凝土
 
-![Concrete](https://minecraft.wiki/images/White_Concrete_JE3_BE2.png?format=original)
+![Concrete](../page/images/blocks/concrete/a9e45e94.png)
 
 > **稀有度**：常见 | **可再生**：是 | **可堆叠**：64 | **工具**：木镐或更好
 > **硬度**：1.8 | **爆炸抗性**：1.8 | **发光**：否 | **透明**：否 | **可燃**：否

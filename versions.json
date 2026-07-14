@@ -1,0 +1,49 @@
+{
+  "latest": {
+    "java": "1.21.5",
+    "java_name": "Spring to Life",
+    "java_name_zh": "春日生机",
+    "java_date": "2025-03-25",
+    "bedrock": "1.21.70",
+    "bedrock_name": "Spring to Life",
+    "bedrock_name_zh": "春日生机",
+    "bedrock_date": "2025-03-25"
+  },
+  "recent": {
+    "java_1_21": {
+      "version": "1.21",
+      "name": "Tricky Trials",
+      "name_zh": "棘巧试炼",
+      "date": "2024-06-13"
+    },
+    "java_1_21_4": {
+      "version": "1.21.4",
+      "name": "The Garden Awakens",
+      "name_zh": "花园觉醒",
+      "date": "2024-12-03"
+    },
+    "bedrock_1_21": {
+      "version": "1.21",
+      "name": "Tricky Trials",
+      "name_zh": "棘巧试炼",
+      "date": "2024-06-13"
+    }
+  },
+  "all_versions": [
+    { "version": "1.21.5", "name": "Spring to Life", "name_zh": "春日生机", "date": "2025-03-25", "edition": "java" },
+    { "version": "1.21.70", "name": "Spring to Life", "name_zh": "春日生机", "date": "2025-03-25", "edition": "bedrock" },
+    { "version": "1.21.4", "name": "The Garden Awakens", "name_zh": "花园觉醒", "date": "2024-12-03", "edition": "java" },
+    { "version": "1.21.3", "name": "Bundles of Bravery", "name_zh": "勇气之包", "date": "2024-10-22", "edition": "java" },
+    { "version": "1.21.2", "name": "Bundles of Bravery", "name_zh": "勇气之包", "date": "2024-10-22", "edition": "java" },
+    { "version": "1.21", "name": "Tricky Trials", "name_zh": "棘巧试炼", "date": "2024-06-13", "edition": "java" },
+    { "version": "1.20", "name": "Trails & Tales", "name_zh": "足迹与故事", "date": "2023-06-07", "edition": "java" },
+    { "version": "1.19", "name": "The Wild Update", "name_zh": "荒野更新", "date": "2022-06-07", "edition": "java" },
+    { "version": "1.18", "name": "Caves & Cliffs II", "name_zh": "洞穴与山崖 II", "date": "2021-11-30", "edition": "java" },
+    { "version": "1.17", "name": "Caves & Cliffs I", "name_zh": "洞穴与山崖 I", "date": "2021-06-08", "edition": "java" },
+    { "version": "1.16", "name": "Nether Update", "name_zh": "下界更新", "date": "2020-06-23", "edition": "java" },
+    { "version": "1.14", "name": "Village & Pillage", "name_zh": "村庄与掠夺", "date": "2019-04-23", "edition": "java" },
+    { "version": "1.13", "name": "Update Aquatic", "name_zh": "水域更新", "date": "2018-07-18", "edition": "java" },
+    { "version": "1.21", "name": "Tricky Trials", "name_zh": "棘巧试炼", "date": "2024-06-13", "edition": "bedrock" },
+    { "version": "1.20", "name": "Trails & Tales", "name_zh": "足迹与故事", "date": "2023-06-07", "edition": "bedrock" }
+  ]
+}
